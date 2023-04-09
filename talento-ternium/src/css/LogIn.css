@@ -1,0 +1,138 @@
+.loginContainer {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+}
+
+.column1 {
+    width: 70vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.layer {
+    background-color: rgb(0, 0, 0, 0.6);
+    width: 70vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: white;
+}
+
+.layerTitle {
+    margin-left: 2vw;
+    margin-top: 4vw;
+    font-size: 5rem;
+}
+
+.layerCopy {
+    margin-left: 5vh;
+    margin-bottom: 2vw;
+    cursor: pointer;
+    width: 26vw;
+}
+
+.layerCopy:hover {
+    color: lightgray;
+}
+
+.column2 {
+    width: 30vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.logTitle {
+    font-size: 2.5rem;
+    margin-right: 5vw;
+    margin-left: 5vw;
+    margin-top: 3vh;
+    text-align: center;
+}
+
+.column2 form {
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.register {
+    color: black;
+    font-size: 0.85rem;
+    margin-top: -6vh;
+}
+
+input {
+    width: 18vw;
+    height: 7vh;
+    border: 2px solid darkgray;
+    border-radius: 4px;
+    font-size: 1rem;
+    background-color: white;
+    padding-left: 5px;
+}
+
+input:focus {
+    border: 2px solid black;
+}
+
+textarea {
+    width: 18vw;
+    height: 11vh;
+    border: 2px solid darkgray;
+    border-radius: 4px;
+    font-size: 1rem;
+    background-color: white;
+    padding-left: 5px;
+}
+
+button {
+    background-color: #1a1a1a;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    color: white;
+    width: 14vw;
+    height: 7vh;
+    font-size: 1rem;
+    transition: 0.5s;
+    padding: 3px;
+}
+
+button:hover {
+    background-color: darkgray;
+}
+
+.loader-container {
+    width: 14vw;
+    height: 7vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.spinner {
+    width: 15px;
+    height: 15px;
+    border: 2px solid;
+    border-color: white transparent white transparent;
+    border-radius: 50%;
+    animation: spin-anim 1.2s linear infinite;
+}
+
+@keyframes spin-anim {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
