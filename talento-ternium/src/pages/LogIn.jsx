@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Card, Container, Form, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import terniumLogo from "../img/Ternium_Logo.svg";
+import '../css/LogIn.css';
 
 function LogInCard({ switchCard }) {
   return (
@@ -15,11 +16,14 @@ function LogInCard({ switchCard }) {
         </Card.Body>
         <Card.Body>
           <Form.Group controlId="formBasicUsername">
-            <Form.Control type="text" placeholder="Enter username" />
+            <Form.Control type="text" placeholder="Usuario" />
           </Form.Group>
 
           <Form.Group controlId="formBasicPassword" className="mt-2">
-            <Form.Control type="password" placeholder="Enter password" />
+            <Form.Control type="password" placeholder="Contraseña" />
+            <div className="mt-2">
+              <a href="#" style={{textDecoration: 'underline', color: 'blue'}}>Olvidé mi contraseña</a>
+            </div>
           </Form.Group>
 
           <Button
@@ -27,7 +31,7 @@ function LogInCard({ switchCard }) {
             className="mt-3 py-2 w-75"
             style={{ backgroundColor: '#d14906', borderColor: '#d14906' }}
           >
-            Log In
+            Iniciar sesión
          </Button>
 
           <Button
@@ -36,7 +40,7 @@ function LogInCard({ switchCard }) {
             style={{ backgroundColor: '#d14906', borderColor: '#d14906' }}
             onClick={switchCard}
           >
-            Register
+            Registrarse
           </Button>
         </Card.Body>
       </Card>
@@ -62,15 +66,15 @@ function RegisterCard({ switchCard }) {
         </Card.Body>
         <Card.Body>
           <Form.Group controlId="formBasicEmail">
-            <Form.Control type="email" placeholder="Enter email" value={email} onChange={handleEmailChange} />
+            <Form.Control type="email" placeholder="Correo electrónico" value={email} onChange={handleEmailChange} />
           </Form.Group>
 
           <Form.Group controlId="formBasicUsername" className="mt-2">
-            <Form.Control type="text" placeholder="Enter username" />
+            <Form.Control type="text" placeholder="Usuario" />
           </Form.Group>
 
           <Form.Group controlId="formBasicPassword" className="mt-2">
-            <Form.Control type="password" placeholder="Enter password" />
+            <Form.Control type="password" placeholder="Contraseña" />
           </Form.Group>
 
           <Button
@@ -78,7 +82,7 @@ function RegisterCard({ switchCard }) {
             className="mt-3 py-2 w-75"
             style={{ backgroundColor: '#d14906', borderColor: '#d14906' }}
           >
-            Register
+            Registrarse
           </Button>
           <Button
             type="button"
@@ -86,7 +90,7 @@ function RegisterCard({ switchCard }) {
             style={{ backgroundColor: '#d14906', borderColor: '#d14906' }}
             onClick={switchCard}
           >
-            Log In
+            Iniciar sesión
           </Button>
         </Card.Body>
       </Card>
@@ -95,21 +99,21 @@ function RegisterCard({ switchCard }) {
 }
 
 function LogIn() {
-    const [activeCard, setActiveCard] = useState('login'); // default active card is 'login'
+  const [activeCard, setActiveCard] = useState('login'); // default active card is 'login'
 
-    function switchCard() {
-        setActiveCard(activeCard === 'login' ? 'register' : 'login');
-    }
+  function switchCard() {
+    setActiveCard(activeCard === 'login' ? 'register' : 'login');
+  }
 
-    return (
-        <div>
-            {activeCard === 'login' ? (
-                <LogInCard switchCard={switchCard} />
-            ) : (
-                <RegisterCard switchCard={switchCard} />
-            )}
-        </div>
-    );
+  return (
+    <div>
+      {activeCard === 'login' ? (
+        <LogInCard switchCard={switchCard} />
+      ) : (
+        <RegisterCard switchCard={switchCard} />
+      )}
+    </div>
+  );
 }
 
 export default LogIn;
