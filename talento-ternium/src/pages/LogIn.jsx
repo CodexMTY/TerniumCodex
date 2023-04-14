@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
-import { Card, Container, Form, Button } from 'react-bootstrap';
+import { Card, Container, Form, Button, FormControl } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import terniumLogo from "../img/Ternium_Logo.svg";
+import terniumLogo from '../img/Ternium_Logo.svg';
 import '../css/LogIn.css';
+import {Link} from 'react-router-dom';
 
 function LogInCard({ switchCard }) {
   return (
     <Container className="d-flex justify-content-center align-items-center">
       <Card style={{ width: '25rem' }}>
         <Card.Body>
-          <img src={terniumLogo} className="img-fluid" alt="Card Image" />
+          <img src={terniumLogo} className="img-fluid" alt="Logo Ternium" />
         </Card.Body>
         <Card.Body>
           <Card.Text className="text-muted text-center">Sistema para equipo de talento</Card.Text>
@@ -22,12 +23,12 @@ function LogInCard({ switchCard }) {
           <Form.Group controlId="formBasicPassword" className="mt-2">
             <Form.Control type="password" placeholder="Contraseña" />
             <div className="mt-2">
-              <a href="#" style={{textDecoration: 'underline', color: 'blue'}}>Olvidé mi contraseña</a>
+              <Link to='/passwordReset'>Olvidé mi contraseña</Link>
             </div>
           </Form.Group>
 
           <Button
-            type="button"
+            type="submit"
             className="mt-3 py-2 w-75"
             style={{ backgroundColor: '#d14906', borderColor: '#d14906' }}
           >

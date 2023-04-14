@@ -1,5 +1,6 @@
 import './css/App.css';
-import LogIn from "./pages/LogIn.jsx";
+import LogIn from './pages/LogIn.jsx';
+import PasswordReset from './pages/PasswordReset';
 import {
   BrowserRouter as Router,
   Routes,
@@ -13,6 +14,7 @@ function App() {
       <Router>
         <Routes>
             <Route path='/' element={<LogIn />} />
+            <Route path='/passwordReset' element={<PasswordReset />} />
         </Routes>
       </Router>
     </div>
