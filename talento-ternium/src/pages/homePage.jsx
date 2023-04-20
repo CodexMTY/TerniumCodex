@@ -1,7 +1,7 @@
 import React from 'react'
-import '../CSS/homePage.css'
+import '../css/homePage.css'
 import { Container,Row,Col,Dropdown,DropdownButton,Form,InputGroup } from 'react-bootstrap'
-import terniumLogo from '../terniumLogo.svg';
+import terniumLogo from '../img/Ternium_Logo.svg';
 import listaTrabajadores from '../ejemploTrabajadores';
 
 function TablaTrabajadores(){

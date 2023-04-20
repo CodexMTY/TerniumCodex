@@ -1,7 +1,7 @@
 import { Card, Container, Form, Button, FormControl } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import terniumLogo from '../img/Ternium_Logo.svg';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function PasswordCard(){
     return (

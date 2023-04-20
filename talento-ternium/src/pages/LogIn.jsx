@@ -3,7 +3,7 @@ import { Card, Container, Form, Button, FormControl } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import terniumLogo from '../img/Ternium_Logo.svg';
 import '../css/LogIn.css';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function LogInCard({ switchCard }) {
   return (
@@ -11,11 +11,8 @@ function LogInCard({ switchCard }) {
       <Card style={{ width: '25rem' }}>
         <Card.Body>
           <img src={terniumLogo} className="img-fluid" alt="Logo Ternium" />
-        </Card.Body>
-        <Card.Body>
-          <Card.Text className="text-muted text-center">Sistema para equipo de talento</Card.Text>
-        </Card.Body>
-        <Card.Body>
+          <Card.Text className="text-muted text-center mt-2">Sistema para equipo de talento</Card.Text>
+
           <Form.Group controlId="formBasicUsername">
             <Form.Control type="text" placeholder="Usuario" />
           </Form.Group>
@@ -61,11 +58,8 @@ function RegisterCard({ switchCard }) {
       <Card style={{ width: '25rem' }}>
         <Card.Body>
           <img src={terniumLogo} className="img-fluid" alt="Card Image" />
-        </Card.Body>
-        <Card.Body>
-          <Card.Text className="text-muted text-center">Sistema para equipo de talento</Card.Text>
-        </Card.Body>
-        <Card.Body>
+          <Card.Text className="text-muted text-center mt-2">Sistema para equipo de talento</Card.Text>
+
           <Form.Group controlId="formBasicEmail">
             <Form.Control type="email" placeholder="Correo electrónico" value={email} onChange={handleEmailChange} />
           </Form.Group>
