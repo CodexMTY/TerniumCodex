@@ -1,7 +1,8 @@
 import React from 'react'
 import { Table,Container,Row,Col,Button } from 'react-bootstrap'
-import terniumLogo from '../terniumLogo.svg';
-import '../CSS/vistaEmpleado.css'
+import terniumLogo from '../img/Ternium_Logo.svg';
+import '../css/vistaEmpleado.css'
+import { Link } from 'react-router-dom';
 
 function FichaEmpleado(){
     return(
@@ -161,7 +162,7 @@ function VistaEmpleado(){
         <div id='vistaEmpleado'>
             <Container fluid id='parteSuperior'>
                 <Row xs={2}>
-                    <Col><a href='#' id='regreso'>Regresar</a></Col>
+                    <Col><Link to='/homePage'>Regresar</Link></Col>
                     <Col><img src={terniumLogo} alt='Logo de Ternium' id='logo'/></Col>
                 </Row>
             </Container>
