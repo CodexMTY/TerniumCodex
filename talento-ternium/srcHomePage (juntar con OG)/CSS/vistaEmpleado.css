@@ -1,0 +1,70 @@
+#logo{
+    width: 200px;
+    display: -webkit-box;
+    margin-left: auto;
+    margin-right: 10px;
+    margin-top: 10px;
+}
+
+#parteSuperior{
+    height: auto;
+    vertical-align: auto;
+}
+
+#regreso{
+    top: 50%;
+}
+
+.titulo{
+    background-color: rgba(255, 153, 0,1);
+    font-weight: bold;
+    margin-bottom: 5px;
+    padding: 5px;
+    border: 1px solid black;
+}
+
+#nombre{
+    text-align: center;
+}
+
+#datosEmpleado{
+    padding: 20px;
+}
+
+th{
+    font-weight: normal;
+}
+
+thead tr{
+    background-color: rgba(212, 212, 212,1);
+}
+
+thead tr th{
+    font-weight: bold;
+}
+
+.table{
+    --bs-table-border-color:black;
+}
+
+#resumen{
+    margin-top: 10px;
+    border: 1px solid black;
+    padding: 5px;
+}
+
+.hstack{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-self: stretch;
+}
+
+#botonImprimir{
+    position:absolute;
+    margin-bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgb(102, 102, 102);
+    border: 0;
+}
