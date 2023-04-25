@@ -1,6 +1,5 @@
 import { Card, Container, Form, Button, FormControl } from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import terniumLogo from '../img/Ternium_Logo.svg';
+import terniumLogo from '../img/logo-ternium.png';
 import { Link } from 'react-router-dom';
 
 function PasswordCard(){
@@ -17,15 +16,15 @@ function PasswordCard(){
                         <Button
                             type="button"
                             className="mt-3 py-2 w-75"
-                            style={{ backgroundColor: '#d14906', borderColor: '#d14906' }}
+                            variant='outline-danger'
                         >
-                            Submit
+                            Enviar un email
                         </Button>
                         <Link to='/'>
                             <Button
                                 type="button"
                                 className="mt-3 py-2 w-75"
-                                style={{ backgroundColor: '#d14906', borderColor: '#d14906' }}
+                                variant='outline-danger'
                             >
                                 Regresar
                             </Button>

@@ -1,8 +1,9 @@
 import React from 'react'
 import '../css/homePage.css'
-import { Container,Row,Col,Dropdown,DropdownButton,Form,InputGroup } from 'react-bootstrap'
-import terniumLogo from '../img/Ternium_Logo.svg';
+import { Container,Row,Col,Dropdown,DropdownButton,Form,InputGroup,Button } from 'react-bootstrap'
+import terniumLogo from '../img/logo-ternium.png';
 import listaTrabajadores from '../ejemploTrabajadores';
+import { Link } from 'react-router-dom';
 
 function TablaTrabajadores(){
     return (
@@ -13,11 +14,12 @@ function TablaTrabajadores(){
                 <Col className='identificador'>Antigüedad</Col>
                 <Col className='identificador'>Area</Col>
                 <Col className='identificador'>Dirección</Col>
-                <Col className='identificador'ß>Puesto</Col>
+                <Col className='identificador'>Puesto</Col>
             </Row>
             {
                 listaTrabajadores.map(function(element){
                     return(
+                        <Link to='/vistaEmpleado' style={{ color: 'black' }}>
                         <Row xs={6} className='elemento' id={element.id}>
                             <Col className='identificador'>{element.nombre}</Col>
                             <Col className='identificador'>{element.edad}</Col>
@@ -26,6 +28,7 @@ function TablaTrabajadores(){
                             <Col className='identificador'>{element.direccion}</Col>
                             <Col className='identificador'>{element.puesto}</Col>
                         </Row>
+                        </Link>
                     );
                 })
             }
@@ -38,7 +41,18 @@ function TablaTrabajadores(){
 function HomePage(){
     return(
         <div id='homePage'>
-            <img src={terniumLogo} alt='Logo de Ternium' id='logo'/>
+            <Col>
+                <Link to='/'>
+                    <Button
+                        className="mt-3 py-2"
+                        type="button"
+                        variant='outline-danger'
+                    >Regresar a Login</Button>
+                </Link>
+            </Col>
+            <Col>
+                <img src={terniumLogo} alt='Logo de Ternium' id='logo'/>
+            </Col>
             <InputGroup id='barraBusqueda'>
                 <Form.Control placeholder='Buscar' aria-label='buscar'/>
                 <DropdownButton variant='outline-secondary' title='Filtros' align="end">

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Table,Container,Row,Col,Button } from 'react-bootstrap'
-import terniumLogo from '../img/Ternium_Logo.svg';
+import terniumLogo from '../img/logo-ternium.png';
 import '../css/vistaEmpleado.css'
 import { Link } from 'react-router-dom';
 
@@ -162,7 +162,15 @@ function VistaEmpleado(){
         <div id='vistaEmpleado'>
             <Container fluid id='parteSuperior'>
                 <Row xs={2}>
-                    <Col><Link to='/homePage'>Regresar</Link></Col>
+                    <Col>
+                        <Link to='/homePage'>
+                            <Button
+                                className="mt-3 py-2"
+                                type="button"
+                                variant='outline-danger'
+                            >Regresar</Button>
+                        </Link>
+                    </Col>
                     <Col><img src={terniumLogo} alt='Logo de Ternium' id='logo'/></Col>
                 </Row>
             </Container>
