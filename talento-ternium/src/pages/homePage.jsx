@@ -1,13 +1,14 @@
 import React from 'react'
 import '../css/homePage.css'
 import { Container,Row,Col,Dropdown,DropdownButton,Form,InputGroup,Button } from 'react-bootstrap'
-import terniumLogo from '../img/logo-ternium.png';
+import Cookies from 'universal-cookie';
 import listaTrabajadores from '../ejemploTrabajadores';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
+import Header from '../components/Header';
 
 function TablaTrabajadores(){
     return (
-        <Container fluid={true} id='tablaTrabajadores'>
+        <Container id='tablaTrabajadores'>
             <Row xs={6} className='encabezado'>
                 <Col className='identificador'>Nombre</Col>
                 <Col className='identificador'>Edad</Col>
@@ -39,34 +40,30 @@ function TablaTrabajadores(){
 }
 
 function HomePage(){
-    return(
-        <div id='homePage'>
-            <Col>
-                <Link to='/'>
-                    <Button
-                        className="mt-3 py-2"
-                        type="button"
-                        variant='outline-danger'
-                    >Regresar a Login</Button>
-                </Link>
-            </Col>
-            <Col>
-                <img src={terniumLogo} alt='Logo de Ternium' id='logo'/>
-            </Col>
-            <InputGroup id='barraBusqueda'>
-                <Form.Control placeholder='Buscar' aria-label='buscar'/>
-                <DropdownButton variant='outline-secondary' title='Filtros' align="end">
-                    <Dropdown.Item href='#'>Filtro 1</Dropdown.Item>
-                    <Dropdown.Item href='#'>Filtro 2</Dropdown.Item>
-                    <Dropdown.Item href='#'>Filtro 3</Dropdown.Item>
-                    <Dropdown.Item href='#'>Filtro 4</Dropdown.Item>
-                </DropdownButton>
-            </InputGroup>
-
-            <TablaTrabajadores />
-        </div>
-    );
     
+    const cookies = new Cookies;
+
+    if(!cookies.get('token')){
+        return <Navigate replace to='/' />;
+    }
+    
+    else{
+        return(
+            <div>
+                <Header />
+                <InputGroup id='barraBusqueda'>
+                    <Form.Control placeholder='Buscar' aria-label='buscar'/>
+                    <DropdownButton variant='outline-secondary' title='Filtros' align="end">
+                        <Dropdown.Item href='#'>Filtro 1</Dropdown.Item>
+                        <Dropdown.Item href='#'>Filtro 2</Dropdown.Item>
+                        <Dropdown.Item href='#'>Filtro 3</Dropdown.Item>
+                        <Dropdown.Item href='#'>Filtro 4</Dropdown.Item>
+                    </DropdownButton>
+                </InputGroup>
+                <TablaTrabajadores />
+            </div>
+        );
+    }
 }
 
 export default HomePage;
