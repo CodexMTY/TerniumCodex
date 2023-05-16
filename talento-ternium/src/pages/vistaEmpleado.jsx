@@ -4,6 +4,7 @@ import '../css/vistaEmpleado.css'
 import { Navigate } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 import Header from '../components/Header';
+import html2canvas from "html2canvas";
 import JsPDF from 'jspdf';
 
 function FichaEmpleado(){
@@ -166,10 +167,13 @@ function VistaEmpleado(){
     const cookies = new Cookies;
     const generaFicha = async () => {
         const pdf = new JsPDF("portrait", "pt", "a4")
-        const data = await document.querySelector('#datosEmpleado')
-        pdf.html(data).then(() =>{
-            pdf.save('ficha.pdf')
-        })
+        const data = await html2canvas(document.querySelector("#datosEmpleado"))
+        const img = data.toDataURL("image/png")  
+        const imgProperties = pdf.getImageProperties(img)
+        const pdfWidth = pdf.internal.pageSize.getWidth()
+        const pdfHeight = (imgProperties.height * pdfWidth) / imgProperties.width
+        pdf.addImage(img, "PNG", 0, 0, pdfWidth, pdfHeight)
+        pdf.save("ficha.pdf")
     }
 
     if(!cookies.get('token')){
