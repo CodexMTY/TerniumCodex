@@ -4,6 +4,7 @@ import '../css/vistaEmpleado.css'
 import { Navigate } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 import Header from '../components/Header';
+import JsPDF from 'jspdf';
 
 function FichaEmpleado(){
     return(
@@ -158,9 +159,18 @@ function FichaEmpleado(){
     
 };
 
+
+
 function VistaEmpleado(){
 
     const cookies = new Cookies;
+    const generaFicha = async () => {
+        const pdf = new JsPDF("portrait", "pt", "a4")
+        const data = await document.querySelector('#datosEmpleado')
+        pdf.html(data).then(() =>{
+            pdf.save('ficha.pdf')
+        })
+    }
 
     if(!cookies.get('token')){
         return <Navigate replace to='/' />;
@@ -171,9 +181,10 @@ function VistaEmpleado(){
             <div id='vistaEmpleado'>
                 <Header />
                 <FichaEmpleado />
-                <Button size='lg' id='botonImprimir'>
+                <Button size='lg' id='botonImprimir' onClick={generaFicha}>
                     Imprimir Ficha
                 </Button>
+                
             </div>
         );
     }
