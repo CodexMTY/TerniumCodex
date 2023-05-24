@@ -9,6 +9,9 @@ import Header from '../components/Header';
 function TablaTrabajadores(){
     return (
         <Container id='tablaTrabajadores'>
+
+            
+
             <Row xs={6} className='encabezado'>
                 <Col className='identificador'>Nombre</Col>
                 <Col className='identificador'>Edad</Col>

@@ -17,7 +17,7 @@ function Header() {
     }
 
     return (
-    <Navbar bg="light" expand="lg" fixed='top'>
+    <Navbar expand="lg" fixed='top' style={{ background: 'white' }}>
         <Container>
             <Link to='/homePage'>
                 <div className="d-inline-block align-top" style={{ paddingRight: '30px' }}>
