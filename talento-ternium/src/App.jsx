@@ -1,13 +1,14 @@
 import './css/App.css';
 import LogIn from './pages/LogIn.jsx';
 import PasswordReset from './pages/PasswordReset';
-import HomePage from './pages/homePage';
+import HomePage from './pages/HomePage';
 import VistaEmpleado from './pages/vistaEmpleado';
 import {
   BrowserRouter as Router,
   Routes,
   Route
 } from "react-router-dom";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 
