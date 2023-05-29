@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { InboxOutlined } from '@ant-design/icons';
-import { Upload, message } from 'antd';
+import { Upload } from 'antd';
 import { Button, Alert } from 'react-bootstrap';
 
 const { Dragger } = Upload;
@@ -22,7 +22,7 @@ const CargarArchivo = () => {
     fileList: listaArchivos,
     onChange(info) {
         const {name, type } = info.file;
-        const extensionesPermitidas= ["text/csv"];
+        const extensionesPermitidas= ["text/csv", "application/vnd.ms-excel"];
 
         if(type === undefined){
             return false;
@@ -83,11 +83,12 @@ const CargarArchivo = () => {
     .then((response) => response.json())
     .then((result) => {
         if (result.error){
-            console.log("error")
-            declararMensajeError("Hubo un error al intentar subir el archivo");
             activarMensajeError(true);
+            declararMensajeError("Hubo un error al intentar subir el archivo");
+
         }
         else {
+            activarMensajeExito(true);
             declararMensajeExito("El archivo se ha subido con éxito");
         }
     })

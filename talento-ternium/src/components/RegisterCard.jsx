@@ -48,9 +48,9 @@ function RegisterCard({ switchCard }) {
     if (result.error){
       setErrorMessage('El correo ya esta registrado');
     }
-    else if(result.message){
+    else {
+      setErrorMessage('');
       setSuccessMessage('Usuario creado con éxito');
-      setTimeout(switchCard, 1000);
     }
   }
 
