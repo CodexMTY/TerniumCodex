@@ -15,14 +15,25 @@ function LoginCard({ switchCard }) {
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
-  const handleChangeEmail = async (e) => {
+  const manejoEmailIngresado = async (e) => {
     setEmail(e.target.value)
   };
-  const handleChangePassword = async (e) => {
+  const manejoPasswordIngresada = async (e) => {
     setPassword(e.target.value)
   };
 
-  const userLogin = async (e) => {
+  const manejoResultadosAPI = async (result) => {
+    if (result.error) {
+      setErrorMessage("Credenciales incorrectas");
+    } else if (result.token) {
+      cookies.set('token', result.token, { path: '/' });
+      cookies.set('exp', result.exp, { path: '/' });
+      cookies.set('user_id', result.user_id, { path: '/' });
+      navigate('/homePage');
+    }
+  };
+
+  const autenticacionUsuario = async (e) => {
     e.preventDefault();
     let userData =  {
       "email": email,
@@ -35,21 +46,7 @@ function LoginCard({ switchCard }) {
       body: JSON.stringify(userData)})
     .then((response) => response.json())
     .then((result) => {
-      if (result.error){
-        setErrorMessage("Credenciales incorrectas")
-      }
-      else if(result.token){
-        cookies.set('token', result.token, {
-          path: '/'
-        });
-        cookies.set('exp', result.exp, {
-          path: '/'
-        });
-        cookies.set('user_id', result.user_id, {
-          path: '/'
-        });
-        navigate('/homePage');
-      }
+      manejoResultadosAPI(result);
     })
   }
 
@@ -61,10 +58,10 @@ function LoginCard({ switchCard }) {
           <Card.Text className="text-muted text-center mt-2">Sistema para equipo de talento</Card.Text>
 
           <Form.Group controlId="formBasicEmail">
-            <Form.Control type="email" placeholder="Correo electrónico" value={email} onChange={handleChangeEmail}/>
+            <Form.Control type="email" placeholder="Correo electrónico" value={email} onChange={manejoEmailIngresado}/>
           </Form.Group>
 
-          <Form.Group controlId="formBasicPassword" className="mt-2" value={password} onChange={handleChangePassword}>
+          <Form.Group controlId="formBasicPassword" className="mt-2" value={password} onChange={manejoPasswordIngresada}>
             <Form.Control type="password" placeholder="Contraseña" />
             {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
           </Form.Group>
@@ -74,7 +71,7 @@ function LoginCard({ switchCard }) {
           </div>
 
           <Button
-            onClick={userLogin}
+            onClick={autenticacionUsuario}
             type="submit"
             className="mt-3 py-2 w-75"
             variant='outline-danger'
