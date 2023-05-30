@@ -1,4 +1,4 @@
-import { Button, Popconfirm } from 'antd';
+import { Button, Popconfirm, message } from 'antd';
 import { useState, useContext } from 'react';
 import { DeleteOutlined } from '@ant-design/icons';
 
@@ -14,10 +14,12 @@ function DeleteConfirm({ userId, chooseEmpleados, listaEmpleados }) {
     const handleOk = () => {
         setConfirmLoading(true);
         fetchDelete();
+        message.success('Registro eliminado');
     };
 
     const handleCancel = () => {
         setOpen(false);
+        message.error('Operación cancelada');
     };
 
     const deleteEmpleado = () => {
@@ -61,7 +63,6 @@ function DeleteConfirm({ userId, chooseEmpleados, listaEmpleados }) {
                     color: '#ff0000'
                 }} />}
                 onClick={showPopconfirm}>
-
             </Button>
         </Popconfirm>
     );

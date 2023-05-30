@@ -488,6 +488,7 @@ function ListaEmpleados() {
             title: 'Borrar',
             key: 'operation',
             responsive: ['sm'],
+            onCell: () => ({onClick: (e) => e.stopPropagation()}),
             render: (record) =>
                 <DeleteConfirm userId={record.id} chooseEmpleados={chooseEmpleados} listaEmpleados={empleados}/>,
         }
