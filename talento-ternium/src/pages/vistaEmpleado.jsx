@@ -1,8 +1,11 @@
 import React from 'react'
 import { Table,Container,Row,Col,Button } from 'react-bootstrap'
-import terniumLogo from '../img/logo-ternium.png';
 import '../css/vistaEmpleado.css'
-import { Link } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
+import Cookies from 'universal-cookie';
+import Header from '../components/Header';
+import html2canvas from "html2canvas";
+import JsPDF from 'jspdf';
 
 function FichaEmpleado(){
     return(
@@ -157,29 +160,38 @@ function FichaEmpleado(){
     
 };
 
+
+
 function VistaEmpleado(){
-    return(
-        <div id='vistaEmpleado'>
-            <Container fluid id='parteSuperior'>
-                <Row xs={2}>
-                    <Col>
-                        <Link to='/homePage'>
-                            <Button
-                                className="mt-3 py-2"
-                                type="button"
-                                variant='outline-danger'
-                            >Regresar</Button>
-                        </Link>
-                    </Col>
-                    <Col><img src={terniumLogo} alt='Logo de Ternium' id='logo'/></Col>
-                </Row>
-            </Container>
-            <FichaEmpleado />
-            <Button size='lg' id='botonImprimir'>
-                Imprimir Ficha
-            </Button>
-        </div>
-    );
+
+    const cookies = new Cookies;
+    const generaFicha = async () => {
+        const pdf = new JsPDF("portrait", "pt", "a4")
+        const data = await html2canvas(document.querySelector("#datosEmpleado"))
+        const img = data.toDataURL("image/png")  
+        const imgProperties = pdf.getImageProperties(img)
+        const pdfWidth = pdf.internal.pageSize.getWidth()
+        const pdfHeight = (imgProperties.height * pdfWidth) / imgProperties.width
+        pdf.addImage(img, "PNG", 0, 0, pdfWidth, pdfHeight)
+        pdf.save("ficha.pdf")
+    }
+
+    if(!cookies.get('token')){
+        return <Navigate replace to='/' />;
+    }
+    
+    else{
+        return(
+            <div id='vistaEmpleado'>
+                <Header />
+                <FichaEmpleado />
+                <Button size='lg' id='botonImprimir' onClick={generaFicha}>
+                    Imprimir Ficha
+                </Button>
+                
+            </div>
+        );
+    }
 };
 
 export default VistaEmpleado;
