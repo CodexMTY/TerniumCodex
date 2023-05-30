@@ -5,7 +5,7 @@ import terniumLogo from '../img/logo-ternium.png';
 import { Link , useNavigate } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 
-const API = 'https://codextern.onrender.com/';
+const API = 'https://codextern-4ny2.onrender.com/';
 
 function LoginCard({ switchCard }) {
 
@@ -40,9 +40,13 @@ function LoginCard({ switchCard }) {
         setErrorMessage("Credenciales incorrectas")
       }
       else if(result.token){
-        cookies.set('token', result.token, {path: '/'});
-        cookies.set('exp', result.exp, {path: '/'});
+        document.cookie = "token=" + result.token + ";expires=" + result.exp;
+
+        // cookies.set('token', result.token, {path: '/'}, {expirationDate: Math.round(date / 1000)});
+        
+        // cookies.set('exp', result.exp, {path: '/'});
         cookies.set('user_id', result.user_id, {path: '/'});
+        console.log(cookies);
         navigate('/homePage');
       }
     })

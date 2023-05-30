@@ -1,4 +1,4 @@
-#logo{
+#logo {
     width: 200px;
     display: -webkit-box;
     margin-left: auto;
@@ -7,33 +7,121 @@
     margin-bottom: 10px;
 }
 
-#tablaTrabajadores{
+#tablaTrabajadores {
     text-align: center;
     padding-right: 0;
     padding-left: 0;
 }
 
-.encabezado{
-    background-color: rgba(255, 153, 0,1);
+.tablaempleados {
+    white-space: nowrap;
+}
+
+.encabezado {
+    background-color: rgba(255, 153, 0, 1);
     height: auto;
     width: auto;
     border: 1px solid black;
     margin: 5px;
     border-radius: 5px;
-    position:relative;
+    position: relative;
 }
 
-.elemento{
+.elemento {
     cursor: pointer;
-    background-color: rgb(212,212,212);
+    background-color: rgb(212, 212, 212);
     height: auto;
     width: auto;
     border: 1px solid black;
     margin: 5px;
     border-radius: 5px;
-    position:relative;
+    position: relative;
 }
 
-#barraBusqueda{
+#barraBusqueda {
     margin: px;
+}
+
+.ant-table-wrapper .ant-table-thead>tr>th {
+    background: linear-gradient(180deg, rgba(255, 153, 0, 1) 0%, rgba(255, 51, 0, 1) 100%);
+    color: white;
+}
+
+.ant-table-wrapper .ant-table-thead th.ant-table-column-has-sorters:hover {
+    color: white;
+    background: linear-gradient(180deg, #e68a00 0%, #e62e00 100%);
+}
+
+.ant-table-wrapper .ant-table-thead th.ant-table-column-has-sorters {
+    background: linear-gradient(180deg, rgba(255, 153, 0, 1) 0%, rgba(255, 51, 0, 1) 100%);
+}
+
+.ant-slider {
+    margin: 11px 7px;
+}
+
+.ant-divider-horizontal {
+    margin: 10px 0px 10px 0px;
+}
+
+.ant-slider .ant-slider-track {
+    background-color: #ffb84d;
+}
+
+.ant-slider:hover .ant-slider-track {
+    background-color: #ffad33;
+}
+
+.ant-slider .ant-slider-handle::after {
+    box-shadow: 0 0 0 2px #ffb84d;
+}
+
+.ant-slider:hover .ant-slider-handle::after {
+    box-shadow: 0 0 0 2px #ffad33;
+}
+
+.ant-slider .ant-slider-handle:hover::after {
+    box-shadow: 0 0 0 4px #ff9900;
+}
+
+.ant-slider .ant-slider-handle:active::after {
+    box-shadow: 0 0 0 4px #ff9900;
+}
+
+.ant-slider .ant-slider-handle:focus::after {
+    box-shadow: 0 0 0 4px #ff9900;
+}
+
+.ant-checkbox-group {
+    display: grid;
+    margin: 0px 0px 0px 25px;
+}
+
+.checkbox-all {
+    margin: 0px 0px 0px 5px;
+}
+
+.ant-table-wrapper .ant-table-container table>thead>tr:first-child>*:first-child {
+    background: linear-gradient(180deg, rgba(255, 153, 0, 1) 0%, rgba(255, 51, 0, 1) 100%);
+    color: white;
+}
+
+.ant-table-wrapper .ant-table-column-sorter-down.active {
+    color: #ffffff
+}
+
+.ant-table-wrapper .ant-table-column-sorter-up.active {
+    color: #ffffff
+}
+
+.linkdelete {
+    color: blue;
+}
+
+.linkdelete:hover{
+    color: #b30000;
+}
+
+.linkdelete:visited{
+    color: purple;
 }
