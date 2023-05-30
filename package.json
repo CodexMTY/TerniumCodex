@@ -11,5 +11,8 @@
   "license": "ISC",
   "devDependencies": {
     "vite": "^4.2.1"
+  },
+  "dependencies": {
+    "react-redux": "^8.0.5"
   }
 }
