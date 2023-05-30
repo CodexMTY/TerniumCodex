@@ -1,12 +1,10 @@
 import React from 'react'
 import '../css/homePage.css'
 import { Container } from 'react-bootstrap'
-import terniumLogo from '../img/logo-ternium.png';
-import listaTrabajadores from '../ejemploTrabajadores';
 import ListaEmpleados from '../components/ListaEmpleados';
-import SearchBar from '../components/SearchBar';
 import Cookies from 'universal-cookie';
-import { Link, Navigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
+import Header from '../components/Header'
 
 function HomePage() {
 
@@ -18,6 +16,7 @@ function HomePage() {
     }else{
         return (
             <Container>
+                <Header />
                 <ListaEmpleados/>
             </Container>
         )

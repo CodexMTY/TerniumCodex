@@ -1,5 +1,3 @@
-import listaTrabajadores from "../ejemploTrabajadores";
-import { Container, Dropdown, DropdownButton, Form, InputGroup } from 'react-bootstrap'
 import { Link , useNavigate } from 'react-router-dom';
 import { SearchOutlined, FilterFilled } from '@ant-design/icons';
 import { Button, Input, Space, Table, Tag, Slider, Divider, List, Checkbox, Row, Col } from 'antd';
