@@ -1,7 +1,7 @@
 import './css/App.css';
 import LogIn from './pages/LogIn.jsx';
 import PasswordReset from './pages/PasswordReset';
-import HomePage from './pages/HomePage';
+import HomePage from './pages/homePage';
 import VistaEmpleado from './pages/vistaEmpleado';
 import {
   BrowserRouter as Router,
