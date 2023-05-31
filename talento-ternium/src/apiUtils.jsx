@@ -11,3 +11,14 @@ export async function postRequest(url, data) {
   });
   return response.json();
 }
+
+export async function getRequest(url) {
+  const response = await fetch(`${API}${url}`, {
+    method: 'GET',
+    headers: {
+      'accept': 'application/json',
+      'content-type': 'application/json',
+    },
+  });
+  return response.json();
+}
