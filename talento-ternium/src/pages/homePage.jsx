@@ -11,16 +11,18 @@ function HomePage() {
     const cookies = new Cookies;
 
     if(!cookies.get('token')){
-        console.log("no existe un token de autenticacion")
         return <Navigate replace to='/'></Navigate>;
     }else{
         return (
-            <Container>
+            <>
                 <Header />
-                <ListaEmpleados/>
-            </Container>
+                <Container> 
+                    <ListaEmpleados/>
+                </Container>
+            </>
         )
     }
 }
+
 
 export default HomePage;

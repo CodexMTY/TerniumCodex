@@ -3,9 +3,11 @@ import { Navigate, useParams } from 'react-router-dom';
 import Header from '../components/Header';
 import { getRequest } from '../apiUtils';
 import Cookies from 'universal-cookie';
-import { Spinner, Button } from 'react-bootstrap';
+import { Spinner, Button, Row, Col, Image } from 'react-bootstrap';
 import html2canvas from "html2canvas";
 import JsPDF from 'jspdf';
+import PersonalDataTable from '../components/PersonalDataTable';
+import picturePlaceholder from '../img/profile_picture.png'
 
 function UserPage() {
 
@@ -42,7 +44,6 @@ function UserPage() {
                 setError(false); // reset error state on successful fetch
             }
         } catch (error) {
-            console.error("Failed to fetch employee data:", error);
             setError(true);
         }
     };
@@ -57,7 +58,16 @@ function UserPage() {
             {employee ? (
                 <div>
                     <div id="datosEmpleado">
-                        <h1>{`${employee.nombre} ${employee.apellidos}`}</h1>
+                        <Row>
+                            <Col>
+                                <Image rounded='true' src={employee.imagen ? employee.imagen : picturePlaceholder}  style={{height: '150px'}} />
+                                <h1>{`${employee.nombre} ${employee.apellidos}`}</h1>
+                                <p>{`${employee.resumen}`}</p>
+                            </Col>
+                            <Col>
+                                <PersonalDataTable employeeData={employee} />
+                            </Col>
+                        </Row>
                     </div>
                     <Button size='lg' id='botonImprimir' onClick={generaFicha}>
                         Imprimir Ficha
