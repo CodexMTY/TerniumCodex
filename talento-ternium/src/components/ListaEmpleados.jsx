@@ -1,7 +1,7 @@
-import { Link , useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { SearchOutlined, FilterFilled } from '@ant-design/icons';
-import { Button, Input, Space, Table, Tag, Slider, Divider, List, Checkbox, Row, Col } from 'antd';
-import { useState, useRef, useEffect, createContext } from "react";
+import { Input, Space, Table, Tag, Slider, Divider, List, Checkbox, Row, Col } from 'antd';
+import { useState, useRef, useEffect } from "react";
 import DeleteConfirm from '../components/DeleteConfirm';
 
 function ListaEmpleados() {
@@ -504,7 +504,13 @@ function ListaEmpleados() {
                 ,
             }}
             onRow={(record) => ({onClick: () => {navigateUser(record.id)}})}
-            dataSource={empleados} scroll={{ x: 1800 }} />
+            dataSource={empleados} scroll={{ x: 1800 }}
+            pagination={{ 
+                defaultPageSize: 5, 
+                showSizeChanger: true, 
+                pageSizeOptions: ['5', '10', '20', '30', '50', '100'],
+                showTotal: (total, range) => `${range[0]}-${range[1]} de ${total} empleados`
+            }}   />
     </>;
 };
 
