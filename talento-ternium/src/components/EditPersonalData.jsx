@@ -57,7 +57,6 @@ function EditPersonalData({ show, handleClose, employeeData }) {
             // Wait for 3 seconds and then reload the page
             setTimeout(() => {
                 window.location.href = window.location.href;
-                handleClose();
             }, 3000);
         }
     }
