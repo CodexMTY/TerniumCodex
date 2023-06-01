@@ -1,6 +1,7 @@
 import { Button, Modal, Form, Row, Col, Alert } from "react-bootstrap";
 import { useState } from 'react';
 import { putRequest } from "../apiUtils";
+import { useNavigate } from "react-router-dom";
 
 function EditPersonalData({ show, handleClose, employeeData }) { 
     const [nombre, setNombre] = useState(employeeData.nombre);
@@ -16,6 +17,8 @@ function EditPersonalData({ show, handleClose, employeeData }) {
     const [error, toggleError] = useState(false);
     const [successMessage, setSuccessMessage] = useState('');
     const [success, toggleSuccess] = useState(false);
+
+    const navigate = useNavigate();
 
     const updateEmployeeData = async (e) => {
         e.preventDefault();
@@ -53,7 +56,8 @@ function EditPersonalData({ show, handleClose, employeeData }) {
     
             // Wait for 3 seconds and then reload the page
             setTimeout(() => {
-                window.location.reload();
+                window.location.href = window.location.href;
+                handleClose();
             }, 3000);
         }
     }
