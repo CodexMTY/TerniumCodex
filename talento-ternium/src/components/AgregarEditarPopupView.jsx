@@ -74,11 +74,10 @@ function AgregarEditarPopupView(
         return (
         <>
         <OverlayTrigger overlay={renderTooltip}>
-            <Nav.Link
-                style={{ paddingRight: '5px', paddingLeft: '5px', paddingTop: '0px', paddingBottom: '2px', border: '1px solid #f8f9fa', backgroundColor: 'white', color: '#f8f9fa', borderRadius: '4px' }} 
-                onClick={manejarAbrir}>
-                    <img src={botonAgregar} alt="AgregarDatos" style={{ width: '15px', height: '15px' }} />
-            </Nav.Link>
+            
+            <Button variant="outline-light" onClick={manejarAbrir} style={{ paddingRight: '5px', paddingLeft: '5px', paddingTop: '0px', paddingBottom: '2px', border: 'none' }}>
+                <img src={botonAgregar} alt="Edit" style={{ width: '15px', height: '15px' }} />
+            </Button>
         </OverlayTrigger>
         <Modal show={mostrar} onHide={manejarCerrar}>
             <Modal.Header closeButton>
