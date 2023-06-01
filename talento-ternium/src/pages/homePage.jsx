@@ -10,15 +10,15 @@ function HomePage() {
 
     const cookies = new Cookies;
 
-    if(!cookies.get('token')){
+    if (!cookies.get('token')) {
         console.log("no existe un token de autenticacion")
         return <Navigate replace to='/'></Navigate>;
-    }else{
+    } else {
         return (
-            <Container>
+            <>
                 <Header />
-                <ListaEmpleados/>
-            </Container>
+                <ListaEmpleados />
+            </>
         )
     }
 }

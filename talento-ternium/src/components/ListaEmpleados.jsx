@@ -17,7 +17,7 @@ function ListaEmpleados() {
     const navigateUser = (id) => {
         var selection = window.getSelection();
         if(!selection.toString()) {
-            navigate(`/users/${id}`)
+            navigate(`/vistaEmpleado/?id=${id}`)
         }
     }
 
@@ -388,6 +388,7 @@ function ListaEmpleados() {
             title: 'Nombre',
             dataIndex: 'nombre',
             key: 'nombre',
+            fixed:  'left',
             ...filtroBusqueda('nombre'),
         },
         {
@@ -395,6 +396,7 @@ function ListaEmpleados() {
             dataIndex: 'apellidos',
             key: 'apellidos',
             responsive: ['xl'],
+            fixed:  'left',
             ...filtroBusqueda('apellidos')
         },
         {
@@ -426,7 +428,7 @@ function ListaEmpleados() {
             dataIndex: 'edad',
             key: 'edad',
             ...filtroRango('edad'),
-            render: (text) => <>{text ? text + ' años' : text}</>,
+            render: (text) => <>{text || text==0 ? text + ' años' : text}</>,
             sorter: (a, b) => a.edad - b.edad,
             sortDirections: ['descend', 'ascend'],
             showSorterTooltip: false
@@ -436,7 +438,7 @@ function ListaEmpleados() {
             dataIndex: 'antiguedad',
             key: 'antiguedad',
             ...filtroRango('antiguedad'),
-            render: (text) => <>{text ? text + ' años' : text}</>,
+            render: (text) => <>{text || text==0 ? text + ' años' : text}</>,
             sorter: (a, b) => a.antiguedad - b.antiguedad,
             sortDirections: ['descend', 'ascend'],
             showSorterTooltip: false
@@ -446,6 +448,13 @@ function ListaEmpleados() {
             dataIndex: 'puesto',
             key: 'puesto',
             ...filtroListaOpciones('puesto'),
+        },
+        {
+            title: 'Jefe',
+            dataIndex: 'jefe',
+            key: 'jefe',
+            responsive: ['xl'],
+            ...filtroListaOpciones('jefe')
         },
         {
             title: 'Estructura3',
@@ -483,7 +492,7 @@ function ListaEmpleados() {
             ...filtroBusqueda('pc_cat')
         },
         {
-            title: 'Borrar',
+            title: 'Ocultar',
             key: 'operation',
             responsive: ['sm'],
             onCell: () => ({onClick: (e) => e.stopPropagation()}),
@@ -504,7 +513,7 @@ function ListaEmpleados() {
                 ,
             }}
             onRow={(record) => ({onClick: () => {navigateUser(record.id)}})}
-            dataSource={empleados} scroll={{ x: 1800 }} />
+            dataSource={empleados} scroll={{ x: 2400 }} />
     </>;
 };
 

@@ -21,7 +21,7 @@ function App() {
             <Route path='/' element={<LogIn />} />
             <Route path='/passwordReset' element={<PasswordReset />} />
             <Route path='/homePage' element={<HomePage />} />
-            <Route path='/vistaEmpleado' element={<VistaEmpleado />} />
+            <Route path='/vistaEmpleado/' element={<VistaEmpleado />} />
         </Routes>
       </Router>
     </div>
