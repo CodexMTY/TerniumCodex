@@ -41,7 +41,7 @@ function UserPage() {
                 setDataEmpty(true);
             } else {
                 setEmployee(data);
-                setError(false); // reset error state on successful fetch
+                setError(false);
             }
         } catch (error) {
             setError(true);
