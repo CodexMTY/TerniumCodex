@@ -17,7 +17,7 @@ function ListaEmpleados() {
     const navigateUser = (id) => {
         var selection = window.getSelection();
         if(!selection.toString()) {
-            navigate(`/vistaEmpleado/?id=${id}`)
+            navigate(`/users/${id}`)
         }
     }
 
@@ -513,7 +513,7 @@ function ListaEmpleados() {
                 ,
             }}
             onRow={(record) => ({onClick: () => {navigateUser(record.id)}})}
-            dataSource={empleados} scroll={{ x: 2400 }} />
+            dataSource={empleados} scroll={{ x: 2400 }}
             pagination={{ 
                 defaultPageSize: 5, 
                 showSizeChanger: true, 
