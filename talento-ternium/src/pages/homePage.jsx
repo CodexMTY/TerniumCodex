@@ -10,15 +10,14 @@ function HomePage() {
 
     const cookies = new Cookies;
 
+
     if(!cookies.get('token')){
         return <Navigate replace to='/'></Navigate>;
-    }else{
+    } else {
         return (
             <>
                 <Header />
-                <Container> 
-                    <ListaEmpleados/>
-                </Container>
+                <ListaEmpleados />
             </>
         )
     }

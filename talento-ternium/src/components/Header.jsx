@@ -3,6 +3,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import terniumLogo from '../img/logo-ternium.png';
 import Cookies from 'universal-cookie';
 import BotonSubida from './BotonSubida';
+import BotonRegistro from './BotonRegistro'
+import {Divider} from 'antd';
 
 function Header() {
 
@@ -32,7 +34,10 @@ function Header() {
                     <Nav.Link onClick={goHome}>
                         Inicio
                     </Nav.Link>
+                    <Divider type="vertical" style={{height: '2.9em', background: '#eeeeee'}}/>
                     <BotonSubida />
+                    <Divider type="vertical"  style={{height: '2.9em', background: '#eeeeee'}} />
+                    <BotonRegistro/>
                 </Nav>
 
                 <Nav className="me-auto">
