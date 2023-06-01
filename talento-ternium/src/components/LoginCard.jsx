@@ -21,9 +21,10 @@ function LoginCard({ switchCard }) {
       setErrorMessage("Credenciales incorrectas");
     }
     else if(result.token){
-      cookies.set('token', result.token, { path: '/' });
-      cookies.set('exp', result.exp, { path: '/' });
-      cookies.set('user_id', result.user_id, { path: '/' });
+      let expDateStr = result.exp;
+      let expiryDate = new Date(Date.parse(expDateStr));
+      cookies.set('token', result.token, { path: '/', expires: expiryDate, sameSite: 'None', secure: true });
+      cookies.set('user_id', result.user_id, { path: '/',  expires: expiryDate, sameSite: 'None', secure: true });
       navigate('/homePage');
     }
   }
