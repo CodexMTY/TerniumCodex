@@ -1,7 +1,6 @@
 import { useState } from 'react';
-import Modal from 'react-bootstrap/Modal';
+import { Modal, Nav } from 'react-bootstrap';
 import CargarArchivo from './CargarArchivo';
-import { Nav } from 'react-bootstrap';
 
 function BotonSubida() {
   const [mostrar, activarMostrar] = useState(false);

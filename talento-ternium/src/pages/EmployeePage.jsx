@@ -6,6 +6,9 @@ import Cookies from 'universal-cookie';
 import { Spinner, Button } from 'react-bootstrap';
 import html2canvas from "html2canvas";
 import JsPDF from 'jspdf';
+import UpwardFeedback from '../components/UpwardFeedback';
+import EvaluacionAnual from '../components/EvaluacionAnual';
+import ClienteProveedor from '../components/ClienteProveedor';
 
 function UserPage() {
 
@@ -59,6 +62,9 @@ function UserPage() {
                     <div id="datosEmpleado">
                         <h1>{`${employee.nombre} ${employee.apellidos}`}</h1>
                     </div>
+                    <UpwardFeedback UpwardFeedbackData={{user_id: id, UpwardFeedbackData: employee.upward_fbks}}/>
+                    <ClienteProveedor ClienteProveedorData={{user_id: id, ClienteProveedorData: employee.cliente_proveedors}}/>
+                    <EvaluacionAnual EvaluacionAnualData={{user_id: id, EvaluacionAnualData: employee.evaluaciones_anuales}}/>
                     <Button size='lg' id='botonImprimir' onClick={generaFicha}>
                         Imprimir Ficha
                     </Button>

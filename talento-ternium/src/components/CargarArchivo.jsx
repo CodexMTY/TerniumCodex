@@ -10,8 +10,8 @@ const CargarArchivo = () => {
   const [listaArchivos, declararListaArchivos] = useState([]);
   const [hayArchivo, activarBoton] = useState(false);
   const [cursorEnCaja, cambiarBorde] = useState(false);
-  const [mensajeError, declararMensajeError] = useState('');
-  const [mensajeExito, declararMensajeExito] = useState('');
+  const [mensajeError, setMensajeError] = useState('');
+  const [mensajeExito, setMensajeExito] = useState('');
   const [mostrarMensajeError, activarMensajeError] = useState(false);
   const [mostrarMensajeExito, activarMensajeExito] = useState(false);
 
@@ -40,7 +40,7 @@ const CargarArchivo = () => {
         const extensionesPermitidas = ["csv"];
 
         if (archivosArrastrados.length !== 1) {
-            declararMensajeError("Solo puede subir un archivo a la vez");
+            setMensajeError("Solo puede subir un archivo a la vez");
             activarMensajeError(true);
             return false;
         }
@@ -49,7 +49,7 @@ const CargarArchivo = () => {
         const extensionArchivo = archivo.name.split('.').pop();
     
         if (!extensionesPermitidas.includes(extensionArchivo)) {
-            declararMensajeError(`El archivo "${archivo.name}" no es de tipo .csv`);
+            setMensajeError(`El archivo "${archivo.name}" no es de tipo .csv`);
             activarMensajeError(true);
             return false;
         }
@@ -84,12 +84,12 @@ const CargarArchivo = () => {
     .then((result) => {
         if (result.error){
             activarMensajeError(true);
-            declararMensajeError("Hubo un error al intentar subir el archivo");
+            setMensajeError("Hubo un error al intentar subir el archivo");
 
         }
         else {
             activarMensajeExito(true);
-            declararMensajeExito("El archivo se ha subido con éxito");
+            setMensajeExito("El archivo se ha subido con éxito");
         }
     })
   };
