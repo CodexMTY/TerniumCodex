@@ -508,7 +508,7 @@ function ListaEmpleados() {
             pagination={{ 
                 defaultPageSize: 5, 
                 showSizeChanger: true, 
-                pageSizeOptions: ['5', '10', '20', '30', '50', '100'],
+                pageSizeOptions: ['5', '10', '15', '20'],
                 showTotal: (total, range) => `${range[0]}-${range[1]} de ${total} empleados`
             }}   />
     </>;
