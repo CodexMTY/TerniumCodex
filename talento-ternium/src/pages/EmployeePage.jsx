@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Navigate, useParams } from 'react-router-dom';
 import Header from '../components/Header';
-import { getRequest } from '../apiUtils';
+import { getRequest, putImage } from '../apiUtils';
 import Cookies from 'universal-cookie';
 import { Spinner, Button, Row, Col, Image } from 'react-bootstrap';
 import html2canvas from "html2canvas";
@@ -15,6 +15,7 @@ import ClienteProveedor from '../components/ClienteProveedor';
 function UserPage() {
 
     const cookies = new Cookies();
+    const fileInputRef = useRef();
 
     if (!cookies.get('token')) {
         console.log("no existe un token de autenticacion");
@@ -36,6 +37,7 @@ function UserPage() {
     const [employee, setEmployee] = useState(null);
     const [error, setError] = useState(false);
     const [isDataEmpty, setDataEmpty] = useState(false);
+    const [isHovered, setHovered] = useState(false);
 
     const fetchEmployeeData = async () => {
         try {
@@ -51,6 +53,30 @@ function UserPage() {
         }
     };
 
+    const handleImageHover = () => {
+        setHovered(true);
+    };
+
+    const handleImageLeave = () => {
+        setHovered(false);
+    };
+
+    const handleImageClick = () => {
+        fileInputRef.current.click();
+    };
+
+    const handleFileChange = async (event) => {
+        const file = event.target.files[0];
+        try {
+            await putImage(`users/${id}`, file);
+            await fetchEmployeeData();
+        } catch (error) {
+            console.error('Error while updating image:', error);
+        }
+    };
+    
+    
+
     useEffect(() => {
         fetchEmployeeData();
     }, [id]);
@@ -62,12 +88,58 @@ function UserPage() {
                 <div>
                     <div id="datosEmpleado">
                         <Row>
-                            <Col>
-                                <Image rounded='true' src={employee.imagen ? employee.imagen : picturePlaceholder}  style={{height: '150px'}} />
-                                <h1>{`${employee.nombre} ${employee.apellidos}`}</h1>
-                                <p>Correo electrónico: {`${employee.email}`}</p>
-                                <p>{`${employee.resumen}`}</p>
-                            </Col>
+                        <Col style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+                            <div 
+                                onMouseEnter={handleImageHover} 
+                                onMouseLeave={handleImageLeave} 
+                                onClick={handleImageClick} 
+                                style={{ 
+                                    position: 'relative', 
+                                    width: '150px', 
+                                    height: '150px', 
+                                    borderRadius: '50%', 
+                                    overflow: 'hidden' 
+                                }}
+                            >
+                                <Image 
+                                    roundedCircle='true' 
+                                    src={employee.image ? employee.image : picturePlaceholder}  
+                                    style={{ 
+                                        height: '150px', 
+                                        width: '150px', 
+                                        objectFit: 'cover' 
+                                    }} 
+                                />
+                                {isHovered && 
+                                    <div 
+                                        style={{ 
+                                            position: 'absolute', 
+                                            top: 0, 
+                                            left: 0, 
+                                            width: '100%', 
+                                            height: '100%', 
+                                            display: 'flex', 
+                                            alignItems: 'center', 
+                                            justifyContent: 'center', 
+                                            backgroundColor: 'rgba(0,0,0,0.5)', 
+                                            color: 'white' 
+                                        }}
+                                    >
+                                        cambiar imagen
+                                    </div>
+                                }
+                                <input 
+                                    ref={fileInputRef} 
+                                    type='file' 
+                                    style={{ display: 'none' }} 
+                                    onChange={handleFileChange}
+                                />
+                            </div>
+                            <h1>{`${employee.nombre} ${employee.apellidos}`}</h1>
+                            <p>Correo electrónico: {`${employee.email}`}</p>
+                            <p>{`${employee.resumen}`}</p>
+                        </Col>
+
                             <Col>
                                 <PersonalDataTable employeeData={employee} />
                             </Col>

@@ -34,3 +34,19 @@ export async function putRequest(url, data) {
   
   return response;
 }
+
+export async function putImage(url, file) {
+  let formData = new FormData();
+  formData.append('image', file);
+  
+  let response = await fetch(`${API}${url}`, {
+    method: 'PUT',
+    body: formData
+  });
+
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+
+  return await response.json();
+}
