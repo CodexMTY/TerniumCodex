@@ -62,6 +62,7 @@ function UserPage() {
                             <Col>
                                 <Image rounded='true' src={employee.imagen ? employee.imagen : picturePlaceholder}  style={{height: '150px'}} />
                                 <h1>{`${employee.nombre} ${employee.apellidos}`}</h1>
+                                <p>Correo electrónico: {`${employee.email}`}</p>
                                 <p>{`${employee.resumen}`}</p>
                             </Col>
                             <Col>

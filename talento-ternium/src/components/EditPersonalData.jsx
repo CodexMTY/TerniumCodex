@@ -5,6 +5,7 @@ import { putRequest } from "../apiUtils";
 function EditPersonalData({ show, handleClose, employeeData }) { 
     const [nombre, setNombre] = useState(employeeData.nombre);
     const [apellidos, setApellidos] = useState(employeeData.apellidos);
+    const [email, setEmail] = useState(employeeData.email);
     const [estructura3, setEstructura3] = useState(employeeData.estructura3);
     const [estructura4, setEstructura4] = useState(employeeData.estructura4);
     const [estructura5, setEstructura5] = useState(employeeData.estructura5);
@@ -30,6 +31,7 @@ function EditPersonalData({ show, handleClose, employeeData }) {
             "user": {
                 "nombre": nombre,
                 "apellidos": apellidos,
+                "email": email,
                 "estructura3": estructura3,
                 "estructura4": estructura4,
                 "estructura5": estructura5,
@@ -75,6 +77,12 @@ function EditPersonalData({ show, handleClose, employeeData }) {
                             <Form.Group>
                                 <Form.Label>Apellidos</Form.Label>
                                 <Form.Control type="text" value={apellidos} onChange={e => setApellidos(e.target.value)} />
+                            </Form.Group>
+                        </Col>
+                        <Col>
+                            <Form.Group>
+                                <Form.Label>Correo electrónico</Form.Label>
+                                <Form.Control type="text" value={email} onChange={e => setEmail(e.target.value)} />
                             </Form.Group>
                         </Col>
                     </Row>
