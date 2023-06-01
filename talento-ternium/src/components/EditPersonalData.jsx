@@ -31,7 +31,7 @@ function EditPersonalData({ show, handleClose, employeeData }) {
         }
     
         let userData = {
-            "user": {
+            
                 "nombre": nombre,
                 "apellidos": apellidos,
                 "email": email,
@@ -41,7 +41,7 @@ function EditPersonalData({ show, handleClose, employeeData }) {
                 "direccion": direccion,
                 "puesto": puesto,
                 "resumen": resumen
-            }
+            
         }
     
         const result = await putRequest(`users/${employeeData.id}`, userData)
