@@ -13,7 +13,6 @@ function Header() {
 
     function handleLogOut() {
         cookies.remove('token', { path: '/' });
-        cookies.remove('exp', { path: '/' });
         cookies.remove('user_id', { path: '/' });
 
         navigate('/');
@@ -26,11 +25,9 @@ function Header() {
     return (
     <Navbar expand="lg" sticky='top' style={{ background: "white" }}>
         <Container>
-            <Link to='/homePage'>
-                <div className="d-inline-block align-top" style={{ paddingRight: '30px' }}>
-                    <Link to='/homePage'><img src={terniumLogo} height="50" alt="Logo Ternium" /></Link>
-                </div>
-            </Link>
+            <div className="d-inline-block align-top" style={{ paddingRight: '10px' }}>
+                <Link to='/homePage'><img src={terniumLogo} height="50" alt="Logo Ternium" /></Link>
+            </div>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="me-auto">

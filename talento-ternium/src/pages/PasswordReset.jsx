@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 function PasswordCard(){
     return (
-        <Container className="d-flex justify-content-center align-items-center">
+        <Container className="d-flex justify-content-center align-items-center" style={{ position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
             <Card style={{ width: '25rem' }}>
                 <Card.Body>
                     <Link to='/'><img src={terniumLogo} className="img-fluid" alt="Logo Ternium" /></Link>
