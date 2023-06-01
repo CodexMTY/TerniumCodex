@@ -24,7 +24,7 @@ function EditPersonalData({ show, handleClose, employeeData }) {
         e.preventDefault();
     
         // Check if all fields have been filled
-        if (!nombre || !apellidos || !estructura3 || !estructura4 || !estructura5 || !direccion || !puesto) {
+        if (!nombre || !email || !apellidos || !estructura3 || !estructura4 || !estructura5 || !direccion || !puesto) {
             setErrorMessage('Favor de llenar todos los datos');
             toggleError(true);
             return;

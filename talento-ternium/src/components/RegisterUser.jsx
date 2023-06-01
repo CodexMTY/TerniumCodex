@@ -52,7 +52,10 @@ const RegisterUser = () => {
                 'estructura4': values['estructura4'],
                 'estructura5': values['estructura5'],
                 'encuadre': values['encuadre'],
-                'pc_cat': values['pccat']
+                'pc_cat': values['pccat'],
+                'resumen': "",
+                'universidad': '',
+                'direccion': '',
             }
         }
 
