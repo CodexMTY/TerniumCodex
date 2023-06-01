@@ -133,7 +133,7 @@ function EditPersonalData({ show, handleClose, employeeData }) {
 
 
                 </Form>
-                <Button variant="outline-danger" className="mt-2 py-2 w-30" onClick={updateEmployeeData}>Guradar cambios</Button>
+                <Button variant="outline-danger" className="mt-2 py-2 w-30" onClick={updateEmployeeData}>Guardar cambios</Button>
                 {setErrorMessage && error && (
                     <Alert style={{ marginTop: "8px", marginBottom: "0px" }} variant="danger" onClose={() => toggleError(false)} dismissible>
                         {errorMessage}
