@@ -55,7 +55,7 @@ const RegisterUser = () => {
                 'pc_cat': values['pccat'],
                 'resumen': "",
                 'universidad': '',
-                'direccion': '',
+                'direccion': ''
             }
         }
 
