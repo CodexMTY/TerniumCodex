@@ -7,7 +7,10 @@ import { Spinner, Button, Row, Col, Image } from 'react-bootstrap';
 import html2canvas from "html2canvas";
 import JsPDF from 'jspdf';
 import PersonalDataTable from '../components/PersonalDataTable';
-import picturePlaceholder from '../img/profile_picture.png'
+import picturePlaceholder from '../img/profile_picture.png';
+import UpwardFeedback from '../components/UpwardFeedback';
+import EvaluacionAnual from '../components/EvaluacionAnual';
+import ClienteProveedor from '../components/ClienteProveedor';
 
 function UserPage() {
 
@@ -69,6 +72,9 @@ function UserPage() {
                                 <PersonalDataTable employeeData={employee} />
                             </Col>
                         </Row>
+                        <UpwardFeedback UpwardFeedbackData={{user_id: id, UpwardFeedbackData: employee.upward_fbks}}/>
+                        <ClienteProveedor ClienteProveedorData={{user_id: id, ClienteProveedorData: employee.cliente_proveedors}}/>
+                        <EvaluacionAnual EvaluacionAnualData={{user_id: id, EvaluacionAnualData: employee.evaluaciones_anuales}}/>
                     </div>
                     <Button size='lg' id='botonImprimir' onClick={generaFicha}>
                         Imprimir Ficha
