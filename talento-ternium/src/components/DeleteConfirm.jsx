@@ -1,11 +1,13 @@
 import { Button, Popconfirm, message } from 'antd';
 import { useState, useContext } from 'react';
 import { DeleteOutlined } from '@ant-design/icons';
+import Cookies from 'universal-cookie';
 
 function DeleteConfirm({ userId, chooseEmpleados, listaEmpleados }) {
 
     const [open, setOpen] = useState(false);
     const [confirmLoading, setConfirmLoading] = useState(false);
+    const cookies = new Cookies();
 
     const showPopconfirm = () => {
         setOpen(true);
@@ -29,7 +31,7 @@ function DeleteConfirm({ userId, chooseEmpleados, listaEmpleados }) {
     
     const fetchDelete = async () => {
         try {
-            const response = await fetch(`https://codextern-4ny2.onrender.com/users/${userId}`, { method: 'DELETE' });
+            const response = await fetch(`https://codextern-4ny2.onrender.com/users/${userId}`, { method: 'DELETE', headers: {'Authorization': cookies.get('token')} });
             if (response.ok) {
                 deleteEmpleado()
                 setOpen(false);
