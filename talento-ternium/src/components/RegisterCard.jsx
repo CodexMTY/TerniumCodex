@@ -34,23 +34,24 @@ function RegisterCard({ switchCard }) {
     }
 
     let userData = {
-      "user": {
-        "email": email,
-        "password": password,
-        "password_confirmation": passwordConfirmation,
-        "nombre": name,
-        "apellidos": lastName
-      }
+      "email": email,
+      "password": password,
+      "password_confirmation": passwordConfirmation,
+      "nombre": name,
+      "apellidos": lastName
     }
 
     const result = await postRequest("users", userData);
 
-    if (result.error){
-      setErrorMessage("El correo ya está registrado");
+    if (result.email == "has already been taken"){
+      setErrorMessage("El correo ya esta registrado");
     }
-    else {
+    else if (result.email) {
       setErrorMessage('');
       setSuccessMessage("Usuario creado con éxito");
+    }
+    else {
+      setErrorMessage('Error, favor de intentar de nuevo')
     }
   }
 

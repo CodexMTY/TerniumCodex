@@ -52,7 +52,7 @@ function PersonalDataTable({ employeeData }) {
                         <td>{getYearsDiff(employeeData.cumpleanos)}</td>
                     </tr>
                     <tr>
-                        <td>Antiguedad</td>
+                        <td>Antigüedad</td>
                         <td>{getYearsDiff(employeeData.fecha_ingreso)}</td>
                     </tr>
                     <tr>

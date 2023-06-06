@@ -3,6 +3,7 @@ import { Button, Form, Input, InputNumber, Radio, DatePicker } from 'antd';
 import Cookies from 'universal-cookie';
 import { useState } from 'react';
 import { Alert } from 'react-bootstrap';
+import { postRequest } from '../apiUtils';
 
 const cookies = new Cookies;
 
@@ -33,61 +34,48 @@ const RegisterUser = () => {
 
     const onFinish = (values) => {
         setConfirmLoading(true);
-        let user = {
-            "user": {
-                "nombre": values["nombre"],
-                "apellidos": values["apellidos"],
-                "email": values["email"],
-                "password": values["password"],
-                "password_confirmation": values["password_confirmation"],
-                "cumpleanos": values["cumpleanos"]["$d"],
-                "fecha_ingreso": values["fecha_ingreso"]["$d"],
-                "idm4": values["idm4"],
-                "cet": values["cet"],
-                "key_talent": values["key_talent"] == "true" ? true : false,
-                "puesto": values["puesto"],
-                "jefe": values["jefe"],
-                "estructura3": values["estructura3"],
-                "estructura4": values["estructura4"],
-                "estructura5": values["estructura5"],
-                "encuadre": values["encuadre"],
-                "pc_cat": values["pccat"],
-                "resumen": "",
-                "universidad": "",
-                "direccion": ""
-            }
+        let userData = {
+            "nombre": values["nombre"],
+            "apellidos": values["apellidos"],
+            "email": values["email"],
+            "password": values["password"],
+            "password_confirmation": values["password_confirmation"],
+            "cumpleanos": values["cumpleanos"]["$d"],
+            "fecha_ingreso": values["fecha_ingreso"]["$d"],
+            "idm4": values["idm4"],
+            "cet": values["cet"],
+            "key_talent": values["key_talent"] == "true" ? true : false,
+            "puesto": values["puesto"],
+            "jefe": values["jefe"],
+            "estructura3": values["estructura3"],
+            "estructura4": values["estructura4"],
+            "estructura5": values["estructura5"],
+            "encuadre": values["encuadre"],
+            "pc_cat": values["pccat"],
+            "resumen": "",
+            "universidad": "",
+            "direccion": ""
         }
 
-        const requestOptions = {
-            method: "POST",
-            headers: {
-                "Authorization": cookies.get("token"),
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(user)
-        };
-        fetch("https://codextern-4ny2.onrender.com/users", requestOptions)
-            .then(response => response.json())
-            .then((result) => {
-                if (result.email == "has already been taken") {
+        const result = postRequest("users", userData, cookies.get("token"));
 
-                    activarMensajeError(true);
-                    setConfirmLoading(false);
-                    declararMensajeError("Correo electrónico ya en uso.");
+        if (result.email == "has already been taken") {
 
-                }
-                else if (result.email) {
-                    activarMensajeExito(true);
-                    setConfirmLoading(false);
-                    declararMensajeExito("Empleado registrado correctamente.");
-                    form.resetFields();
-                } else {
-                    activarMensajeError(true);
-                    setConfirmLoading(false);
-                    declararMensajeError("Error. Inténtelo de nuevo.");
-                }
-            })
+            activarMensajeError(true);
+            setConfirmLoading(false);
+            declararMensajeError("Correo electrónico ya en uso.");
 
+        }
+        else if (result.email) {
+            activarMensajeExito(true);
+            setConfirmLoading(false);
+            declararMensajeExito("Empleado registrado correctamente.");
+            form.resetFields();
+        } else {
+            activarMensajeError(true);
+            setConfirmLoading(false);
+            declararMensajeError("Error. Inténtelo de nuevo.");
+        }
     };
 
     const onFinishFailed = (errorInfo) => {

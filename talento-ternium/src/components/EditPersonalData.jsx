@@ -1,6 +1,8 @@
-import { Button, Modal, Form, Row, Col, Alert } from 'react-bootstrap';
+import { Button, Modal, Form, Row, Col, Alert } from "react-bootstrap";
 import { useState } from 'react';
 import { putRequest } from '../apiUtils';
+import { useNavigate } from 'react-router-dom';
+import Cookies from 'universal-cookie';
 
 function EditPersonalData({ show, handleClose, employeeData }) { 
     const [nombre, setNombre] = useState(employeeData.nombre);
@@ -16,6 +18,7 @@ function EditPersonalData({ show, handleClose, employeeData }) {
     const [error, toggleError] = useState(false);
     const [successMessage, setSuccessMessage] = useState('');
     const [success, toggleSuccess] = useState(false);
+    const cookies = new Cookies();
 
     const updateEmployeeData = async (e) => {
         e.preventDefault();
@@ -28,20 +31,20 @@ function EditPersonalData({ show, handleClose, employeeData }) {
         }
     
         let userData = {
-            
-                "nombre": nombre,
-                "apellidos": apellidos,
-                "email": email,
-                "estructura3": estructura3,
-                "estructura4": estructura4,
-                "estructura5": estructura5,
-                "direccion": direccion,
-                "puesto": puesto,
-                "resumen": resumen
+        
+            "nombre": nombre,
+            "apellidos": apellidos,
+            "email": email,
+            "estructura3": estructura3,
+            "estructura4": estructura4,
+            "estructura5": estructura5,
+            "direccion": direccion,
+            "puesto": puesto,
+            "resumen": resumen
             
         }
     
-        const result = await putRequest(`users/${employeeData.id}`, userData)
+        const result = await putRequest(`users/${employeeData.id}`, userData, cookies.get('token'));
     
         if (result.error){
             setErrorMessage("Error al cambiar los datos, favor de intentar de nuevo.");

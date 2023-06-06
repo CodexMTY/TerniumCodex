@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Modal, Button, Form, InputGroup, OverlayTrigger, Tooltip, Alert } from 'react-bootstrap';
 import botonAgregar from '../img/edit_pencil.png';
 import { postRequest } from '../apiUtils';
+import Cookies from 'universal-cookie';
 
 function AgregarEditarPopupView(
     { titulo,
@@ -21,6 +22,9 @@ function AgregarEditarPopupView(
     url,
     userID } 
     ) {
+
+        const cookies = new Cookies();
+      
         const [mostrar, setMostrar] = useState(false);
         const [datosCompletos, setDatosCompletos] = useState(false);
         const [mensajeError, setMensajeError] = useState('');
@@ -45,11 +49,13 @@ function AgregarEditarPopupView(
             let result = null;
 
             if (url === "upward_fbks") {
-                result = await postRequest(url, {user_id: userID, promedio: puntaje, comments: comentarios})
+                result = await postRequest(url, {user_id, promedio: puntaje, comments: comentarios}, cookies.get('token'))
             } else if (url === "cliente_proveedors") {
-                result = await postRequest(url, {user_id: userID, promedio: puntaje, comentarios});
+                result = await postRequest(url, {user_id, promedio: puntaje, comentarios}, cookies.get('token'));
             } else if (url === "evaluaciones_anuales") {
-                result = await postRequest(url, {user_id: userID, ano: anio, performance, potencial, curva});
+                result = await postRequest(url, {user_id, ano: anio, performance, potencial, curva}, cookies.get('token'));
+            } else {
+                return;
             }
             
             if (result.error){
