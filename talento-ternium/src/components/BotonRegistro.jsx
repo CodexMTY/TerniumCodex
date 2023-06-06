@@ -15,7 +15,7 @@ function BotonSubida() {
                 Registrar empleado
             </Nav.Link>
 
-            <Modal size='lg' show={mostrar} onHide={manejarCerrar}>
+            <Modal size="lg" show={mostrar} onHide={manejarCerrar}>
                 <Modal.Header closeButton>
                     <Modal.Title>Registro individual</Modal.Title>
                 </Modal.Header>

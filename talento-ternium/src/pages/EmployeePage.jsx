@@ -5,7 +5,7 @@ import Header from '../components/Header';
 import { getRequest, putImage } from '../apiUtils';
 import Cookies from 'universal-cookie';
 import { Spinner, Button, Row, Col, Image } from 'react-bootstrap';
-import html2canvas from "html2canvas";
+import html2canvas from 'html2canvas';
 import JsPDF from 'jspdf';
 import PersonalDataTable from '../components/PersonalDataTable';
 import picturePlaceholder from '../img/profile_picture.png';
@@ -18,8 +18,7 @@ function UserPage() {
     const cookies = new Cookies();
     const fileInputRef = useRef();
 
-    if (!cookies.get('token')) {
-        console.log("no existe un token de autenticacion");
+    if (!cookies.get("token")) {
         return <Navigate replace to='/'></Navigate>;
     }
 
@@ -73,7 +72,7 @@ function UserPage() {
             await putImage(`users/${id}`, file, cookies.get('token'));
             await fetchEmployeeData();
         } catch (error) {
-            console.error('Error while updating image:', error);
+            console.error("Error while updating image:", error);
         }
     };
     
@@ -90,50 +89,50 @@ function UserPage() {
                 <div>
                     <div id="datosEmpleado">
                         <Row>
-                        <Col style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+                        <Col style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
                             <div 
                                 onMouseEnter={handleImageHover} 
                                 onMouseLeave={handleImageLeave} 
                                 onClick={handleImageClick} 
                                 style={{ 
-                                    position: 'relative', 
-                                    width: '150px', 
-                                    height: '150px', 
-                                    borderRadius: '50%', 
-                                    overflow: 'hidden' 
+                                    position: "relative", 
+                                    width: "150px", 
+                                    height: "150px", 
+                                    borderRadius: "50%", 
+                                    overflow: "hidden" 
                                 }}
                             >
                                 <Image 
-                                    roundedCircle='true' 
+                                    roundedCircle="true" 
                                     src={employee.image ? employee.image : picturePlaceholder}  
                                     style={{ 
-                                        height: '150px', 
-                                        width: '150px', 
-                                        objectFit: 'cover' 
+                                        height: "150px", 
+                                        width: "150px", 
+                                        objectFit: "cover" 
                                     }} 
                                 />
                                 {isHovered && 
                                     <div 
                                         style={{ 
-                                            position: 'absolute', 
+                                            position: "absolute", 
                                             top: 0, 
                                             left: 0, 
-                                            width: '100%', 
-                                            height: '100%', 
-                                            display: 'flex', 
-                                            alignItems: 'center', 
-                                            justifyContent: 'center', 
-                                            backgroundColor: 'rgba(0,0,0,0.5)', 
-                                            color: 'white' 
+                                            width: "100%", 
+                                            height: "100%", 
+                                            display: "flex", 
+                                            alignItems: "center", 
+                                            justifyContent: "center", 
+                                            backgroundColor: "rgba(0,0,0,0.5)", 
+                                            color: "white" 
                                         }}
                                     >
-                                        cambiar imagen
+                                        Cambiar imagen
                                     </div>
                                 }
                                 <input 
                                     ref={fileInputRef} 
-                                    type='file' 
-                                    style={{ display: 'none' }} 
+                                    type="file" 
+                                    style={{ display: "none" }} 
                                     onChange={handleFileChange}
                                 />
                             </div>
@@ -150,7 +149,7 @@ function UserPage() {
                         <ClienteProveedor ClienteProveedorData={{user_id: id, ClienteProveedorData: employee.cliente_proveedors}}/>
                         <EvaluacionAnual EvaluacionAnualData={{user_id: id, EvaluacionAnualData: employee.evaluaciones_anuales}}/>
                     </div>
-                    <Button size='lg' id='botonImprimir' onClick={generaFicha}>
+                    <Button size="lg" id="botonImprimir" onClick={generaFicha}>
                         Imprimir Ficha
                     </Button>
                 </div>
@@ -163,7 +162,7 @@ function UserPage() {
                 </div>
             ) : (
                 <div>
-                    <Spinner animation="border" variant='warning'>
+                    <Spinner animation="border" variant="warning">
                     </Spinner>
                     <p>Cargando...</p>
                 </div>

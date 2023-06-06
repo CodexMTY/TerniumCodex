@@ -33,13 +33,13 @@ function PersonalDataTable({ employeeData }) {
             <EditPersonalData show={showEditModal} handleClose={handleCloseModal} employeeData={employeeData}/>
             <Table striped bordered size="sm">
                 <thead>
-                <tr style={{ backgroundColor: 'orange' }}>
+                <tr style={{ backgroundColor: "orange" }}>
                         <th colSpan="2" >
-                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                                <span style={{ textAlign: 'center', width: '100%' }}>Datos personales</span>
+                            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                                <span style={{ textAlign: "center", width: "100%" }}>Datos personales</span>
                                 <OverlayTrigger overlay={renderTooltip}>
-                                    <Button variant="outline-light" onClick={handleEditClick} style={{ paddingRight: '5px', paddingLeft: '5px', paddingTop: '0px', paddingBottom: '2px', border: 'none' }}>
-                                        <img src={editPencil} alt="Edit" style={{ width: '15px', height: '15px' }} />
+                                    <Button variant="outline-light" onClick={handleEditClick} style={{ paddingRight: "5px", paddingLeft: "5px", paddingTop: "0px", paddingBottom: "2px", border: "none" }}>
+                                        <img src={editPencil} alt="Edit" style={{ width: "15px", height: "15px" }} />
                                     </Button>
                                 </OverlayTrigger>
                             </div>
@@ -57,7 +57,7 @@ function PersonalDataTable({ employeeData }) {
                     </tr>
                     <tr>
                         <td>Estudios</td>
-                        <td>{employeeData.estudios.length > 0 ? employeeData.estudios.join(', ') : 'Ninguno'}</td>
+                        <td>{employeeData.estudios.length > 0 ? employeeData.estudios.join(", ") : "Ninguno"}</td>
                     </tr>
                     <tr>
                         <td>Universidad</td>
