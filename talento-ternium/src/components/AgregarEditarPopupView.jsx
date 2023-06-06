@@ -49,11 +49,11 @@ function AgregarEditarPopupView(
             let result = null;
 
             if (url === "upward_fbks") {
-                result = await postRequest(url, {user_id, promedio: puntaje, comments: comentarios}, cookies.get('token'))
+                result = await postRequest(url, {userID, promedio: puntaje, comments: comentarios}, cookies.get('token'))
             } else if (url === "cliente_proveedors") {
-                result = await postRequest(url, {user_id, promedio: puntaje, comentarios}, cookies.get('token'));
+                result = await postRequest(url, {userID, promedio: puntaje, comentarios}, cookies.get('token'));
             } else if (url === "evaluaciones_anuales") {
-                result = await postRequest(url, {user_id, ano: anio, performance, potencial, curva}, cookies.get('token'));
+                result = await postRequest(url, {userID, ano: anio, performance, potencial, curva}, cookies.get('token'));
             } else {
                 return;
             }
