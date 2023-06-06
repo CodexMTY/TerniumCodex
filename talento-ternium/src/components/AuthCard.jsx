@@ -5,7 +5,7 @@ import terniumLogo from '../img/logo-ternium.png';
 function AuthCard({ children, onSubmit, switchCard, primaryButtonText, secondaryButtonText }) {
   return (
     <Container className="d-flex justify-content-center align-items-center">
-      <Card style={{ width: '25rem' }}>
+      <Card style={{ width: "25rem" }}>
         <Card.Body>
           <img src={terniumLogo} className="img-fluid" alt="Logo Ternium" />
           <Card.Text className="text-muted text-center mt-2">Sistema para equipo de talento</Card.Text>

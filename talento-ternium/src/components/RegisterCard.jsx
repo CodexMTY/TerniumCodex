@@ -16,7 +16,7 @@ function RegisterCard({ switchCard }) {
   const validateEmail = (value) => {
     const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
     if (!emailRegex.test(value)) {
-      setEmailError('Correo electrónico inválido');
+      setEmailError("Correo electrónico inválido");
       return false;
     }
     setEmailError('');
@@ -29,7 +29,7 @@ function RegisterCard({ switchCard }) {
     if (!isValid) return;
 
     if (password !== passwordConfirmation) {
-      setErrorMessage('Las contraseñas no coinciden');
+      setErrorMessage("Las contraseñas no coinciden");
       return;
     }
 
@@ -41,14 +41,14 @@ function RegisterCard({ switchCard }) {
       "apellidos": lastName
     }
 
-    const result = await postRequest('users', userData);
+    const result = await postRequest("users", userData);
 
-    if (result.email == 'has already been taken'){
-      setErrorMessage('El correo ya esta registrado');
+    if (result.email == "has already been taken"){
+      setErrorMessage("El correo ya esta registrado");
     }
     else if (result.email) {
       setErrorMessage('');
-      setSuccessMessage('Usuario creado con éxito');
+      setSuccessMessage("Usuario creado con éxito");
     }
     else {
       setErrorMessage('Error, favor de intentar de nuevo')
@@ -59,7 +59,7 @@ function RegisterCard({ switchCard }) {
     <AuthCard onSubmit={register} switchCard={switchCard} primaryButtonText="Registrarse" secondaryButtonText="Regresar">
       <Form.Group controlId="formBasicEmail">
         <Form.Control type="email" placeholder="Correo electrónico" value={email} onChange={(e) => setEmail(e.target.value)} />
-        {emailError && <p style={{ color: 'red' }}>{emailError}</p>}
+        {emailError && <p style={{ color: "red" }}>{emailError}</p>}
       </Form.Group>
 
       <Form.Group controlId="formBasicPassword" className="mt-2">
@@ -78,8 +78,8 @@ function RegisterCard({ switchCard }) {
         <Form.Control type="text" placeholder="Apellido" value={lastName} onChange={(e) => setLastName(e.target.value)} />
       </Form.Group>
 
-      {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
-      {successMessage && <p style={{ color: 'green' }}>{successMessage}</p>}
+      {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
+      {successMessage && <p style={{ color: "green" }}>{successMessage}</p>}
     </AuthCard>
   );
 }

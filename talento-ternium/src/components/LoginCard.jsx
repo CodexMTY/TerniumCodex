@@ -16,21 +16,18 @@ function LoginCard({ switchCard }) {
 
   const userLogin = async (e) => {
     e.preventDefault();
-    const result = await postRequest('auth/login', { email, password });
+    const result = await postRequest("auth/login", { email, password });
     
     if (result.error){
       setErrorMessage("Credenciales incorrectas");
     }
     else if(result.token){
       let expDateStr = result.exp;
-      console.log(expDateStr);
       let expiryDate = expDateStr.split(' ')[0].split('-').reverse().join('-') + 'T' + expDateStr.split(' ')[1] + 'Z';
       let utcDate = parseISO(expiryDate);
-      console.log(expiryDate);
-      console.log(utcDate);
-      cookies.set('token', result.token, { expires: utcDate, path: '/', sameSite: 'None', secure: true });
-      cookies.set('user_id', result.user_id, { expires: utcDate, path: '/', sameSite: 'None', secure: true });
-      navigate('/homePage');
+      cookies.set("token", result.token, { expires: utcDate, path: '/', sameSite: "None", secure: true });
+      cookies.set("user_id", result.user_id, { expires: utcDate, path: '/', sameSite: "None", secure: true });
+      navigate("/homePage");
     }
   }
 
@@ -42,11 +39,11 @@ function LoginCard({ switchCard }) {
 
       <Form.Group controlId="formBasicPassword" className="mt-2">
         <Form.Control type="password" placeholder="Contraseña" value={password} onChange={(e) => setPassword(e.target.value)} />
-        {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
+        {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
       </Form.Group>
 
       <div className="mt-2">
-        <Link to='/passwordReset'>Olvidé mi contraseña</Link>
+        <Link to="/passwordReset">Olvidé mi contraseña</Link>
       </div>
     </AuthCard>
   );

@@ -1,7 +1,7 @@
 import { Button, Modal, Form, Row, Col, Alert } from "react-bootstrap";
 import { useState } from 'react';
-import { putRequest } from "../apiUtils";
-import { useNavigate } from "react-router-dom";
+import { putRequest } from '../apiUtils';
+import { useNavigate } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 
 function EditPersonalData({ show, handleClose, employeeData }) { 
@@ -20,14 +20,12 @@ function EditPersonalData({ show, handleClose, employeeData }) {
     const [success, toggleSuccess] = useState(false);
     const cookies = new Cookies();
 
-    const navigate = useNavigate();
-
     const updateEmployeeData = async (e) => {
         e.preventDefault();
     
         // Check if all fields have been filled
         if (!nombre || !email || !apellidos || !estructura3 || !estructura4 || !estructura5 || !direccion || !puesto) {
-            setErrorMessage('Favor de llenar todos los datos');
+            setErrorMessage("Favor de llenar todos los datos");
             toggleError(true);
             return;
         }
@@ -49,11 +47,11 @@ function EditPersonalData({ show, handleClose, employeeData }) {
         const result = await putRequest(`users/${employeeData.id}`, userData, cookies.get('token'));
     
         if (result.error){
-            setErrorMessage('Error al cambiar los datos, favor de intentar de nuevo.');
+            setErrorMessage("Error al cambiar los datos, favor de intentar de nuevo.");
             toggleError(true);
         }
         else {
-            setSuccessMessage('Los datos se han guardado exitosamente. La pagina se reiniciara en breve.');
+            setSuccessMessage("Los datos se han guardado exitosamente. La página se reiniciará en breve.");
             toggleSuccess(true);
     
             // Wait for 3 seconds and then reload the page
@@ -112,7 +110,7 @@ function EditPersonalData({ show, handleClose, employeeData }) {
                         </Col>
                     </Row>
                     <Form.Group>
-                        <Form.Label>Direccion</Form.Label>
+                        <Form.Label>Dirección</Form.Label>
                         <Form.Control type="text" value={direccion} onChange={e => setDireccion(e.target.value)} />
                     </Form.Group>
                     <Form.Group>
