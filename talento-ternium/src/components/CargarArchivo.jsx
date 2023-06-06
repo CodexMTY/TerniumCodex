@@ -96,8 +96,8 @@ const CargarArchivo = () => {
 
   return (
     <div>
-        <Dragger style={{ borderColor: cursorEnCaja ? '#e56773' : 'inherit' }} {...props}>
-            <p className="ant-upload-drag-icon"> <InboxOutlined style={{ color: '#e56773' }}/> </p>
+        <Dragger style={{ borderColor: cursorEnCaja ? "#e56773" : "inherit" }} {...props}>
+            <p className="ant-upload-drag-icon"> <InboxOutlined style={{ color: "#e56773" }}/> </p>
             <p className="ant-upload-text">Arrastra un archivo o haz click aquí para cargarlo</p>
             <p className="ant-upload-hint">Solo se aceptan archivos .csv</p>
         </Dragger>

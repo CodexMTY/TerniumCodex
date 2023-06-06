@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { SearchOutlined, FilterFilled } from '@ant-design/icons';
 import { Input, Space, Table, Tag, Slider, Divider, List, Checkbox, Row, Col } from 'antd';
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from 'react';
 import DeleteConfirm from '../components/DeleteConfirm';
 
 function ListaEmpleados() {
@@ -79,7 +79,7 @@ function ListaEmpleados() {
                     onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
                     style={{
                         marginBottom: 8,
-                        display: 'block',
+                        display: "block",
                     }}
                 />
                 <Space>
@@ -109,7 +109,7 @@ function ListaEmpleados() {
         filterIcon: (filtered) => (
             <SearchOutlined
                 style={{
-                    color: filtered ? '#ffffff' : undefined,
+                    color: filtered ? "#ffffff" : undefined,
                 }}
             />
         ),
@@ -139,7 +139,7 @@ function ListaEmpleados() {
     };
 
     const handleRangeSearch = (setSelectedKeys, selectedKeys, confirm, dataIndex) => {
-        if (typeof selectedKeys[0] === 'string' && selectedKeys[0].includes('-')) {
+        if (typeof selectedKeys[0] === "string" && selectedKeys[0].includes('-')) {
             let first = selectedKeys[0].substring(0, selectedKeys[0].indexOf('-'))
             let last = selectedKeys[0].substring((selectedKeys[0].indexOf('-') + 1), (selectedKeys[0].length))
             setSelectedKeys(rango(Number(first), Number(last)))
@@ -164,12 +164,12 @@ function ListaEmpleados() {
                 <Input
                     ref={searchInput}
                     placeholder={`Buscar ${dataIndex}`}
-                    value={typeof selectedKeys[0] === 'undefined' ? "" : selectedKeys[0] != selectedKeys.slice(-1) ? `${selectedKeys[0]}-${selectedKeys.slice(-1)}` : selectedKeys[0]}
+                    value={typeof selectedKeys[0] === "undefined" ? "" : selectedKeys[0] != selectedKeys.slice(-1) ? `${selectedKeys[0]}-${selectedKeys.slice(-1)}` : selectedKeys[0]}
                     onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
                     onPressEnter={() => handleRangeSearch(setSelectedKeys, selectedKeys, confirm, dataIndex)}
                     style={{
                         marginBottom: 8,
-                        display: 'block',
+                        display: "block",
                     }}
                 />
                 <Divider />
@@ -211,7 +211,7 @@ function ListaEmpleados() {
         filterIcon: (filtered) => (
             <FilterFilled
                 style={{
-                    color: filtered ? '#ffffff' : undefined,
+                    color: filtered ? "#ffffff" : undefined,
                 }}
             />
         ),
@@ -228,8 +228,8 @@ function ListaEmpleados() {
     const [selectAll, setSelectAll] = useState(false);
 
     const keyOptions = [
-        { label: 'Key talent', value: true },
-        { label: 'No', value: false },
+        { label: "Key talent", value: true },
+        { label: "No", value: false },
     ];
 
     const handleCheckAll = () => {
@@ -305,7 +305,7 @@ function ListaEmpleados() {
         filterIcon: (filtered) => (
             <FilterFilled
                 style={{
-                    color: filtered ? '#ffffff' : undefined,
+                    color: filtered ? "#ffffff" : undefined,
                 }}
             />
         ),
@@ -334,7 +334,7 @@ function ListaEmpleados() {
                     onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
                     style={{
                         marginBottom: 8,
-                        display: 'block',
+                        display: "block",
                     }}
                 />
                 <Divider />
@@ -370,7 +370,7 @@ function ListaEmpleados() {
         filterIcon: (filtered) => (
             <FilterFilled
                 style={{
-                    color: filtered ? '#ffffff' : undefined,
+                    color: filtered ? "#ffffff" : undefined,
                 }}
             />
         ),
@@ -385,116 +385,116 @@ function ListaEmpleados() {
 
     const columns = [
         {
-            title: 'Nombre',
-            dataIndex: 'nombre',
-            key: 'nombre',
-            fixed:  'left',
-            ...filtroBusqueda('nombre'),
+            title: "Nombre",
+            dataIndex: "nombre",
+            key: "nombre",
+            fixed:  "left",
+            ...filtroBusqueda("nombre"),
         },
         {
-            title: 'Apellidos',
-            dataIndex: 'apellidos',
-            key: 'apellidos',
-            responsive: ['xl'],
-            fixed:  'left',
-            ...filtroBusqueda('apellidos')
+            title: "Apellidos",
+            dataIndex: "apellidos",
+            key: "apellidos",
+            responsive: ["xl"],
+            fixed:  "left",
+            ...filtroBusqueda("apellidos")
         },
         {
-            title: 'IDM4',
-            dataIndex: 'idm4',
-            key: 'idm4',
-            responsive: ['md'],
-            ...filtroBusqueda('idm4')
+            title: "IDM4",
+            dataIndex: "idm4",
+            key: "idm4",
+            responsive: ["md"],
+            ...filtroBusqueda("idm4")
         },
         {
-            title: 'CET',
-            dataIndex: 'cet',
-            key: 'cet',
-            responsive: ['md'],
-            ...filtroBusqueda('cet')
+            title: "CET",
+            dataIndex: "cet",
+            key: "cet",
+            responsive: ["md"],
+            ...filtroBusqueda("cet")
         },
         {
-            title: 'Key Talent',
-            dataIndex: 'key_talent',
-            key: 'key_talent',
-            ...filtroKeyTalent('key_talent'),
+            title: "Key Talent",
+            dataIndex: "key_talent",
+            key: "key_talent",
+            ...filtroKeyTalent("key_talent"),
             render: (key_talent) =>
-                <Tag color={key_talent ? 'green' : 'red'} key={'key'}>
-                    {key_talent ? 'key' : 'no'}
+                <Tag color={key_talent ? "green" : "red"} key={"key"}>
+                    {key_talent ? "key" : "no"}
                 </Tag>
         },
         {
-            title: 'Edad',
-            dataIndex: 'edad',
-            key: 'edad',
-            ...filtroRango('edad'),
-            render: (text) => <>{text || text==0 ? text + ' años' : text}</>,
+            title: "Edad",
+            dataIndex: "edad",
+            key: "edad",
+            ...filtroRango("edad"),
+            render: (text) => <>{text || text==0 ? text + " años" : text}</>,
             sorter: (a, b) => a.edad - b.edad,
-            sortDirections: ['descend', 'ascend'],
+            sortDirections: ["descend", "ascend"],
             showSorterTooltip: false
         },
         {
-            title: 'Antigüedad',
-            dataIndex: 'antiguedad',
-            key: 'antiguedad',
-            ...filtroRango('antiguedad'),
-            render: (text) => <>{text || text==0 ? text + ' años' : text}</>,
+            title: "Antigüedad",
+            dataIndex: "antiguedad",
+            key: "antiguedad",
+            ...filtroRango("antiguedad"),
+            render: (text) => <>{text || text==0 ? text + " años" : text}</>,
             sorter: (a, b) => a.antiguedad - b.antiguedad,
-            sortDirections: ['descend', 'ascend'],
+            sortDirections: ["descend", "ascend"],
             showSorterTooltip: false
         },
         {
-            title: 'Puesto',
-            dataIndex: 'puesto',
-            key: 'puesto',
-            ...filtroListaOpciones('puesto'),
+            title: "Puesto",
+            dataIndex: "puesto",
+            key: "puesto",
+            ...filtroListaOpciones("puesto"),
         },
         {
-            title: 'Jefe',
-            dataIndex: 'jefe',
-            key: 'jefe',
-            responsive: ['xl'],
-            ...filtroListaOpciones('jefe')
+            title: "Jefe",
+            dataIndex: "jefe",
+            key: "jefe",
+            responsive: ["xl"],
+            ...filtroListaOpciones("jefe")
         },
         {
-            title: 'Estructura3',
-            dataIndex: 'estructura3',
-            key: 'estructura3',
-            responsive: ['lg'],
-            ...filtroListaOpciones('estructura3'),
+            title: "Estructura3",
+            dataIndex: "estructura3",
+            key: "estructura3",
+            responsive: ["lg"],
+            ...filtroListaOpciones("estructura3"),
         },
         {
-            title: 'Estructura4',
-            dataIndex: 'estructura4',
-            key: 'estructura4',
-            responsive: ['lg'],
-            ...filtroListaOpciones('estructura4'),
+            title: "Estructura4",
+            dataIndex: "estructura4",
+            key: "estructura4",
+            responsive: ["lg"],
+            ...filtroListaOpciones("estructura4"),
         },
         {
-            title: 'Estructura5',
-            dataIndex: 'estructura5',
-            key: 'estructura5',
-            responsive: ['lg'],
-            ...filtroListaOpciones('estructura5'),
+            title: "Estructura5",
+            dataIndex: "estructura5",
+            key: "estructura5",
+            responsive: ["lg"],
+            ...filtroListaOpciones("estructura5"),
         },
         {
-            title: 'Encuadre',
-            dataIndex: 'encuadre',
-            key: 'encuadre',
-            responsive: ['lg'],
-            ...filtroListaOpciones('encuadre')
+            title: "Encuadre",
+            dataIndex: "encuadre",
+            key: "encuadre",
+            responsive: ["lg"],
+            ...filtroListaOpciones("encuadre")
         },
         {
-            title: 'PC-CAT',
-            dataIndex: 'pc_cat',
-            key: 'pc_cat',
-            responsive: ['md'],
-            ...filtroBusqueda('pc_cat')
+            title: "PC-CAT",
+            dataIndex: "pc_cat",
+            key: "pc_cat",
+            responsive: ["md"],
+            ...filtroBusqueda("pc_cat")
         },
         {
-            title: 'Ocultar',
-            key: 'operation',
-            responsive: ['sm'],
+            title: "Ocultar",
+            key: "operation",
+            responsive: ["sm"],
             onCell: () => ({onClick: (e) => e.stopPropagation()}),
             render: (record) =>
                 <DeleteConfirm userId={record.id} chooseEmpleados={chooseEmpleados} listaEmpleados={empleados}/>,
@@ -517,7 +517,7 @@ function ListaEmpleados() {
             pagination={{ 
                 defaultPageSize: 5, 
                 showSizeChanger: true, 
-                pageSizeOptions: ['5', '10', '15', '20'],
+                pageSizeOptions: ["5", "10", "15", "20"],
                 showTotal: (total, range) => `${range[0]}-${range[1]} de ${total} empleados`
             }}   />
 

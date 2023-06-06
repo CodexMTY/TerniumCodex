@@ -15,7 +15,7 @@ function LoginCard({ switchCard }) {
 
   const userLogin = async (e) => {
     e.preventDefault();
-    const result = await postRequest('auth/login', { email, password });
+    const result = await postRequest("auth/login", { email, password });
     
     if (result.error){
       setErrorMessage("Credenciales incorrectas");
@@ -23,9 +23,9 @@ function LoginCard({ switchCard }) {
     else if(result.token){
       let expDateStr = result.exp;
       let expiryDate = new Date(Date.parse(expDateStr));
-      cookies.set('token', result.token, { path: '/', expires: expiryDate, sameSite: 'None', secure: true });
-      cookies.set('user_id', result.user_id, { path: '/',  expires: expiryDate, sameSite: 'None', secure: true });
-      navigate('/homePage');
+      cookies.set("token", result.token, { path: '/', expires: expiryDate, sameSite: "None", secure: true });
+      cookies.set("user_id", result.user_id, { path: '/',  expires: expiryDate, sameSite: "None", secure: true });
+      navigate("/homePage");
     }
   }
 
@@ -37,11 +37,11 @@ function LoginCard({ switchCard }) {
 
       <Form.Group controlId="formBasicPassword" className="mt-2">
         <Form.Control type="password" placeholder="Contraseña" value={password} onChange={(e) => setPassword(e.target.value)} />
-        {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
+        {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
       </Form.Group>
 
       <div className="mt-2">
-        <Link to='/passwordReset'>Olvidé mi contraseña</Link>
+        <Link to="/passwordReset">Olvidé mi contraseña</Link>
       </div>
     </AuthCard>
   );

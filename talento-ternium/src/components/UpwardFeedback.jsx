@@ -30,20 +30,20 @@ function UpwardFeedback({ UpwardFeedbackData }) {
         <>
         <Table striped bordered hover size="sm">
             <thead>
-                <tr style={{ backgroundColor: 'orange' }}>
+                <tr style={{ backgroundColor: "orange" }}>
                     <th colSpan={2}>
-                        <div style={{ display: 'flex', alignItems: 'center' }}>
-                            <span style={{ marginLeft: '5px', textAlign: 'left' }}>Upward Feedback</span>
-                            <div style={{ display: 'flex', marginLeft: 'auto', alignItems: 'center' }}>
-                                <span style={{ marginRight: '10px' }}>Promedio: {promedio}</span>
+                        <div style={{ display: "flex", alignItems: "center" }}>
+                            <span style={{ marginLeft: "5px", textAlign: "left" }}>Upward Feedback</span>
+                            <div style={{ display: "flex", marginLeft: "auto", alignItems: "center" }}>
+                                <span style={{ marginRight: "10px" }}>Promedio: {promedio}</span>
                                 <AgregarEditarPopupView
-                                    title='Agregar datos de Upward Feedback'
+                                    title="Agregar datos de Upward Feedback"
                                     puntaje={puntaje}
                                     comentarios={comentarios}
                                     manejoPuntaje={manejoPuntaje}
                                     manejoComentarios={manejoComentarios}
                                     inputsHabilitados={inputsHabilitados}
-                                    url='upward_fbks'
+                                    url="upward_fbks"
                                     user_id={UpwardFeedbackData.user_id}
                                 />
                             </div>
@@ -53,8 +53,8 @@ function UpwardFeedback({ UpwardFeedbackData }) {
             </thead>
             <thead>
                 <tr>
-                    <th style={{ backgroundColor: '#ffc966', width: '100px' }}>Puntaje</th>
-                    <th style={{ backgroundColor: '#ffc966', width: '450px' }}>Comentarios</th>
+                    <th style={{ backgroundColor: "#ffc966", width: "100px" }}>Puntaje</th>
+                    <th style={{ backgroundColor: "#ffc966", width: "450px" }}>Comentarios</th>
                 </tr>
             </thead>
             <tbody>

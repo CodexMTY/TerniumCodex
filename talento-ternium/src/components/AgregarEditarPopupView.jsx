@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
-import { Modal, Nav, Button, Form, InputGroup, OverlayTrigger, Tooltip, Alert } from 'react-bootstrap';
+import { Modal, Button, Form, InputGroup, OverlayTrigger, Tooltip, Alert } from 'react-bootstrap';
 import botonAgregar from '../img/edit_pencil.png';
 import { postRequest } from '../apiUtils';
 
 function AgregarEditarPopupView(
-    { title,
+    { titulo,
     puntaje,
     comentarios,
     anio,
@@ -19,21 +19,21 @@ function AgregarEditarPopupView(
     manejoCurva,
     inputsHabilitados,
     url,
-    user_id } 
+    userID } 
     ) {
-        const [mostrar, activarMostrar] = useState(false);
+        const [mostrar, setMostrar] = useState(false);
         const [datosCompletos, setDatosCompletos] = useState(false);
         const [mensajeError, setMensajeError] = useState('');
         const [mensajeExito, setMensajeExito] = useState('');
         const [mostrarMensajeError, activarMensajeError] = useState(false);
         const [mostrarMensajeExito, activarMensajeExito] = useState(false);
 
-        const manejarCerrar = () => activarMostrar(false);
-        const manejarAbrir = () => activarMostrar(true);
+        const manejarCerrar = () => setMostrar(false);
+        const manejarAbrir = () => setMostrar(true);
 
         useEffect(() => {
             const inputs = inputsHabilitados.map((input) => eval(input));
-            setDatosCompletos(inputs.every((valor) => valor !== ''));
+            setDatosCompletos(inputs.every((valor) => valor !== ""));
         }, inputsHabilitados.map((input) => eval(input)));
         
         const habilitarCampo = (nombreCampo) => {
@@ -44,20 +44,20 @@ function AgregarEditarPopupView(
             e.preventDefault();
             let result = null;
 
-            if (url === 'upward_fbks') {
-                result = await postRequest(url, {user_id, promedio: puntaje, comments: comentarios})
-            } else if (url === 'cliente_proveedors') {
-                result = await postRequest(url, {user_id, promedio: puntaje, comentarios});
-            } else if (url === 'evaluaciones_anuales') {
-                result = await postRequest(url, {user_id, ano: anio, performance, potencial, curva});
+            if (url === "upward_fbks") {
+                result = await postRequest(url, {user_id: userID, promedio: puntaje, comments: comentarios})
+            } else if (url === "cliente_proveedors") {
+                result = await postRequest(url, {user_id: userID, promedio: puntaje, comentarios});
+            } else if (url === "evaluaciones_anuales") {
+                result = await postRequest(url, {user_id: userID, ano: anio, performance, potencial, curva});
             }
             
             if (result.error){
-                setMensajeError('Error al subir los datos, favor de intentar de nuevo.');
+                setMensajeError("Error al subir los datos, favor de intentar de nuevo.");
                 activarMensajeError(true);
             }
             else {
-                setMensajeExito('Los datos se han guardado exitosamente. La pagina se reiniciara en breve.');
+                setMensajeExito("Los datos se han guardado exitosamente. La página se reiniciará en breve.");
                 activarMensajeExito(true);
     
                 setTimeout(() => {
@@ -69,23 +69,24 @@ function AgregarEditarPopupView(
         const renderTooltip = (props) => (
             <Tooltip id="button-tooltip" {...props}>
                 Agregar datos
-            </Tooltip>)
+            </Tooltip>
+        )
   
         return (
         <>
         <OverlayTrigger overlay={renderTooltip}>
             
-            <Button variant="outline-light" onClick={manejarAbrir} style={{ paddingRight: '5px', paddingLeft: '5px', paddingTop: '0px', paddingBottom: '2px', border: 'none' }}>
-                <img src={botonAgregar} alt="Edit" style={{ width: '15px', height: '15px' }} />
+            <Button variant="outline-light" onClick={manejarAbrir} style={{ paddingRight: "5px", paddingLeft: "5px", paddingTop: "0px", paddingBottom: "2px", border: "none" }}>
+                <img src={botonAgregar} alt="Agregar" style={{ width: "15px", height: "15px" }} />
             </Button>
         </OverlayTrigger>
         <Modal show={mostrar} onHide={manejarCerrar}>
             <Modal.Header closeButton>
-                <Modal.Title>{title}</Modal.Title>
+                <Modal.Title>{titulo}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <InputGroup size="sm" className="mb-3" hidden={habilitarCampo("puntaje")}>
-                <InputGroup.Text id="IngresarPuntaje" style={{ width: '100px' }}>Puntaje</InputGroup.Text>
+                <InputGroup.Text id="IngresarPuntaje" style={{ width: "100px" }}>Puntaje</InputGroup.Text>
                 <Form.Control
                     aria-label="Puntaje"
                     aria-describedby="IngresarPuntaje"
@@ -94,7 +95,7 @@ function AgregarEditarPopupView(
                 />
                 </InputGroup>
                 <InputGroup size="sm" className="mb-3"  hidden={habilitarCampo("comentarios")}>
-                    <InputGroup.Text id="IngresarComentarios" style={{ width: '100px' }}>Comentarios</InputGroup.Text>
+                    <InputGroup.Text id="IngresarComentarios" style={{ width: "100px" }}>Comentarios</InputGroup.Text>
                     <Form.Control
                         aria-label="Comentarios"
                         aria-describedby="IngresarComentarios"
@@ -103,7 +104,7 @@ function AgregarEditarPopupView(
                     />
                 </InputGroup>
                 <InputGroup size="sm" className="mb-3"  hidden={habilitarCampo("anio")}>
-                    <InputGroup.Text id="IngresarAño" style={{ width: '100px' }}>Año</InputGroup.Text>
+                    <InputGroup.Text id="IngresarAño" style={{ width: "100px" }}>Año</InputGroup.Text>
                     <Form.Control
                         aria-label="Año"
                         aria-describedby="IngresarAño"
@@ -112,7 +113,7 @@ function AgregarEditarPopupView(
                     />
                 </InputGroup>
                 <InputGroup size="sm" className="mb-3"  hidden={habilitarCampo("performance")}>
-                    <InputGroup.Text id="IngresarPerformance" style={{ width: '100px' }}>Performance</InputGroup.Text>
+                    <InputGroup.Text id="IngresarPerformance" style={{ width: "100px" }}>Performance</InputGroup.Text>
                     <Form.Control
                         aria-label="Performance"
                         aria-describedby="IngresarPerformance"
@@ -121,7 +122,7 @@ function AgregarEditarPopupView(
                     />
                 </InputGroup>
                 <InputGroup size="sm" className="mb-3"  hidden={habilitarCampo("potencial")}>
-                    <InputGroup.Text id="IngresarPotencial" style={{ width: '100px' }}>Potencial</InputGroup.Text>
+                    <InputGroup.Text id="IngresarPotencial" style={{ width: "100px" }}>Potencial</InputGroup.Text>
                     <Form.Control
                         aria-label="Potencial"
                         aria-describedby="IngresarPotencial"
@@ -130,7 +131,7 @@ function AgregarEditarPopupView(
                     />
                 </InputGroup>
                 <InputGroup size="sm" className="mb-3"  hidden={habilitarCampo("curva")}>
-                    <InputGroup.Text id="IngresarCurva" style={{ width: '100px' }}>Curva</InputGroup.Text>
+                    <InputGroup.Text id="IngresarCurva" style={{ width: "100px" }}>Curva</InputGroup.Text>
                     <Form.Control
                         aria-label="Curva"
                         aria-describedby="IngresarCurva"

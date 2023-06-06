@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Checkbox, Form, Input, InputNumber, Radio, DatePicker } from 'antd';
+import { Button, Form, Input, InputNumber, Radio, DatePicker } from 'antd';
 import Cookies from 'universal-cookie';
 import { useState } from 'react';
 import { Alert } from 'react-bootstrap';
@@ -7,14 +7,14 @@ import { Alert } from 'react-bootstrap';
 const cookies = new Cookies;
 
 const validateMessages = {
-    required: '${label} es obligatorio',
+    required: "${label} es obligatorio",
     types: {
-        email: '${label} no es válido',
-        number: '${label} no es válido',
+        email: "${label} no es válido",
+        number: "${label} no es válido",
     }
 };
 
-const dateFormat = 'YYYY-DD-MM';
+const dateFormat = "YYYY-DD-MM";
 
 const RegisterUser = () => {
 
@@ -32,45 +32,44 @@ const RegisterUser = () => {
     }
 
     const onFinish = (values) => {
-        // console.log('Success:', values['user']['cumpleanos']['$d']);
         setConfirmLoading(true);
         let user = {
-            'user': {
-                'nombre': values['nombre'],
-                'apellidos': values['apellidos'],
-                'email': values['email'],
-                'password': values['password'],
-                'password_confirmation': values['password_confirmation'],
-                'cumpleanos': values['cumpleanos']['$d'],
-                'fecha_ingreso': values['fecha_ingreso']['$d'],
-                'idm4': values['idm4'],
-                'cet': values['cet'],
-                'key_talent': values['key_talent'] == "true" ? true : false,
-                'puesto': values['puesto'],
-                'jefe': values['jefe'],
-                'estructura3': values['estructura3'],
-                'estructura4': values['estructura4'],
-                'estructura5': values['estructura5'],
-                'encuadre': values['encuadre'],
-                'pc_cat': values['pccat'],
-                'resumen': "",
-                'universidad': '',
-                'direccion': ''
+            "user": {
+                "nombre": values["nombre"],
+                "apellidos": values["apellidos"],
+                "email": values["email"],
+                "password": values["password"],
+                "password_confirmation": values["password_confirmation"],
+                "cumpleanos": values["cumpleanos"]["$d"],
+                "fecha_ingreso": values["fecha_ingreso"]["$d"],
+                "idm4": values["idm4"],
+                "cet": values["cet"],
+                "key_talent": values["key_talent"] == "true" ? true : false,
+                "puesto": values["puesto"],
+                "jefe": values["jefe"],
+                "estructura3": values["estructura3"],
+                "estructura4": values["estructura4"],
+                "estructura5": values["estructura5"],
+                "encuadre": values["encuadre"],
+                "pc_cat": values["pccat"],
+                "resumen": "",
+                "universidad": "",
+                "direccion": ""
             }
         }
 
         const requestOptions = {
-            method: 'POST',
+            method: "POST",
             headers: {
-                'Authorization': cookies.get('token'),
-                'Content-Type': 'application/json'
+                "Authorization": cookies.get("token"),
+                "Content-Type": "application/json"
             },
             body: JSON.stringify(user)
         };
-        fetch('https://codextern-4ny2.onrender.com/users', requestOptions)
+        fetch("https://codextern-4ny2.onrender.com/users", requestOptions)
             .then(response => response.json())
             .then((result) => {
-                if (result.email == 'has already been taken') {
+                if (result.email == "has already been taken") {
 
                     activarMensajeError(true);
                     setConfirmLoading(false);
@@ -82,7 +81,6 @@ const RegisterUser = () => {
                     setConfirmLoading(false);
                     declararMensajeExito("Empleado registrado correctamente.");
                     form.resetFields();
-                    // console.log("error:" + result.error);
                 } else {
                     activarMensajeError(true);
                     setConfirmLoading(false);
@@ -93,7 +91,7 @@ const RegisterUser = () => {
     };
 
     const onFinishFailed = (errorInfo) => {
-        console.log('Failed:', errorInfo);
+        console.log("Failed:", errorInfo);
     };
 
     return (
@@ -120,7 +118,7 @@ const RegisterUser = () => {
             >
                 <Form.Item
                     label="Nombre"
-                    name='nombre'
+                    name="nombre"
                     rules={[
                         {
                             required: true,
@@ -132,7 +130,7 @@ const RegisterUser = () => {
 
                 <Form.Item
                     label="Apellido/s"
-                    name='apellidos'
+                    name="apellidos"
                     rules={[
                         {
                             required: true,
@@ -142,10 +140,10 @@ const RegisterUser = () => {
                     <Input />
                 </Form.Item>
 
-                <Form.Item name='email' label="Email"
+                <Form.Item name="email" label="Email"
                     rules={[
                         {
-                            type: 'email',
+                            type: "email",
                             required: true
                         }
                     ]}>
@@ -154,7 +152,7 @@ const RegisterUser = () => {
 
                 <Form.Item
                     label="Contraseña"
-                    name='password'
+                    name="password"
                     rules={[
                         {
                             required: true,
@@ -167,20 +165,20 @@ const RegisterUser = () => {
 
                 <Form.Item
                     label="Confirmar contraseña"
-                    name='password_confirmation'
-                    dependencies={['password']}
+                    name="password_confirmation"
+                    dependencies={["password"]}
                     hasFeedback
                     rules={[
                         {
                             required: true,
-                            message: 'Favor de confirmar contraseña',
+                            message: "Favor de confirmar contraseña",
                         },
                         ({ getFieldValue }) => ({
                             validator(_, value) {
-                                if (!value || getFieldValue('password') === value) {
+                                if (!value || getFieldValue("password") === value) {
                                     return Promise.resolve();
                                 }
-                                return Promise.reject(new Error('Las contraseñas no coinciden'));
+                                return Promise.reject(new Error("Las contraseñas no coinciden"));
                             },
                         }),
                     ]}
@@ -189,7 +187,7 @@ const RegisterUser = () => {
                 </Form.Item>
 
                 <Form.Item label="Fecha de nacimiento"
-                    name='cumpleanos'
+                    name="cumpleanos"
                     rules={[
                         {
                             required: true,
@@ -199,7 +197,7 @@ const RegisterUser = () => {
                 </Form.Item>
 
                 <Form.Item label="Fecha de ingreso"
-                    name='fecha_ingreso'
+                    name="fecha_ingreso"
                     rules={[
                         {
                             required: true,
@@ -209,7 +207,7 @@ const RegisterUser = () => {
                 </Form.Item>
 
                 <Form.Item label="IDM4"
-                    name='idm4'
+                    name="idm4"
                     rules={[
                         {
                             required: true,
@@ -220,7 +218,7 @@ const RegisterUser = () => {
                 </Form.Item>
 
                 <Form.Item label="CET"
-                    name='cet'
+                    name="cet"
                     rules={[
                         {
                             required: true,
@@ -231,7 +229,7 @@ const RegisterUser = () => {
                 </Form.Item>
 
                 <Form.Item label="Key talent"
-                    name='key_talent'>
+                    name="key_talent">
                     <Radio.Group defaultValue="false">
                         <Radio value="true"> Si </Radio>
                         <Radio value="false"> No </Radio>
@@ -239,7 +237,7 @@ const RegisterUser = () => {
                 </Form.Item>
 
                 <Form.Item label="Puesto"
-                    name='puesto'
+                    name="puesto"
                     rules={[
                         {
                             required: true,
@@ -250,7 +248,7 @@ const RegisterUser = () => {
                 </Form.Item>
 
                 <Form.Item label="Jefe"
-                    name='jefe'
+                    name="jefe"
                     rules={[
                         {
                             required: true,
@@ -261,7 +259,7 @@ const RegisterUser = () => {
                 </Form.Item>
 
                 <Form.Item label="Estructura3"
-                    name='estructura3'
+                    name="estructura3"
                     rules={[
                         {
                             required: true,
@@ -272,7 +270,7 @@ const RegisterUser = () => {
                 </Form.Item>
 
                 <Form.Item label="Estructura4"
-                    name='estructura4'
+                    name="estructura4"
                     rules={[
                         {
                             required: true,
@@ -283,7 +281,7 @@ const RegisterUser = () => {
                 </Form.Item>
 
                 <Form.Item label="Estructura5"
-                    name='estructura5'
+                    name="estructura5"
                     rules={[
                         {
                             required: true,
@@ -294,7 +292,7 @@ const RegisterUser = () => {
                 </Form.Item>
 
                 <Form.Item label="Encuadre"
-                    name='encuadre'
+                    name="encuadre"
                     rules={[
                         {
                             required: true,
@@ -305,7 +303,7 @@ const RegisterUser = () => {
                 </Form.Item>
 
                 <Form.Item label="PC-CAT"
-                    name='pccat'
+                    name="pccat"
                     rules={[
                         {
                             required: true,
