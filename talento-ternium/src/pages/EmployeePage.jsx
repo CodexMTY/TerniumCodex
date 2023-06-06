@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import '../css/EmployeePage.css';
 import { Navigate, useParams } from 'react-router-dom';
 import Header from '../components/Header';
 import { getRequest, putImage } from '../apiUtils';
@@ -40,9 +41,10 @@ function UserPage() {
     const [isHovered, setHovered] = useState(false);
 
     const fetchEmployeeData = async () => {
+        console.log(cookies.get('token'))
         try {
-            const data = await getRequest(`users/${id}`);
-            if(data.nombre === undefined || data.nombre === null) {
+            const data = await getRequest(`users/${id}`, cookies.get('token'));
+            if(data.idm4 === null || data.nombre === null) {
                 setDataEmpty(true);
             } else {
                 setEmployee(data);
@@ -68,7 +70,7 @@ function UserPage() {
     const handleFileChange = async (event) => {
         const file = event.target.files[0];
         try {
-            await putImage(`users/${id}`, file);
+            await putImage(`users/${id}`, file, cookies.get('token'));
             await fetchEmployeeData();
         } catch (error) {
             console.error('Error while updating image:', error);

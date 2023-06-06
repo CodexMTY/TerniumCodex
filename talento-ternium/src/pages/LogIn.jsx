@@ -4,7 +4,7 @@ import RegisterCard from '../components/RegisterCard';
 import Cookies from 'universal-cookie';
 import { Navigate } from 'react-router-dom';
 
-const API = 'https://codextern-4ny2.onrender.com/';
+
 
 function LogIn() {
   const cookies = new Cookies();

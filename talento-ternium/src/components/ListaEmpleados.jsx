@@ -3,10 +3,13 @@ import { SearchOutlined, FilterFilled } from '@ant-design/icons';
 import { Input, Space, Table, Tag, Slider, Divider, List, Checkbox, Row, Col } from 'antd';
 import { useState, useRef, useEffect } from "react";
 import DeleteConfirm from '../components/DeleteConfirm';
+import Cookies from 'universal-cookie';
+import { getRequest } from '../apiUtils';
 
 function ListaEmpleados() {
 
     const navigate = useNavigate();
+    const cookies = new Cookies();
 
     const [empleados, setEmpleados] = useState([]);
 
@@ -26,10 +29,8 @@ function ListaEmpleados() {
     }, []);
 
     const fetchEmpleados = async () => {
-        let response = await (
-            await fetch("https://codextern-4ny2.onrender.com/users")
-        ).json();
-        setEmpleados(response);
+        const data = await getRequest('users', cookies.get('token'));
+        setEmpleados(data);
     };
 
     const distinctColumns = (dataIndex) => {
@@ -513,7 +514,7 @@ function ListaEmpleados() {
                 ,
             }}
             onRow={(record) => ({onClick: () => {navigateUser(record.id)}})}
-            dataSource={empleados} scroll={{ x: 2400 }}
+            dataSource={empleados} scroll={{ x: 1800 }}
             pagination={{ 
                 defaultPageSize: 5, 
                 showSizeChanger: true, 
