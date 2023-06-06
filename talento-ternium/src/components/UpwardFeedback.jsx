@@ -37,14 +37,14 @@ function UpwardFeedback({ UpwardFeedbackData }) {
                             <div style={{ display: "flex", marginLeft: "auto", alignItems: "center" }}>
                                 <span style={{ marginRight: "10px" }}>Promedio: {promedio}</span>
                                 <AgregarEditarPopupView
-                                    title="Agregar datos de Upward Feedback"
+                                    titulo="Agregar datos de Upward Feedback"
                                     puntaje={puntaje}
                                     comentarios={comentarios}
                                     manejoPuntaje={manejoPuntaje}
                                     manejoComentarios={manejoComentarios}
                                     inputsHabilitados={inputsHabilitados}
                                     url="upward_fbks"
-                                    user_id={UpwardFeedbackData.user_id}
+                                    userID={UpwardFeedbackData.user_id}
                                 />
                             </div>
                         </div>
@@ -58,7 +58,7 @@ function UpwardFeedback({ UpwardFeedbackData }) {
                 </tr>
             </thead>
             <tbody>
-                {UpwardFeedbackData.UpwardFeedbackData.slice(-5).map((data) => (
+                {UpwardFeedbackData.UpwardFeedbackData.slice(-5).reverse().map((data) => (
                     <tr key={data.id}>
                         <td>{data.promedio}</td>
                         <td>{data.comments}</td>

@@ -36,7 +36,7 @@ function EvaluacionAnual({ EvaluacionAnualData }) {
                         <span style={{ marginLeft: "5px", textAlign: "left" }}>Evaluaciones Anuales</span>
                         <div style={{ display: "flex", marginLeft: "auto", alignItems: "center" }}>
                             <AgregarEditarPopupView
-                                title="Agregar datos de Evaluaciones Anuales"
+                                titulo="Agregar datos de Evaluaciones Anuales"
                                 anio={anio}
                                 performance={performance}
                                 potencial={potencial}
@@ -47,7 +47,7 @@ function EvaluacionAnual({ EvaluacionAnualData }) {
                                 manejoCurva={manejoCurva}
                                 inputsHabilitados={inputsHabilitados}
                                 url="evaluaciones_anuales"
-                                user_id={EvaluacionAnualData.user_id}
+                                userID={EvaluacionAnualData.user_id}
                             />
                         </div>
                     </div>
@@ -63,7 +63,7 @@ function EvaluacionAnual({ EvaluacionAnualData }) {
                 </tr>
             </thead>
             <tbody>
-                {EvaluacionAnualData.EvaluacionAnualData.slice(-5).map((data) => (
+                {EvaluacionAnualData.EvaluacionAnualData.slice(-5).reverse().map((data) => (
                     <tr key={data.id}>
                         <td>{data.ano}</td>
                         <td>{data.performance}</td>

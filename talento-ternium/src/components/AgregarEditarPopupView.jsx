@@ -26,7 +26,7 @@ function AgregarEditarPopupView(
         const cookies = new Cookies();
       
         const [mostrar, setMostrar] = useState(false);
-        const [datosCompletos, setDatosCompletos] = useState(false);
+        const [activarBoton, setActivar] = useState(false);
         const [mensajeError, setMensajeError] = useState('');
         const [mensajeExito, setMensajeExito] = useState('');
         const [mostrarMensajeError, activarMensajeError] = useState(false);
@@ -37,7 +37,7 @@ function AgregarEditarPopupView(
 
         useEffect(() => {
             const inputs = inputsHabilitados.map((input) => eval(input));
-            setDatosCompletos(inputs.every((valor) => valor !== ""));
+            setActivar(inputs.every((valor) => valor !== ""));
         }, inputsHabilitados.map((input) => eval(input)));
         
         const habilitarCampo = (nombreCampo) => {
@@ -46,24 +46,27 @@ function AgregarEditarPopupView(
 
         const manejarSubidaDatos = async (e) => {
             e.preventDefault();
+            setActivar(false);
             let result = null;
 
             if (url === "upward_fbks") {
-                result = await postRequest(url, {userID, promedio: puntaje, comments: comentarios}, cookies.get('token'))
+                result = await postRequest(url, {user_id: userID, promedio: puntaje, comments: comentarios}, cookies.get("token"))
             } else if (url === "cliente_proveedors") {
-                result = await postRequest(url, {userID, promedio: puntaje, comentarios}, cookies.get('token'));
+                result = await postRequest(url, {user_id: userID, promedio: puntaje, comentarios}, cookies.get("token"));
             } else if (url === "evaluaciones_anuales") {
-                result = await postRequest(url, {userID, ano: anio, performance, potencial, curva}, cookies.get('token'));
+                result = await postRequest(url, {user_id: userID, ano: anio, performance, potencial, curva}, cookies.get("token"));
             } else {
                 return;
             }
             
             if (result.error){
                 setMensajeError("Error al subir los datos, favor de intentar de nuevo.");
+                setActivar(true);
                 activarMensajeError(true);
             }
             else {
                 setMensajeExito("Los datos se han guardado exitosamente. La página se reiniciará en breve.");
+                setActivar(false);
                 activarMensajeExito(true);
     
                 setTimeout(() => {
@@ -150,7 +153,7 @@ function AgregarEditarPopupView(
                     className=" py-2 w-30"
                     variant="outline-danger"
                     onClick={manejarSubidaDatos}
-                    disabled={!datosCompletos}
+                    disabled={!activarBoton}
                 >
                     Subir los datos ingresados
                 </Button>

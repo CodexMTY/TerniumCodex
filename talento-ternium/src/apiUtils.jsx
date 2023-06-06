@@ -1,14 +1,14 @@
-const API = 'https://codextern-4ny2.onrender.com/';
+const API = "https://codextern-4ny2.onrender.com/";
 
 export async function postRequest(url, data, token) {
   let response = await (
     await fetch(`${API}${url}`, {
-      method: 'POST',
+      method: "POST",
       body: JSON.stringify(data),
       headers: {
-        'accept': 'application/json',
-        'content-type': 'application/json',
-        'Authorization': token
+        "accept": "application/json",
+        "content-type": "application/json",
+        "Authorization": token
       }
   })).json();
   
@@ -19,7 +19,7 @@ export async function getRequest(url, token) {
   let response = await (
     await fetch(`${API}${url}`, {
       headers: {
-        'Authorization': token
+        "Authorization": token
       }
     })
   ).json();
@@ -29,12 +29,12 @@ export async function getRequest(url, token) {
 export async function putRequest(url, data, token) {
   let response = await (
     await fetch(`${API}${url}`, {
-      method: 'PUT',
+      method: "PUT",
       body: JSON.stringify(data),
       headers: {
-        'accept': 'application/json',
-        'content-type': 'application/json',
-        'Authorization': token
+        "accept": "application/json",
+        "content-type": "application/json",
+        "Authorization": token
       }
   })).json();
   
@@ -43,13 +43,13 @@ export async function putRequest(url, data, token) {
 
 export async function putImage(url, file, token) {
   let formData = new FormData();
-  formData.append('image', file);
+  formData.append("image", file);
   
   let response = await fetch(`${API}${url}`, {
-    method: 'PUT',
+    method: "PUT",
     body: formData,
     headers: {
-      'Authorization': token
+      "Authorization": token
     }
   });
 

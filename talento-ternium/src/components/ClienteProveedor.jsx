@@ -37,14 +37,14 @@ function ClienteProveedor({ ClienteProveedorData }) {
                             <div style={{ display: "flex", marginLeft: "auto", alignItems: "center" }}>
                                 <span style={{ marginRight: "10px" }}>Promedio: {promedio}</span>
                                 <AgregarEditarPopupView
-                                    title="Agregar datos de Cliente Proveedor"
+                                    titulo="Agregar datos de Cliente Proveedor"
                                     puntaje={puntaje}
                                     comentarios={comentarios}
                                     manejoPuntaje={manejoPuntaje}
                                     manejoComentarios={manejoComentarios}
                                     inputsHabilitados={inputsHabilitados}
                                     url="cliente_proveedors"
-                                    user_id={ClienteProveedorData.user_id}
+                                    userID={ClienteProveedorData.user_id}
                                 />
                             </div>
                         </div>
@@ -58,7 +58,7 @@ function ClienteProveedor({ ClienteProveedorData }) {
                 </tr>
             </thead>
             <tbody>
-                {ClienteProveedorData.ClienteProveedorData.slice(-5).map((data) => (
+                {ClienteProveedorData.ClienteProveedorData.slice(-5).reverse().map((data) => (
                     <tr key={data.id}>
                         <td>{data.promedio}</td>
                         <td>{data.comentarios}</td>
