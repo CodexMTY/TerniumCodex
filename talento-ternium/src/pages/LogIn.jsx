@@ -9,20 +9,19 @@ import { Navigate } from 'react-router-dom';
 function LogIn() {
   const cookies = new Cookies();
 
-  if (cookies.get('token')) {
-    console.log("no existe un token de autenticacion");
-    return <Navigate replace to='/homePage'></Navigate>;
+  if (cookies.get("token")) {
+    return <Navigate replace to="/homePage"></Navigate>;
   }
 
-  const [activeCard, setActiveCard] = useState('login');
+  const [activeCard, setActiveCard] = useState("login");
 
   function switchCard() {
-    setActiveCard(activeCard === 'login' ? 'register' : 'login');
+    setActiveCard(activeCard === "login" ? "register" : "login");
   }
 
   return (
-    <div style={{ position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
-      {activeCard === 'login' ? (
+    <div style={{ position: "fixed", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}>
+      {activeCard === "login" ? (
         <LoginCard switchCard={switchCard} />
       ) : (
         <RegisterCard switchCard={switchCard} />
