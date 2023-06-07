@@ -1,8 +1,8 @@
-import { useState } from 'react';
-import { InboxOutlined } from '@ant-design/icons';
-import { Upload } from 'antd';
-import { Button, Alert } from 'react-bootstrap';
-import Cookies from 'universal-cookie';
+import { useState } from "react";
+import { InboxOutlined } from "@ant-design/icons";
+import { Upload } from "antd";
+import { Button, Alert } from "react-bootstrap";
+import Cookies from "universal-cookie";
 const { Dragger } = Upload;
 const API = "https://codextern-4ny2.onrender.com/";
 
@@ -10,8 +10,8 @@ const CargarArchivo = () => {
   const [listaArchivos, declararListaArchivos] = useState([]);
   const [hayArchivo, activarBoton] = useState(false);
   const [cursorEnCaja, cambiarBorde] = useState(false);
-  const [mensajeError, declararMensajeError] = useState('');
-  const [mensajeExito, declararMensajeExito] = useState('');
+  const [mensajeError, declararMensajeError] = useState("");
+  const [mensajeExito, declararMensajeExito] = useState("");
   const [mostrarMensajeError, activarMensajeError] = useState(false);
   const [mostrarMensajeExito, activarMensajeExito] = useState(false);
   const cookies = new Cookies();
@@ -47,7 +47,7 @@ const CargarArchivo = () => {
         }
         
         const archivo = archivosArrastrados[0];
-        const extensionArchivo = archivo.name.split('.').pop();
+        const extensionArchivo = archivo.name.split(".").pop();
     
         if (!extensionesPermitidas.includes(extensionArchivo)) {
             declararMensajeError(`El archivo "${archivo.name}" no es de tipo .csv`);
@@ -81,7 +81,7 @@ const CargarArchivo = () => {
     method: "POST",
     body: form,
     headers: {
-        'Authorization': cookies.get('token')
+        "Authorization": cookies.get("token")
     }
     })
     .then((response) => response.json())

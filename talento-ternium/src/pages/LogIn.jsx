@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import LoginCard from '../components/LoginCard';
-import RegisterCard from '../components/RegisterCard';
-import Cookies from 'universal-cookie';
-import { Navigate } from 'react-router-dom';
+import React, { useState } from "react";
+import LoginCard from "../components/LoginCard";
+import RegisterCard from "../components/RegisterCard";
+import Cookies from "universal-cookie";
+import { Navigate } from "react-router-dom";
 
 
 

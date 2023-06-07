@@ -1,7 +1,8 @@
 import { Button, Modal, Form, Row, Col, Alert } from "react-bootstrap";
-import { useState } from 'react';
-import { putRequest } from '../apiUtils';
-import Cookies from 'universal-cookie';
+import { useState } from "react";
+import { putRequest } from "../apiUtils";
+import { useNavigate } from "react-router-dom";
+import Cookies from "universal-cookie";
 
 function EditPersonalData({ show, handleClose, employeeData }) { 
     const [nombre, setNombre] = useState(employeeData.nombre);
@@ -12,17 +13,20 @@ function EditPersonalData({ show, handleClose, employeeData }) {
     const [estructura5, setEstructura5] = useState(employeeData.estructura5);
     const [direccion, setDireccion] = useState(employeeData.direccion);
     const [puesto, setPuesto] = useState(employeeData.puesto);
+    const [jefe, setJefe] = useState(employeeData.jefe);
     const [resumen, setResumen] = useState(employeeData.resumen);
-    const [errorMessage, setErrorMessage] = useState('');
+    const [keyTalent, setKeyTalent] = useState(employeeData.key_talent);
+    const [errorMessage, setErrorMessage] = useState("");
     const [error, toggleError] = useState(false);
-    const [successMessage, setSuccessMessage] = useState('');
+    const [successMessage, setSuccessMessage] = useState("");
     const [success, toggleSuccess] = useState(false);
     const cookies = new Cookies();
 
     const updateEmployeeData = async (e) => {
         e.preventDefault();
+      
+        if (!nombre || !email || !apellidos || !estructura3 || !estructura4 || !estructura5 || !direccion || !puesto || !jefe) {
 
-        if (!nombre || !email || !apellidos || !estructura3 || !estructura4 || !estructura5 || !direccion || !puesto) {
             setErrorMessage("Favor de llenar todos los datos");
             toggleError(true);
             return;
@@ -38,11 +42,13 @@ function EditPersonalData({ show, handleClose, employeeData }) {
             "estructura5": estructura5,
             "direccion": direccion,
             "puesto": puesto,
-            "resumen": resumen
+            "jefe": jefe,
+            "resumen": resumen, 
+            "key_talent": keyTalent
             
         }
     
-        const result = await putRequest(`users/${employeeData.id}`, userData, cookies.get('token'));
+        const result = await putRequest(`users/${employeeData.id}`, userData, cookies.get("token"));
     
         if (result.error){
             setErrorMessage("Error al cambiar los datos, favor de intentar de nuevo.");
@@ -60,7 +66,7 @@ function EditPersonalData({ show, handleClose, employeeData }) {
     
 
     return (
-        <Modal size="lg" show={show} onHide={handleClose}>
+        <Modal size="xl" show={show} onHide={handleClose}>
             <Modal.Header closeButton>
                 <Modal.Title>Editar Datos Personales</Modal.Title>
             </Modal.Header>
@@ -89,30 +95,40 @@ function EditPersonalData({ show, handleClose, employeeData }) {
                     <Row>
                         <Col>
                             <Form.Group>
-                                <Form.Label>Estructura3</Form.Label>
+                                <Form.Label>Estructura 3</Form.Label>
                                 <Form.Control type="text" value={estructura3} onChange={e => setEstructura3(e.target.value)} />
                             </Form.Group>
                         </Col>
                         <Col>
                             <Form.Group>
-                                <Form.Label>Estructura4</Form.Label>
+                                <Form.Label>Estructura 4</Form.Label>
                                 <Form.Control type="text" value={estructura4} onChange={e => setEstructura4(e.target.value)} />
                             </Form.Group>
                         </Col>
                         <Col>
                             <Form.Group>
-                                <Form.Label>Estructura5</Form.Label>
+                                <Form.Label>Estructura 5</Form.Label>
                                 <Form.Control type="text" value={estructura5} onChange={e => setEstructura5(e.target.value)} />
+                            </Form.Group>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col>
+                            <Form.Group>
+                                <Form.Label>Puesto</Form.Label>
+                                <Form.Control type="text" value={puesto} onChange={e => setPuesto(e.target.value)} />
+                            </Form.Group>
+                        </Col>
+                        <Col>
+                        <Form.Group>
+                                <Form.Label>Jefe</Form.Label>
+                                <Form.Control type="text" value={jefe} onChange={e => setJefe(e.target.value)} />
                             </Form.Group>
                         </Col>
                     </Row>
                     <Form.Group>
                         <Form.Label>Dirección</Form.Label>
                         <Form.Control type="text" value={direccion} onChange={e => setDireccion(e.target.value)} />
-                    </Form.Group>
-                    <Form.Group>
-                        <Form.Label>Puesto</Form.Label>
-                        <Form.Control type="text" value={puesto} onChange={e => setPuesto(e.target.value)} />
                     </Form.Group>
                     <Form.Group>
                         <Form.Label>Resumen</Form.Label>
@@ -127,7 +143,15 @@ function EditPersonalData({ show, handleClose, employeeData }) {
                             {resumen.length}/250
                         </Form.Text>
                     </Form.Group>
-
+    
+                    <Form.Group>
+                                <Form.Check
+                                    type="switch"
+                                    label="Key Talent"
+                                    checked={keyTalent}
+                                    onChange={(e) => setKeyTalent(e.target.checked)}
+                                />
+                            </Form.Group>
 
                 </Form>
                 <Button variant="outline-danger" className="mt-2 py-2 w-30" onClick={updateEmployeeData}>Guardar cambios</Button>

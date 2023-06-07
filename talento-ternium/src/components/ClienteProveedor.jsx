@@ -1,11 +1,11 @@
-import { useState, useEffect } from 'react';
-import { Table } from 'react-bootstrap';
-import AgregarEditarPopupView from './AgregarEditarPopupView';
+import { useState, useEffect } from "react";
+import { Table } from "react-bootstrap";
+import AgregarEditarPopupView from "./AgregarEditarPopupView";
 
 function ClienteProveedor({ ClienteProveedorData }) {
-    const [puntaje, setPuntaje] = useState('');
-    const [comentarios, setComentarios] = useState('');
-    const [promedio, setPromedio] = useState('');
+    const [puntaje, setPuntaje] = useState("");
+    const [comentarios, setComentarios] = useState("");
+    const [promedio, setPromedio] = useState("");
 
     useEffect(() => {
         if (ClienteProveedorData.ClienteProveedorData.length > 0) {

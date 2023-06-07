@@ -1,7 +1,7 @@
-import { Button, OverlayTrigger, Table, Tooltip } from 'react-bootstrap';
-import editPencil from '../img/edit_pencil.png';
-import { useState } from 'react';
-import EditPersonalData from './EditPersonalData';
+import { Button, OverlayTrigger, Table, Tooltip } from "react-bootstrap";
+import editPencil from "../img/edit_pencil.png";
+import { useState } from "react";
+import EditPersonalData from "./EditPersonalData";
 
 function PersonalDataTable({ employeeData }) {
 
@@ -31,7 +31,7 @@ function PersonalDataTable({ employeeData }) {
     return (
         <>
             <EditPersonalData show={showEditModal} handleClose={handleCloseModal} employeeData={employeeData}/>
-            <Table striped bordered size="sm">
+            <Table hover striped bordered size="sm">
                 <thead>
                 <tr style={{ backgroundColor: "orange" }}>
                         <th colSpan="2" >
@@ -64,19 +64,19 @@ function PersonalDataTable({ employeeData }) {
                         <td>{employeeData.universidad}</td>
                     </tr>
                     <tr>
-                        <td>Estructura3</td>
+                        <td>Estructura 3</td>
                         <td>{employeeData.estructura3}</td>
                     </tr>
                     <tr>
-                        <td>Estructura4</td>
+                        <td>Estructura 4</td>
                         <td>{employeeData.estructura4}</td>
                     </tr>
                     <tr>
-                        <td>Estructura5</td>
+                        <td>Estructura 5</td>
                         <td>{employeeData.estructura5}</td>
                     </tr>
                     <tr>
-                        <td>Direccion</td>
+                        <td>Dirección</td>
                         <td>{employeeData.direccion}</td>
                     </tr>
                     <tr>
@@ -84,8 +84,20 @@ function PersonalDataTable({ employeeData }) {
                         <td>{employeeData.puesto}</td>
                     </tr>
                     <tr>
+                        <td>Jefe</td>
+                        <td>{employeeData.jefe}</td>
+                    </tr>
+                    <tr>
                         <td>PC_CAT</td>
                         <td>{employeeData.pc_cat}</td>
+                    </tr>
+                    <tr>
+                        <td>IDM_4</td>
+                        <td>{employeeData.idm4}</td>
+                    </tr>
+                    <tr>
+                        <td>CET</td>
+                        <td>{employeeData.cet}</td>
                     </tr>
                 </tbody>
             </Table>

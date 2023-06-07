@@ -1,10 +1,10 @@
-import { useNavigate } from 'react-router-dom';
-import { SearchOutlined, FilterFilled } from '@ant-design/icons';
-import { Input, Space, Table, Tag, Slider, Divider, List, Checkbox, Row, Col } from 'antd';
-import { useState, useRef, useEffect } from 'react';
-import DeleteConfirm from '../components/DeleteConfirm';
-import Cookies from 'universal-cookie';
-import { getRequest } from '../apiUtils';
+import { useNavigate } from "react-router-dom";
+import { SearchOutlined, FilterFilled } from "@ant-design/icons";
+import { Input, Space, Table, Tag, Slider, Divider, List, Checkbox, Row, Col } from "antd";
+import { useState, useRef, useEffect } from "react";
+import DeleteConfirm from "../components/DeleteConfirm";
+import Cookies from "universal-cookie";
+import { getRequest } from "../apiUtils";
 
 function ListaEmpleados() {
 
@@ -29,7 +29,7 @@ function ListaEmpleados() {
     }, []);
 
     const fetchEmpleados = async () => {
-        const data = await getRequest('users', cookies.get('token'));
+        const data = await getRequest("users", cookies.get("token"));
         setEmpleados(data);
     };
 
@@ -48,8 +48,8 @@ function ListaEmpleados() {
         return result;
     }
 
-    const [searchText, setSearchText] = useState('');
-    const [searchedColumn, setSearchedColumn] = useState('');
+    const [searchText, setSearchText] = useState("");
+    const [searchedColumn, setSearchedColumn] = useState("");
     const searchInput = useRef(null);
 
     const handleSearch = (selectedKeys, confirm, dataIndex) => {
@@ -60,7 +60,7 @@ function ListaEmpleados() {
 
     const handleReset = (clearFilters, confirm) => {
         clearFilters();
-        setSearchText('');
+        setSearchText("");
         confirm()
     };
 
@@ -140,9 +140,9 @@ function ListaEmpleados() {
     };
 
     const handleRangeSearch = (setSelectedKeys, selectedKeys, confirm, dataIndex) => {
-        if (typeof selectedKeys[0] === "string" && selectedKeys[0].includes('-')) {
-            let first = selectedKeys[0].substring(0, selectedKeys[0].indexOf('-'))
-            let last = selectedKeys[0].substring((selectedKeys[0].indexOf('-') + 1), (selectedKeys[0].length))
+        if (typeof selectedKeys[0] === "string" && selectedKeys[0].includes("-")) {
+            let first = selectedKeys[0].substring(0, selectedKeys[0].indexOf("-"))
+            let last = selectedKeys[0].substring((selectedKeys[0].indexOf("-") + 1), (selectedKeys[0].length))
             setSelectedKeys(rango(Number(first), Number(last)))
             confirm();
             setSearchText(rango(Number(first), Number(last)))

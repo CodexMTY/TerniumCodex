@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
-import { Form } from 'react-bootstrap';
-import AuthCard from './AuthCard';
-import { postRequest } from '../apiUtils';
+import React, { useState } from "react";
+import { Form } from "react-bootstrap";
+import AuthCard from "./AuthCard";
+import { postRequest } from "../apiUtils";
 
 function RegisterCard({ switchCard }) {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [passwordConfirmation, setPasswordConfirmation] = useState('');
-  const [name, setName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [emailError, setEmailError] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
-  const [successMessage, setSuccessMessage] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordConfirmation, setPasswordConfirmation] = useState("");
+  const [name, setName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
 
   const validateEmail = (value) => {
     const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
@@ -19,7 +19,7 @@ function RegisterCard({ switchCard }) {
       setEmailError("Correo electrónico inválido");
       return false;
     }
-    setEmailError('');
+    setEmailError("");
     return true;
   }
 
@@ -47,11 +47,11 @@ function RegisterCard({ switchCard }) {
       setErrorMessage("El correo ya esta registrado");
     }
     else if (result.email) {
-      setErrorMessage('');
+      setErrorMessage("");
       setSuccessMessage("Usuario creado con éxito");
     }
     else {
-      setErrorMessage('Error, favor de intentar de nuevo')
+      setErrorMessage("Error, favor de intentar de nuevo")
     }
   }
 

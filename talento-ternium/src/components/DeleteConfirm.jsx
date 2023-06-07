@@ -1,7 +1,7 @@
-import { Button, Popconfirm, message } from 'antd';
-import { useState } from 'react';
-import { DeleteOutlined } from '@ant-design/icons';
-import Cookies from 'universal-cookie';
+import { Button, Popconfirm, message } from "antd";
+import { useState } from "react";
+import { DeleteOutlined } from "@ant-design/icons";
+import Cookies from "universal-cookie";
 
 function DeleteConfirm({ userId, chooseEmpleados, listaEmpleados }) {
 
