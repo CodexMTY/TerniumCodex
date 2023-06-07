@@ -35,7 +35,6 @@ const RegisterUser = () => {
         // console.log('Success:', values['user']['cumpleanos']['$d']);
         setConfirmLoading(true);
         let user = {
-            'user': {
                 'nombre': values['nombre'],
                 'apellidos': values['apellidos'],
                 'email': values['email'],
@@ -56,7 +55,6 @@ const RegisterUser = () => {
                 'resumen': "",
                 'universidad': '',
                 'direccion': ''
-            }
         }
 
         const requestOptions = {

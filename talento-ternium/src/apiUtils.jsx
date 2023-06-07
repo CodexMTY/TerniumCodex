@@ -14,9 +14,13 @@ export async function postRequest(url, data) {
   return response;
 }
 
-export async function getRequest(url) {
+export async function getRequest(url, token) {
   let response = await (
-    await fetch(`${API}${url}`)
+    await fetch(`${API}${url}`, {
+      headers: {
+        "Authorization": token
+      }
+    })
   ).json();
   return response;
 }
