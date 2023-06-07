@@ -32,7 +32,7 @@ const RegisterUser = () => {
         window.location.reload;
     }
 
-    const onFinish = (values) => {
+    const onFinish = async (values) => {
         setConfirmLoading(true);
         let userData = {
             "nombre": values["nombre"],
@@ -57,7 +57,7 @@ const RegisterUser = () => {
             "direccion": ""
         }
 
-        const result = postRequest("users", userData, cookies.get("token"));
+        const result = await postRequest("users", userData, cookies.get("token"));
 
         if (result.email == "has already been taken") {
 
