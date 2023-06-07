@@ -1,12 +1,12 @@
-import { useState } from 'react';
-import { Table } from 'react-bootstrap';
-import AgregarEditarPopupView from './AgregarEditarPopupView';
+import { useState } from "react";
+import { Table } from "react-bootstrap";
+import AgregarEditarPopupView from "./AgregarEditarPopupView";
 
 function EvaluacionAnual({ EvaluacionAnualData }) {
-    const [anio, setAnio] = useState('');
-    const [performance, setPerformance] = useState('');
-    const [potencial, setPotencial] = useState('');
-    const [curva, setCurva] = useState('');
+    const [anio, setAnio] = useState("");
+    const [performance, setPerformance] = useState("");
+    const [potencial, setPotencial] = useState("");
+    const [curva, setCurva] = useState("");
 
     const manejoAnio = (event) => {
         setAnio(event.target.value);

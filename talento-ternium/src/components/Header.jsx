@@ -1,10 +1,10 @@
-import { Container, Nav, Navbar, Button } from 'react-bootstrap';
-import { Link, useNavigate } from 'react-router-dom';
-import terniumLogo from '../img/logo-ternium.png';
-import Cookies from 'universal-cookie';
-import BotonSubida from './BotonSubida';
-import BotonRegistro from './BotonRegistro'
-import {Divider} from 'antd';
+import { Container, Nav, Navbar, Button } from "react-bootstrap";
+import { Link, useNavigate } from "react-router-dom";
+import terniumLogo from "../img/logo-ternium.png";
+import Cookies from "universal-cookie";
+import BotonSubida from "./BotonSubida";
+import BotonRegistro from "./BotonRegistro"
+import {Divider} from "antd";
 
 function Header() {
 
@@ -12,10 +12,10 @@ function Header() {
     const navigate = useNavigate();
 
     function handleLogOut() {
-        cookies.remove("token", { path: '/' });
-        cookies.remove("user_id", { path: '/' });
+        cookies.remove("token", { path: "/" });
+        cookies.remove("user_id", { path: "/" });
 
-        navigate('/');
+        navigate("/");
     }
 
     function goHome() {

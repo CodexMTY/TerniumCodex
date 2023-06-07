@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
-import { Modal, Button, Form, InputGroup, OverlayTrigger, Tooltip, Alert } from 'react-bootstrap';
-import botonAgregar from '../img/edit_pencil.png';
-import { postRequest } from '../apiUtils';
-import Cookies from 'universal-cookie';
+import { useState, useEffect } from "react";
+import { Modal, Button, Form, InputGroup, OverlayTrigger, Tooltip, Alert } from "react-bootstrap";
+import botonAgregar from "../img/edit_pencil.png";
+import { postRequest } from "../apiUtils";
+import Cookies from "universal-cookie";
 
 function AgregarEditarPopupView(
     { titulo,
@@ -27,8 +27,8 @@ function AgregarEditarPopupView(
       
         const [mostrar, setMostrar] = useState(false);
         const [activarBoton, setActivar] = useState(false);
-        const [mensajeError, setMensajeError] = useState('');
-        const [mensajeExito, setMensajeExito] = useState('');
+        const [mensajeError, setMensajeError] = useState("");
+        const [mensajeExito, setMensajeExito] = useState("");
         const [mostrarMensajeError, activarMensajeError] = useState(false);
         const [mostrarMensajeExito, activarMensajeExito] = useState(false);
 

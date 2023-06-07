@@ -1,6 +1,6 @@
-import React from 'react';
-import { Card, Container, Form, Button } from 'react-bootstrap';
-import terniumLogo from '../img/logo-ternium.png';
+import React from "react";
+import { Card, Container, Form, Button } from "react-bootstrap";
+import terniumLogo from "../img/logo-ternium.png";
 
 function AuthCard({ children, onSubmit, switchCard, primaryButtonText, secondaryButtonText }) {
   return (

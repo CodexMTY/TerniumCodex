@@ -1,9 +1,9 @@
-import React from 'react';
-import { Button, Form, Input, InputNumber, Radio, DatePicker } from 'antd';
-import Cookies from 'universal-cookie';
-import { useState } from 'react';
-import { Alert } from 'react-bootstrap';
-import { postRequest } from '../apiUtils';
+import React from "react";
+import { Button, Form, Input, InputNumber, Radio, DatePicker } from "antd";
+import Cookies from "universal-cookie";
+import { useState } from "react";
+import { Alert } from "react-bootstrap";
+import { postRequest } from "../apiUtils";
 
 const cookies = new Cookies;
 
@@ -19,8 +19,8 @@ const dateFormat = "YYYY-DD-MM";
 
 const RegisterUser = () => {
 
-    const [mensajeError, declararMensajeError] = useState('');
-    const [mensajeExito, declararMensajeExito] = useState('');
+    const [mensajeError, declararMensajeError] = useState("");
+    const [mensajeExito, declararMensajeExito] = useState("");
     const [mostrarMensajeError, activarMensajeError] = useState(false);
     const [mostrarMensajeExito, activarMensajeExito] = useState(false);
 
