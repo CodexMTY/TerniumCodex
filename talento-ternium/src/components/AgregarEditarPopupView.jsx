@@ -22,15 +22,20 @@ function AgregarEditarPopupView(
     url,
     userID } 
     ) {
-
         const cookies = new Cookies();
-      
+
         const [mostrar, setMostrar] = useState(false);
-        const [activarBoton, setActivar] = useState(false);
-        const [mensajeError, setMensajeError] = useState("");
-        const [mensajeExito, setMensajeExito] = useState("");
+        const [activarBoton, setActivar] = useState(false); 
+        const [mensajeError, setMensajeError] = useState('');
+        const [mensajeExito, setMensajeExito] = useState('');
+        const [mensajeInputPuntaje, setMensajeInputPuntaje] = useState('');
+        const [mensajeInputAnio, setMensajeInputAnio] = useState('');
+        const [mensajeInputPerformance, setMensajeInputPerformance] = useState('');
         const [mostrarMensajeError, activarMensajeError] = useState(false);
         const [mostrarMensajeExito, activarMensajeExito] = useState(false);
+        const [mostrarMensajeInputPuntaje, activarMensajeInputPuntaje] = useState(false);
+        const [mostrarMensajeInputAnio, activarMensajeInputAnio] = useState(false);
+        const [mostrarMensajeInputPerformance, activarMensajeInputPerformance] = useState(false);
 
         const manejarCerrar = () => setMostrar(false);
         const manejarAbrir = () => setMostrar(true);
@@ -44,10 +49,47 @@ function AgregarEditarPopupView(
             return !inputsHabilitados.includes(nombreCampo);
         };
 
+        const validarInputsNumericos = () => {
+            const numericRegex = /^[0-9]+$/;
+            let inputInvalido = false;
+            
+            setMensajeInputPuntaje("");
+            setMensajeInputAnio("");
+            setMensajeInputPerformance("");
+            activarMensajeInputPuntaje(false);
+            activarMensajeInputAnio(false);
+            activarMensajeInputPerformance(false);
+            
+            if (puntaje !== undefined && puntaje !== "" && !numericRegex.test(puntaje)) {
+                setMensajeInputPuntaje("Solo se aceptan valores numéricos para el puntaje");
+                activarMensajeInputPuntaje(true);
+                inputInvalido = true;
+            }
+            
+            if (anio !== undefined && anio !== "" && !numericRegex.test(anio)) {
+                setMensajeInputAnio("Solo se aceptan valores numéricos para el año");
+                activarMensajeInputAnio(true);
+                inputInvalido = true;
+            }
+            
+            if (performance !== undefined && performance !== "" && !numericRegex.test(performance)) {
+                setMensajeInputPerformance("Solo se aceptan valores numéricos para el performance");
+                activarMensajeInputPerformance(true);
+                inputInvalido = true;
+            }
+            
+            return inputInvalido;
+        }
+
         const manejarSubidaDatos = async (e) => {
             e.preventDefault();
             setActivar(false);
             let result = null;
+
+            if (validarInputsNumericos()) {
+                setActivar(true);
+                return;
+            }
 
             if (url === "upward_fbks") {
                 result = await postRequest(url, {user_id: userID, promedio: puntaje, comments: comentarios}, cookies.get("token"))
@@ -66,7 +108,6 @@ function AgregarEditarPopupView(
             }
             else {
                 setMensajeExito("Los datos se han guardado exitosamente. La página se reiniciará en breve.");
-                setActivar(false);
                 activarMensajeExito(true);
     
                 setTimeout(() => {
@@ -84,7 +125,6 @@ function AgregarEditarPopupView(
         return (
         <>
         <OverlayTrigger overlay={renderTooltip}>
-            
             <Button variant="outline-light" onClick={manejarAbrir} style={{ paddingRight: "5px", paddingLeft: "5px", paddingTop: "0px", paddingBottom: "2px", border: "none" }}>
                 <img src={botonAgregar} alt="Agregar" style={{ width: "15px", height: "15px" }} />
             </Button>
@@ -94,16 +134,17 @@ function AgregarEditarPopupView(
                 <Modal.Title>{titulo}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <InputGroup size="sm" className="mb-3" hidden={habilitarCampo("puntaje")}>
-                <InputGroup.Text id="IngresarPuntaje" style={{ width: "100px" }}>Puntaje</InputGroup.Text>
-                <Form.Control
-                    aria-label="Puntaje"
-                    aria-describedby="IngresarPuntaje"
-                    value={puntaje}
-                    onChange={manejoPuntaje}
-                />
+                <InputGroup size="sm" hidden={habilitarCampo("puntaje")}>
+                    <InputGroup.Text id="IngresarPuntaje" style={{ width: "100px" }}>Puntaje</InputGroup.Text>
+                    <Form.Control
+                        aria-label="Puntaje"
+                        aria-describedby="IngresarPuntaje"
+                        value={puntaje}
+                        onChange={manejoPuntaje}
+                    />
                 </InputGroup>
-                <InputGroup size="sm" className="mb-3"  hidden={habilitarCampo("comentarios")}>
+                {mostrarMensajeInputPuntaje && <div style={{ color: "red", fontSize: "14px" }}>{mensajeInputPuntaje}</div>}
+                <InputGroup size="sm" className="mt-3"  hidden={habilitarCampo("comentarios")}>
                     <InputGroup.Text id="IngresarComentarios" style={{ width: "100px" }}>Comentarios</InputGroup.Text>
                     <Form.Control
                         aria-label="Comentarios"
@@ -112,7 +153,7 @@ function AgregarEditarPopupView(
                         onChange={manejoComentarios}
                     />
                 </InputGroup>
-                <InputGroup size="sm" className="mb-3"  hidden={habilitarCampo("anio")}>
+                <InputGroup size="sm"  hidden={habilitarCampo("anio")}>
                     <InputGroup.Text id="IngresarAño" style={{ width: "100px" }}>Año</InputGroup.Text>
                     <Form.Control
                         aria-label="Año"
@@ -121,7 +162,8 @@ function AgregarEditarPopupView(
                         onChange={manejoAnio}
                     />
                 </InputGroup>
-                <InputGroup size="sm" className="mb-3"  hidden={habilitarCampo("performance")}>
+                {mostrarMensajeInputAnio && <div style={{ color: "red", fontSize: "14px" }}>{mensajeInputAnio}</div>}
+                <InputGroup size="sm" className="mt-3"  hidden={habilitarCampo("performance")}>
                     <InputGroup.Text id="IngresarPerformance" style={{ width: "100px" }}>Performance</InputGroup.Text>
                     <Form.Control
                         aria-label="Performance"
@@ -130,7 +172,8 @@ function AgregarEditarPopupView(
                         onChange={manejoPerformance}
                     />
                 </InputGroup>
-                <InputGroup size="sm" className="mb-3"  hidden={habilitarCampo("potencial")}>
+                {mostrarMensajeInputPerformance && <div style={{ color: "red", fontSize: "14px" }}>{mensajeInputPerformance}</div>}
+                <InputGroup size="sm" className="mt-3"  hidden={habilitarCampo("potencial")}>
                     <InputGroup.Text id="IngresarPotencial" style={{ width: "100px" }}>Potencial</InputGroup.Text>
                     <Form.Control
                         aria-label="Potencial"
@@ -139,7 +182,7 @@ function AgregarEditarPopupView(
                         onChange={manejoPotencial}
                     />
                 </InputGroup>
-                <InputGroup size="sm" className="mb-3"  hidden={habilitarCampo("curva")}>
+                <InputGroup size="sm" className="mt-3"  hidden={habilitarCampo("curva")}>
                     <InputGroup.Text id="IngresarCurva" style={{ width: "100px" }}>Curva</InputGroup.Text>
                     <Form.Control
                         aria-label="Curva"
@@ -150,19 +193,19 @@ function AgregarEditarPopupView(
                 </InputGroup>
                 <Button
                     type="submit"
-                    className=" py-2 w-30"
+                    className="mt-3 py-2 w-30"
                     variant="outline-danger"
                     onClick={manejarSubidaDatos}
                     disabled={!activarBoton}
                 >
                     Subir los datos ingresados
                 </Button>
-                {activarMensajeError && mostrarMensajeError && (
+                {mostrarMensajeError && (
                     <Alert style={{ marginTop: "16px", marginBottom: "0px" }} variant="danger" onClose={() => activarMensajeError(false)} dismissible>
                         {mensajeError}
                     </Alert>
                 )}
-                {activarMensajeExito && mostrarMensajeExito && (
+                {mostrarMensajeExito && (
                     <Alert style={{ marginTop: "16px", marginBottom: "0px" }} variant="success" onClose={() => activarMensajeExito(false)} dismissible>
                         {mensajeExito}
                     </Alert>

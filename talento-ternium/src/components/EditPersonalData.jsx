@@ -24,9 +24,9 @@ function EditPersonalData({ show, handleClose, employeeData }) {
 
     const updateEmployeeData = async (e) => {
         e.preventDefault();
-    
-        // Check if all fields have been filled
+      
         if (!nombre || !email || !apellidos || !estructura3 || !estructura4 || !estructura5 || !direccion || !puesto || !jefe) {
+
             setErrorMessage("Favor de llenar todos los datos");
             toggleError(true);
             return;
@@ -58,7 +58,6 @@ function EditPersonalData({ show, handleClose, employeeData }) {
             setSuccessMessage("Los datos se han guardado exitosamente. La página se reiniciará en breve.");
             toggleSuccess(true);
     
-            // Wait for 3 seconds and then reload the page
             setTimeout(() => {
                 window.location.href = window.location.href;
             }, 3000);
@@ -156,12 +155,12 @@ function EditPersonalData({ show, handleClose, employeeData }) {
 
                 </Form>
                 <Button variant="outline-danger" className="mt-2 py-2 w-30" onClick={updateEmployeeData}>Guardar cambios</Button>
-                {setErrorMessage && error && (
+                {error && (
                     <Alert style={{ marginTop: "8px", marginBottom: "0px" }} variant="danger" onClose={() => toggleError(false)} dismissible>
                         {errorMessage}
                     </Alert>
                 )}
-                {setSuccessMessage && success && (
+                {success && (
                     <Alert style={{ marginTop: "8px", marginBottom: "0px" }} variant="success" onClose={() => toggleSuccess(false)} dismissible>
                         {successMessage}
                     </Alert>
