@@ -7,13 +7,6 @@ function PersonalDataTable({ employeeData }) {
 
     const [showEditModal, setShowEditModal] = useState(false);
 
-    const getYearsDiff = (dateStr) => {
-        const date = new Date(dateStr);
-        const now = new Date();
-        const yearsDiff = now.getFullYear() - date.getFullYear();
-        return yearsDiff;
-    }
-
     const renderTooltip = (props) => (
         <Tooltip id="button-tooltip" {...props}>
           Editar datos
@@ -49,11 +42,11 @@ function PersonalDataTable({ employeeData }) {
                 <tbody>
                     <tr>
                         <td>Edad</td>
-                        <td>{getYearsDiff(employeeData.cumpleanos)}</td>
+                        <td>{employeeData.edad}</td>
                     </tr>
                     <tr>
                         <td>Antigüedad</td>
-                        <td>{getYearsDiff(employeeData.fecha_ingreso)}</td>
+                        <td>{employeeData.antiguedad}</td>
                     </tr>
                     <tr>
                         <td>Estudios</td>

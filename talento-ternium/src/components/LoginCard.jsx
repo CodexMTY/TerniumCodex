@@ -14,6 +14,14 @@ function LoginCard({ switchCard }) {
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
+  function reformatDate(dateStr) {
+    let parts = dateStr.split(' ');
+    let dateParts = parts[0].split('-');
+    let reformattedDate = `${dateParts[1]}-${dateParts[0]}-${dateParts[2]} ${parts[1]}`;
+
+    return reformattedDate;
+  }
+
   const userLogin = async (e) => {
     e.preventDefault();
     const result = await postRequest("auth/login", { email, password });
@@ -22,11 +30,11 @@ function LoginCard({ switchCard }) {
       setErrorMessage("Credenciales incorrectas");
     }
     else if(result.token){
-      let expDateStr = result.exp;
+      let expDateStr = reformatDate(result.exp);
       let expiryDate = expDateStr.split(" ")[0].split("-").reverse().join("-") + "T" + expDateStr.split(" ")[1] + "Z";
       let utcDate = parseISO(expiryDate);
-      cookies.set("token", result.token, { expires: utcDate, path: "/", sameSite: "None", secure: true });
-      cookies.set("user_id", result.user_id, { expires: utcDate, path: "/", sameSite: "None", secure: true });
+      cookies.set("token", result.token, { expires: utcDate, path: "/", SameSite: "None", Secure: true });
+      cookies.set("user_id", result.user_id, { expires: utcDate, path: "/", SameSite: "None", Secure: true });
       navigate("/homePage");
     }
   }
