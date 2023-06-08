@@ -78,10 +78,6 @@ const RegisterUser = () => {
         }
     };
 
-    const onFinishFailed = (errorInfo) => {
-        console.log("Failed:", errorInfo);
-    };
-
     return (
         <>
             <Form
@@ -100,7 +96,6 @@ const RegisterUser = () => {
                     remember: true,
                 }}
                 onFinish={onFinish}
-                onFinishFailed={onFinishFailed}
                 autoComplete="off"
                 validateMessages={validateMessages}
             >

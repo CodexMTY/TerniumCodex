@@ -33,7 +33,6 @@ function LoginCard({ switchCard }) {
       let expDateStr = reformatDate(result.exp);
       let expiryDate = expDateStr.split(" ")[0].split("-").reverse().join("-") + "T" + expDateStr.split(" ")[1] + "Z";
       let utcDate = parseISO(expiryDate);
-      console.log(utcDate)
       cookies.set("token", result.token, { expires: utcDate, path: "/", SameSite: "None", Secure: true });
       cookies.set("user_id", result.user_id, { expires: utcDate, path: "/", SameSite: "None", Secure: true });
       navigate("/homePage");
