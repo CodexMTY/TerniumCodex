@@ -29,18 +29,16 @@ function LoginCard({ switchCard }) {
     }
     else if(result.token){
       let expDateStr = result.exp; // MM-DD-YYYY HH:MM
-      console.log(expDateStr)
       let [month, day, yearTime] = expDateStr.split("-");
       let [year, time] = yearTime.split(" ");
       let expiryDate = `${year}-${month}-${day}T${time}:00Z`; // Convert to ISO string format
 
       let utcDate = new Date(expiryDate);
-      
-      console.log(utcDate);
 
       Cookies.set("token", result.token, { expires: utcDate, path: "/", sameSite: "None", secure: true });
       Cookies.set("user_id", result.user_id, { expires: utcDate, path: "/", sameSite: "None", secure: true });
-      
+      Cookies.set("admin", result.admin, { expires: utcDate, path: "/", sameSite: "None", secure: true });
+      Cookies.set("super_admin", result.super_admin, { expires: utcDate, path: "/", sameSite: "None", secure: true });
       navigate("/homePage");
     }
   }

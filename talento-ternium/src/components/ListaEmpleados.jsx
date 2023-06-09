@@ -1,18 +1,16 @@
 import { useNavigate } from "react-router-dom";
 import { SearchOutlined, FilterFilled } from "@ant-design/icons";
-import { Input, Space, Table, Tag, Slider, Divider, List, Checkbox, Row, Col, Button } from "antd";
+import { Input, Space, Table, Tag, Slider, Divider, Checkbox, Button } from "antd";
 import { useState, useRef, useEffect } from "react";
 import DeleteConfirm from "../components/DeleteConfirm";
 import Cookies from "js-cookie";
 import { getRequest } from "../apiUtils";
 
 function ListaEmpleados() {
-
     const [filteredInfo, setFilteredInfo] = useState({});
     const [sortedInfo, setSortedInfo] = useState({});
 
-    const handleChange = (pagination, filters, sorter) => {
-        console.log('Various parameters', pagination, filters, sorter);
+    const handleChange = (filters, sorter) => {
         setFilteredInfo(filters);
         setSortedInfo(sorter);
     };
@@ -47,10 +45,7 @@ function ListaEmpleados() {
 
     const fetchEmpleados = async () => {
         const data = await getRequest("users", Cookies.get("token"));
-        const filteredData = data.filter(function(obj) {
-            return obj.id !== Cookies.get("user_id")
-        });
-        setEmpleados(filteredData);
+        setEmpleados(data);
     };
 
     const distinctColumns = (dataIndex) => {
@@ -411,7 +406,7 @@ function ListaEmpleados() {
             key: "nombre",
             filteredValue: filteredInfo.nombre || null,
             fixed: "left",
-            ...filtroBusqueda('nombre'),
+            ...filtroBusqueda("nombre"),
         },
         {
             title: "Apellidos",
@@ -528,14 +523,40 @@ function ListaEmpleados() {
             responsive: ["md"],
             ...filtroBusqueda("pc_cat")
         },
-        {
-            title: "Ocultar",
-            key: "operation",
-            responsive: ["sm"],
-            onCell: () => ({onClick: (e) => e.stopPropagation()}),
-            render: (record) =>
-                <DeleteConfirm userId={record.id} chooseEmpleados={chooseEmpleados} listaEmpleados={empleados} />,
-        }
+        ...(Cookies.get("admin") === "true" && Cookies.get("super_admin") === "false"
+            ? [
+                {
+                    title: "Ocultar",
+                    key: "operation",
+                    responsive: ["sm"],
+                    onCell: () => ({ onClick: (e) => e.stopPropagation() }),
+                    render: (record) => (
+                        <DeleteConfirm
+                        userId={record.id}
+                        chooseEmpleados={chooseEmpleados}
+                        listaEmpleados={empleados}
+                        />
+                    ),
+                },
+            ]
+            : []),
+        ...(Cookies.get("super_admin") === "true" && Cookies.get("super_admin") === "true"
+            ? [
+                {
+                    title: "Borrar",
+                    key: "operation",
+                    responsive: ["sm"],
+                    onCell: () => ({ onClick: (e) => e.stopPropagation() }),
+                    render: (record) => (
+                        <DeleteConfirm
+                        userId={record.id}
+                        chooseEmpleados={chooseEmpleados}
+                        listaEmpleados={empleados}
+                        />
+                    ),
+                },
+            ]
+        : []),
     ];
 
     return <>
