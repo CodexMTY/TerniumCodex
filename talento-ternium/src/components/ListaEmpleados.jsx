@@ -3,7 +3,7 @@ import { SearchOutlined, FilterFilled } from "@ant-design/icons";
 import { Input, Space, Table, Tag, Slider, Divider, List, Checkbox, Row, Col, Button } from "antd";
 import { useState, useRef, useEffect } from "react";
 import DeleteConfirm from "../components/DeleteConfirm";
-import Cookies from "universal-cookie";
+import Cookies from "js-cookie";
 import { getRequest } from "../apiUtils";
 
 function ListaEmpleados() {
@@ -27,7 +27,6 @@ function ListaEmpleados() {
     };
 
     const navigate = useNavigate();
-    const cookies = new Cookies();
 
     const [empleados, setEmpleados] = useState([]);
 
@@ -47,7 +46,7 @@ function ListaEmpleados() {
     }, []);
 
     const fetchEmpleados = async () => {
-        const data = await getRequest("users", cookies.get("token"));
+        const data = await getRequest("users", Cookies.get("token"));
         setEmpleados(data);
     };
 

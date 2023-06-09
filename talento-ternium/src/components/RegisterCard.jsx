@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Form } from "react-bootstrap";
 import AuthCard from "./AuthCard";
 import { postRequest } from "../apiUtils";
-import Cookies from "universal-cookie";
+import Cookies from "js-cookie";
 
 function RegisterCard({ switchCard }) {
   const [email, setEmail] = useState("");
@@ -13,7 +13,7 @@ function RegisterCard({ switchCard }) {
   const [emailError, setEmailError] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
-  const cookies = new Cookies();
+  
 
   const validateEmail = (value) => {
     const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
@@ -43,7 +43,7 @@ function RegisterCard({ switchCard }) {
       "apellidos": lastName
     }
 
-    const result = await postRequest("users", userData, cookies.get('token'));
+    const result = await postRequest("users", userData, Cookies.get("token"));
 
     if (result.email == "has already been taken"){
       setErrorMessage("El correo ya esta registrado");

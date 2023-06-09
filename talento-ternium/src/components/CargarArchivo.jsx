@@ -2,7 +2,7 @@ import { useState } from "react";
 import { InboxOutlined } from "@ant-design/icons";
 import { Upload } from "antd";
 import { Button, Alert } from "react-bootstrap";
-import Cookies from "universal-cookie";
+import Cookies from "js-cookie";
 const { Dragger } = Upload;
 const API = "https://codextern-4ny2.onrender.com/";
 
@@ -14,7 +14,7 @@ const CargarArchivo = () => {
   const [mensajeExito, declararMensajeExito] = useState("");
   const [mostrarMensajeError, activarMensajeError] = useState(false);
   const [mostrarMensajeExito, activarMensajeExito] = useState(false);
-  const cookies = new Cookies();
+  
 
   const props = {
     name: "file",
@@ -81,7 +81,7 @@ const CargarArchivo = () => {
     method: "POST",
     body: form,
     headers: {
-        "Authorization": cookies.get("token")
+        "Authorization": Cookies.get("token")
     }
     })
     .then((response) => response.json())

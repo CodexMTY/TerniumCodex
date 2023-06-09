@@ -3,18 +3,18 @@ import "../css/EmployeePage.css";
 import { Navigate, useParams } from "react-router-dom";
 import Header from "../components/Header";
 import { getRequest, putImage } from "../apiUtils";
-import Cookies from "universal-cookie";
+import Cookies from "js-cookie";
 import { Spinner, Button, Row, Col, Image, Badge } from "react-bootstrap";
 import html2canvas from "html2canvas";
 import JsPDF from "jspdf";
 import picturePlaceholder from "../img/profile_picture.png";
-import EmployeeData from '../components/EmployeeData';
+import EmployeeData from "../components/EmployeeData";
 
 function UserPage() {
-  const cookies = new Cookies();
+  
   const fileInputRef = useRef();
 
-  if (!cookies.get("token")) {
+  if (!Cookies.get("token")) {
     return <Navigate replace to="/"></Navigate>;
   }
 
@@ -38,7 +38,7 @@ function UserPage() {
 
   const fetchEmployeeData = async () => {
     try {
-      const data = await getRequest(`users/${id}`, cookies.get("token"));
+      const data = await getRequest(`users/${id}`, Cookies.get("token"));
       if (data.idm4 === null || data.nombre === null) {
         setDataEmpty(true);
       } else {
@@ -65,7 +65,7 @@ function UserPage() {
   const handleFileChange = async (event) => {
     const file = event.target.files[0];
     try {
-      await putImage(`users/${id}`, file, cookies.get("token"));
+      await putImage(`users/${id}`, file, Cookies.get("token"));
       await fetchEmployeeData();
     } catch (error) {
       console.error("Error while updating image:", error);
