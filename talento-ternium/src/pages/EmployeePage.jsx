@@ -35,18 +35,27 @@ function UserPage() {
   const [error, setError] = useState(false);
   const [isDataEmpty, setDataEmpty] = useState(false);
   const [isHovered, setHovered] = useState(false);
+  const [sameUser, setSameUser] = useState(false);
 
   const fetchEmployeeData = async () => {
-    try {
-      const data = await getRequest(`users/${id}`, Cookies.get("token"));
-      if (data.idm4 === null || data.nombre === null) {
-        setDataEmpty(true);
-      } else {
-        setEmployee(data);
-        setError(false);
+
+    if (Cookies.get("user_id") === id){
+      setSameUser(true);
+      return;
+    }
+
+    else {
+      try {
+        const data = await getRequest(`users/${id}`, Cookies.get("token"));
+        if (data.idm4 === null || data.nombre === null) {
+          setDataEmpty(true);
+        } else {
+          setEmployee(data);
+          setError(false);
+        }
+      } catch (error) {
+        setError(true);
       }
-    } catch (error) {
-      setError(true);
     }
   };
 
@@ -104,6 +113,8 @@ function UserPage() {
           <p>Error al cargar los datos</p>
           <Button onClick={fetchEmployeeData}>Recargar</Button>
         </div>
+      ) : sameUser ? (
+        <p>No tiene acceso a este usuario</p>
       ) : (
         <div>
           <Spinner animation="border" variant="warning">
