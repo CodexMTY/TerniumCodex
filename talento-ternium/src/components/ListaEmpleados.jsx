@@ -537,7 +537,7 @@ function ListaEmpleados() {
         ...(Cookies.get("admin") === "true" && Cookies.get("super_admin") === "false"
             ? [
                 {
-                    title: "Ocultar",
+                    title: "Desactivar",
                     key: "operation",
                     responsive: ["sm"],
                     onCell: () => ({ onClick: (e) => e.stopPropagation() }),
