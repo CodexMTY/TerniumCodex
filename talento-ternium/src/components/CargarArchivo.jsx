@@ -3,6 +3,7 @@ import { InboxOutlined } from "@ant-design/icons";
 import { Upload } from "antd";
 import { Button, Alert } from "react-bootstrap";
 import Cookies from "js-cookie";
+
 const { Dragger } = Upload;
 const API = "https://codextern-4ny2.onrender.com/";
 
@@ -73,27 +74,41 @@ const CargarArchivo = () => {
     },
   };
 
-  const subirArchivo = () => {  
+  const subirArchivo = async () => {
     const form = new FormData();
-    form.append("file", listaArchivos[0], listaArchivos[0].name);
+    const token = Cookies.get("token");
 
-    fetch(`${API}users/batch_upload`, {
-    method: "POST",
-    body: form,
-    headers: {
-        "Authorization": Cookies.get("token")
+    form.append("file", listaArchivos[0], listaArchivos[0].name);
+  
+    for (const [key, value] of form.entries()) {
+        console.log(`${key}:`, value);
     }
+  
+    activarBoton(false);
+  
+    fetch(`${API}users/batch_upload`, {
+      method: "POST",
+      body: form,
+      headers: {
+        "Authorization": token,
+      },
     })
     .then((response) => response.json())
     .then((result) => {
+        console.log(result)
         if (result.error){
+            activarBoton(true);
             activarMensajeError(true);
-            declararMensajeError("Hubo un error al intentar subir el archivo");
-
+            declararMensajeError("Hubo un error al subir el archivo. Por favor intente de nuevo.");
         }
         else {
+            console.log(result)
             activarMensajeExito(true);
-            declararMensajeExito("El archivo se ha subido con éxito");
+            declararMensajeExito("El archivo se ha subido con éxito. La página se reiniciará en breve.");
+
+            setTimeout(() => {
+                window.location.href = window.location.href;
+            }, 3000);
         }
     })
   };
