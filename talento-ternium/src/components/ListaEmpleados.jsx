@@ -1,15 +1,32 @@
 import { useNavigate } from "react-router-dom";
 import { SearchOutlined, FilterFilled } from "@ant-design/icons";
-import { Input, Space, Table, Tag, Slider, Divider, List, Checkbox, Row, Col } from "antd";
+import { Input, Space, Table, Tag, Slider, Divider, List, Checkbox, Row, Col, Button } from "antd";
 import { useState, useRef, useEffect } from "react";
 import DeleteConfirm from "../components/DeleteConfirm";
-import Cookies from "universal-cookie";
+import Cookies from "js-cookie";
 import { getRequest } from "../apiUtils";
 
 function ListaEmpleados() {
 
+    const [filteredInfo, setFilteredInfo] = useState({});
+    const [sortedInfo, setSortedInfo] = useState({});
+
+    const handleChange = (pagination, filters, sorter) => {
+        console.log('Various parameters', pagination, filters, sorter);
+        setFilteredInfo(filters);
+        setSortedInfo(sorter);
+    };
+
+    const clearFilters = () => {
+        setFilteredInfo({});
+    };
+
+    const clearAll = () => {
+        setFilteredInfo({});
+        setSortedInfo({});
+    };
+
     const navigate = useNavigate();
-    const cookies = new Cookies();
 
     const [empleados, setEmpleados] = useState([]);
 
@@ -19,7 +36,7 @@ function ListaEmpleados() {
 
     const navigateUser = (id) => {
         var selection = window.getSelection();
-        if(!selection.toString()) {
+        if (!selection.toString()) {
             navigate(`/users/${id}`)
         }
     }
@@ -29,8 +46,11 @@ function ListaEmpleados() {
     }, []);
 
     const fetchEmpleados = async () => {
-        const data = await getRequest("users", cookies.get("token"));
-        setEmpleados(data);
+        const data = await getRequest("users", Cookies.get("token"));
+        const filteredData = data.filter(function(obj) {
+            return obj.id !== Cookies.get("user_id")
+        });
+        setEmpleados(filteredData);
     };
 
     const distinctColumns = (dataIndex) => {
@@ -389,21 +409,24 @@ function ListaEmpleados() {
             title: "Nombre",
             dataIndex: "nombre",
             key: "nombre",
-            fixed:  "left",
-            ...filtroBusqueda("nombre"),
+            filteredValue: filteredInfo.nombre || null,
+            fixed: "left",
+            ...filtroBusqueda('nombre'),
         },
         {
             title: "Apellidos",
             dataIndex: "apellidos",
             key: "apellidos",
+            filteredValue: filteredInfo.apellidos || null,
             responsive: ["xl"],
-            fixed:  "left",
+            fixed: "left",
             ...filtroBusqueda("apellidos")
         },
         {
             title: "IDM4",
             dataIndex: "idm4",
             key: "idm4",
+            filteredValue: filteredInfo.idm4 || null,
             responsive: ["md"],
             ...filtroBusqueda("idm4")
         },
@@ -411,6 +434,7 @@ function ListaEmpleados() {
             title: "CET",
             dataIndex: "cet",
             key: "cet",
+            filteredValue: filteredInfo.cet || null,
             responsive: ["md"],
             ...filtroBusqueda("cet")
         },
@@ -418,6 +442,7 @@ function ListaEmpleados() {
             title: "Key Talent",
             dataIndex: "key_talent",
             key: "key_talent",
+            filteredValue: filteredInfo.key_talent || null,
             ...filtroKeyTalent("key_talent"),
             render: (key_talent) =>
                 <Tag color={key_talent ? "green" : "red"} key={"key"}>
@@ -428,6 +453,8 @@ function ListaEmpleados() {
             title: "Edad",
             dataIndex: "edad",
             key: "edad",
+            filteredValue: filteredInfo.edad || null,
+            sortOrder: sortedInfo.columnKey === "edad" ? sortedInfo.order : null,
             ...filtroRango("edad"),
             render: (text) => <>{text || text==0 ? text + " años" : text}</>,
             sorter: (a, b) => a.edad - b.edad,
@@ -438,6 +465,8 @@ function ListaEmpleados() {
             title: "Antigüedad",
             dataIndex: "antiguedad",
             key: "antiguedad",
+            filteredValue: filteredInfo.antiguedad || null,
+            sortOrder: sortedInfo.columnKey === "antiguedad" ? sortedInfo.order : null,
             ...filtroRango("antiguedad"),
             render: (text) => <>{text || text==0 ? text + " años" : text}</>,
             sorter: (a, b) => a.antiguedad - b.antiguedad,
@@ -448,12 +477,14 @@ function ListaEmpleados() {
             title: "Puesto",
             dataIndex: "puesto",
             key: "puesto",
+            filteredValue: filteredInfo.puesto || null,
             ...filtroListaOpciones("puesto"),
         },
         {
             title: "Jefe",
             dataIndex: "jefe",
             key: "jefe",
+            filteredValue: filteredInfo.jefe || null,
             responsive: ["xl"],
             ...filtroListaOpciones("jefe")
         },
@@ -461,6 +492,7 @@ function ListaEmpleados() {
             title: "Estructura3",
             dataIndex: "estructura3",
             key: "estructura3",
+            filteredValue: filteredInfo.estructura3 || null,
             responsive: ["lg"],
             ...filtroListaOpciones("estructura3"),
         },
@@ -468,6 +500,7 @@ function ListaEmpleados() {
             title: "Estructura4",
             dataIndex: "estructura4",
             key: "estructura4",
+            filteredValue: filteredInfo.estructura4 || null,
             responsive: ["lg"],
             ...filtroListaOpciones("estructura4"),
         },
@@ -475,6 +508,7 @@ function ListaEmpleados() {
             title: "Estructura5",
             dataIndex: "estructura5",
             key: "estructura5",
+            filteredValue: filteredInfo.estructura5 || null,
             responsive: ["lg"],
             ...filtroListaOpciones("estructura5"),
         },
@@ -482,6 +516,7 @@ function ListaEmpleados() {
             title: "Encuadre",
             dataIndex: "encuadre",
             key: "encuadre",
+            filteredValue: filteredInfo.encuadre || null,
             responsive: ["lg"],
             ...filtroListaOpciones("encuadre")
         },
@@ -489,6 +524,7 @@ function ListaEmpleados() {
             title: "PC-CAT",
             dataIndex: "pc_cat",
             key: "pc_cat",
+            filteredValue: filteredInfo.pc_cat || null,
             responsive: ["md"],
             ...filtroBusqueda("pc_cat")
         },
@@ -498,12 +534,23 @@ function ListaEmpleados() {
             responsive: ["sm"],
             onCell: () => ({onClick: (e) => e.stopPropagation()}),
             render: (record) =>
-                <DeleteConfirm userId={record.id} chooseEmpleados={chooseEmpleados} listaEmpleados={empleados}/>,
+                <DeleteConfirm userId={record.id} chooseEmpleados={chooseEmpleados} listaEmpleados={empleados} />,
         }
     ];
 
     return <>
+        <Space
+            style={{
+                marginTop: 32,
+                marginLeft: 32,
+                width: "100%"
+            }}
+        >
+            <Button onClick={clearFilters}>Eliminar filtros</Button>
+            <Button onClick={clearAll}>Eliminar filtros y clasificadores</Button>
+        </Space>
         <Table columns={columns} rowKey={(record) => record.id}
+          onChange={handleChange}
             expandable={{
                 expandedRowRender: (record) =>
                     <>
@@ -514,13 +561,13 @@ function ListaEmpleados() {
                 ,
             }}
             onRow={(record) => ({onClick: () => {navigateUser(record.id)}})}
-            dataSource={empleados} scroll={{ x: 1800 }}
+            dataSource={empleados} scroll={{ x: 2400 }}
             pagination={{ 
                 defaultPageSize: 5, 
                 showSizeChanger: true, 
                 pageSizeOptions: ["5", "10", "15", "20"],
                 showTotal: (total, range) => `${range[0]}-${range[1]} de ${total} empleados`
-            }}   />
+            }} />
 
     </>;
 };

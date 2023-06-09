@@ -1,15 +1,14 @@
 import React, { useState } from "react";
 import LoginCard from "../components/LoginCard";
 import RegisterCard from "../components/RegisterCard";
-import Cookies from "universal-cookie";
+import Cookies from "js-cookie";
 import { Navigate } from "react-router-dom";
 
 
 
 function LogIn() {
-  const cookies = new Cookies();
 
-  if (cookies.get("token")) {
+  if (Cookies.get("token")) {
     return <Navigate replace to="/homePage"></Navigate>;
   }
 
