@@ -1,16 +1,18 @@
 import { useNavigate } from "react-router-dom";
 import { SearchOutlined, FilterFilled } from "@ant-design/icons";
-import { Input, Space, Table, Tag, Slider, Divider, Checkbox, Button } from "antd";
+import { Input, Space, Table, Tag, Slider, Divider, List, Checkbox, Row, Col, Button } from "antd";
 import { useState, useRef, useEffect } from "react";
 import DeleteConfirm from "../components/DeleteConfirm";
 import Cookies from "js-cookie";
-import { getRequest } from "../apiUtils";
+import {getRequest} from "../apiUtils";
 
 function ListaEmpleados() {
+
     const [filteredInfo, setFilteredInfo] = useState({});
     const [sortedInfo, setSortedInfo] = useState({});
 
-    const handleChange = (filters, sorter) => {
+    const handleChange = (pagination, filters, sorter) => {
+        console.log("Various parameters", pagination, filters, sorter);
         setFilteredInfo(filters);
         setSortedInfo(sorter);
     };
@@ -462,7 +464,7 @@ function ListaEmpleados() {
             filteredValue: filteredInfo.edad || null,
             sortOrder: sortedInfo.columnKey === "edad" ? sortedInfo.order : null,
             ...filtroRango("edad"),
-            render: (text) => <>{text || text==0 ? text + " años" : text}</>,
+            render: (text) => <>{text || text == 0 ? text + " años" : text}</>,
             sorter: (a, b) => a.edad - b.edad,
             sortDirections: ["descend", "ascend"],
             showSorterTooltip: false
@@ -474,7 +476,7 @@ function ListaEmpleados() {
             filteredValue: filteredInfo.antiguedad || null,
             sortOrder: sortedInfo.columnKey === "antiguedad" ? sortedInfo.order : null,
             ...filtroRango("antiguedad"),
-            render: (text) => <>{text || text==0 ? text + " años" : text}</>,
+            render: (text) => <>{text || text == 0 ? text + " años" : text}</>,
             sorter: (a, b) => a.antiguedad - b.antiguedad,
             sortDirections: ["descend", "ascend"],
             showSorterTooltip: false
@@ -592,11 +594,11 @@ function ListaEmpleados() {
                     </>
                 ,
             }}
-            onRow={(record) => ({onClick: () => {navigateUser(record.id)}})}
+            onRow={(record) => ({ onClick: () => { navigateUser(record.id) } })}
             dataSource={empleados} scroll={{ x: 2400 }}
-            pagination={{ 
-                defaultPageSize: 5, 
-                showSizeChanger: true, 
+            pagination={{
+                defaultPageSize: 5,
+                showSizeChanger: true,
                 pageSizeOptions: ["5", "10", "15", "20"],
                 showTotal: (total, range) => `${range[0]}-${range[1]} de ${total} empleados`
             }} />
