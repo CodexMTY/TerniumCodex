@@ -2,7 +2,7 @@ import React from "react";
 import { Card, Container, Form, Button } from "react-bootstrap";
 import terniumLogo from "../img/logo-ternium.png";
 
-function AuthCard({ children, onSubmit, switchCard, primaryButtonText, secondaryButtonText }) {
+function AuthCard({ children, onSubmit, primaryButtonText }) {
   return (
     <Container className="d-flex justify-content-center align-items-center">
       <Card style={{ width: "25rem" }}>
@@ -14,10 +14,6 @@ function AuthCard({ children, onSubmit, switchCard, primaryButtonText, secondary
 
             <Button variant="outline-danger" type="submit" className="mt-3 py-2 w-75">
                 {primaryButtonText}
-            </Button>
-
-            <Button variant="outline-danger" onClick={switchCard} className="mt-3 py-2 w-75">
-                {secondaryButtonText}
             </Button>
 
           </Form>
