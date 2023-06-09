@@ -44,7 +44,7 @@ function LoginCard({ switchCard }) {
   }
 
   return (
-    <AuthCard onSubmit={userLogin} switchCard={switchCard} primaryButtonText="Iniciar sesión" secondaryButtonText="Registrarse">
+    <AuthCard onSubmit={userLogin} switchCard={switchCard} primaryButtonText="Iniciar sesión">
       <Form.Group controlId="formBasicEmail">
         <Form.Control type="email" placeholder="Correo electrónico" value={email} onChange={(e) => setEmail(e.target.value)} />
       </Form.Group>
@@ -54,9 +54,6 @@ function LoginCard({ switchCard }) {
         {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
       </Form.Group>
 
-      <div className="mt-2">
-        <Link to="/passwordReset">Olvidé mi contraseña</Link>
-      </div>
     </AuthCard>
   );
 }

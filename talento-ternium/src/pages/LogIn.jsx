@@ -20,11 +20,7 @@ function LogIn() {
 
   return (
     <div style={{ position: "fixed", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}>
-      {activeCard === "login" ? (
         <LoginCard switchCard={switchCard} />
-      ) : (
-        <RegisterCard switchCard={switchCard} />
-      )}
     </div>
   );
 }
