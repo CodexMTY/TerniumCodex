@@ -1,13 +1,14 @@
-const API = 'https://codextern-4ny2.onrender.com/';
+const API = "https://codextern-4ny2.onrender.com/";
 
-export async function postRequest(url, data) {
+export async function postRequest(url, data, token) {
   let response = await (
     await fetch(`${API}${url}`, {
-      method: 'POST',
+      method: "POST",
       body: JSON.stringify(data),
       headers: {
-        'accept': 'application/json',
-        'content-type': 'application/json'
+        "accept": "application/json",
+        "content-type": "application/json",
+        "Authorization": token
       }
   })).json();
   
@@ -25,27 +26,31 @@ export async function getRequest(url, token) {
   return response;
 }
 
-export async function putRequest(url, data) {
+export async function putRequest(url, data, token) {
   let response = await (
     await fetch(`${API}${url}`, {
-      method: 'PUT',
+      method: "PUT",
       body: JSON.stringify(data),
       headers: {
-        'accept': 'application/json',
-        'content-type': 'application/json'
+        "accept": "application/json",
+        "content-type": "application/json",
+        "Authorization": token
       }
   })).json();
   
   return response;
 }
 
-export async function putImage(url, file) {
+export async function putImage(url, file, token) {
   let formData = new FormData();
-  formData.append('image', file);
+  formData.append("image", file);
   
   let response = await fetch(`${API}${url}`, {
-    method: 'PUT',
-    body: formData
+    method: "PUT",
+    body: formData,
+    headers: {
+      "Authorization": token
+    }
   });
 
   if (!response.ok) {

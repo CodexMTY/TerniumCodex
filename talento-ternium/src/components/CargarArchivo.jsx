@@ -1,8 +1,8 @@
-import { useState } from 'react';
-import { InboxOutlined } from '@ant-design/icons';
-import { Upload } from 'antd';
-import { Button, Alert } from 'react-bootstrap';
-
+import { useState } from "react";
+import { InboxOutlined } from "@ant-design/icons";
+import { Upload } from "antd";
+import { Button, Alert } from "react-bootstrap";
+import Cookies from "universal-cookie";
 const { Dragger } = Upload;
 const API = "https://codextern-4ny2.onrender.com/";
 
@@ -10,10 +10,11 @@ const CargarArchivo = () => {
   const [listaArchivos, declararListaArchivos] = useState([]);
   const [hayArchivo, activarBoton] = useState(false);
   const [cursorEnCaja, cambiarBorde] = useState(false);
-  const [mensajeError, declararMensajeError] = useState('');
-  const [mensajeExito, declararMensajeExito] = useState('');
+  const [mensajeError, declararMensajeError] = useState("");
+  const [mensajeExito, declararMensajeExito] = useState("");
   const [mostrarMensajeError, activarMensajeError] = useState(false);
   const [mostrarMensajeExito, activarMensajeExito] = useState(false);
+  const cookies = new Cookies();
 
   const props = {
     name: "file",
@@ -46,7 +47,7 @@ const CargarArchivo = () => {
         }
         
         const archivo = archivosArrastrados[0];
-        const extensionArchivo = archivo.name.split('.').pop();
+        const extensionArchivo = archivo.name.split(".").pop();
     
         if (!extensionesPermitidas.includes(extensionArchivo)) {
             declararMensajeError(`El archivo "${archivo.name}" no es de tipo .csv`);
@@ -79,6 +80,9 @@ const CargarArchivo = () => {
     fetch(`${API}users/batch_upload`, {
     method: "POST",
     body: form,
+    headers: {
+        "Authorization": cookies.get("token")
+    }
     })
     .then((response) => response.json())
     .then((result) => {
@@ -96,8 +100,8 @@ const CargarArchivo = () => {
 
   return (
     <div>
-        <Dragger style={{ borderColor: cursorEnCaja ? '#e56773' : 'inherit' }} {...props}>
-            <p className="ant-upload-drag-icon"> <InboxOutlined style={{ color: '#e56773' }}/> </p>
+        <Dragger style={{ borderColor: cursorEnCaja ? "#e56773" : "inherit" }} {...props}>
+            <p className="ant-upload-drag-icon"> <InboxOutlined style={{ color: "#e56773" }}/> </p>
             <p className="ant-upload-text">Arrastra un archivo o haz click aquí para cargarlo</p>
             <p className="ant-upload-hint">Solo se aceptan archivos .csv</p>
         </Dragger>

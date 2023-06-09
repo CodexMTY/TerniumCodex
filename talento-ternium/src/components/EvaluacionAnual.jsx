@@ -1,12 +1,12 @@
-import { useState } from 'react';
-import { Table } from 'react-bootstrap';
-import AgregarEditarPopupView from './AgregarEditarPopupView';
+import { useState } from "react";
+import { Table } from "react-bootstrap";
+import AgregarEditarPopupView from "./AgregarEditarPopupView";
 
 function EvaluacionAnual({ EvaluacionAnualData }) {
-    const [anio, setAnio] = useState('');
-    const [performance, setPerformance] = useState('');
-    const [potencial, setPotencial] = useState('');
-    const [curva, setCurva] = useState('');
+    const [anio, setAnio] = useState("");
+    const [performance, setPerformance] = useState("");
+    const [potencial, setPotencial] = useState("");
+    const [curva, setCurva] = useState("");
 
     const manejoAnio = (event) => {
         setAnio(event.target.value);
@@ -30,13 +30,13 @@ function EvaluacionAnual({ EvaluacionAnualData }) {
         <>
         <Table striped bordered hover size="sm">
             <thead>
-                <tr style={{ backgroundColor: 'orange' }}>
+                <tr style={{ backgroundColor: "orange" }}>
                     <th colSpan={4}>
-                    <div style={{ display: 'flex', alignItems: 'center' }}>
-                        <span style={{ marginLeft: '5px', textAlign: 'left' }}>Evaluaciones Anuales</span>
-                        <div style={{ display: 'flex', marginLeft: 'auto', alignItems: 'center' }}>
+                    <div style={{ display: "flex", alignItems: "center" }}>
+                        <span style={{ marginLeft: "5px", textAlign: "left" }}>Evaluaciones Anuales</span>
+                        <div style={{ display: "flex", marginLeft: "auto", alignItems: "center" }}>
                             <AgregarEditarPopupView
-                                title='Agregar datos de Evaluaciones Anuales'
+                                titulo="Agregar datos de Evaluaciones Anuales"
                                 anio={anio}
                                 performance={performance}
                                 potencial={potencial}
@@ -46,8 +46,8 @@ function EvaluacionAnual({ EvaluacionAnualData }) {
                                 manejoPotencial={manejoPotencial}
                                 manejoCurva={manejoCurva}
                                 inputsHabilitados={inputsHabilitados}
-                                url='evaluaciones_anuales'
-                                user_id={EvaluacionAnualData.user_id}
+                                url="evaluaciones_anuales"
+                                userID={EvaluacionAnualData.user_id}
                             />
                         </div>
                     </div>
@@ -56,14 +56,14 @@ function EvaluacionAnual({ EvaluacionAnualData }) {
             </thead>
             <thead>
                 <tr>
-                    <th style={{ backgroundColor: '#ffc966', width: '100px' }}>Año</th>
-                    <th style={{ backgroundColor: '#ffc966', width: '100px' }}>Performance</th>
-                    <th style={{ backgroundColor: '#ffc966', width: '175px' }}>Potencial</th>
-                    <th style={{ backgroundColor: '#ffc966', width: '175px' }}>Curva</th>
+                    <th style={{ backgroundColor: "#ffc966", width: "100px" }}>Año</th>
+                    <th style={{ backgroundColor: "#ffc966", width: "100px" }}>Performance</th>
+                    <th style={{ backgroundColor: "#ffc966", width: "175px" }}>Potencial</th>
+                    <th style={{ backgroundColor: "#ffc966", width: "175px" }}>Curva</th>
                 </tr>
             </thead>
             <tbody>
-                {EvaluacionAnualData.EvaluacionAnualData.slice(-5).map((data) => (
+                {EvaluacionAnualData.EvaluacionAnualData.slice(-5).reverse().map((data) => (
                     <tr key={data.id}>
                         <td>{data.ano}</td>
                         <td>{data.performance}</td>

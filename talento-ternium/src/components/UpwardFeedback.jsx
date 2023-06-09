@@ -1,11 +1,11 @@
-import { useState, useEffect } from 'react';
-import { Table } from 'react-bootstrap';
-import AgregarEditarPopupView from './AgregarEditarPopupView';
+import { useState, useEffect } from "react";
+import { Table } from "react-bootstrap";
+import AgregarEditarPopupView from "./AgregarEditarPopupView";
 
 function UpwardFeedback({ UpwardFeedbackData }) {
-    const [puntaje, setPuntaje] = useState('');
-    const [comentarios, setComentarios] = useState('');
-    const [promedio, setPromedio] = useState('');
+    const [puntaje, setPuntaje] = useState("");
+    const [comentarios, setComentarios] = useState("");
+    const [promedio, setPromedio] = useState("");
 
     useEffect(() => {
         if (UpwardFeedbackData.UpwardFeedbackData.length > 0) {
@@ -30,21 +30,21 @@ function UpwardFeedback({ UpwardFeedbackData }) {
         <>
         <Table striped bordered hover size="sm">
             <thead>
-                <tr style={{ backgroundColor: 'orange' }}>
+                <tr style={{ backgroundColor: "orange" }}>
                     <th colSpan={2}>
-                        <div style={{ display: 'flex', alignItems: 'center' }}>
-                            <span style={{ marginLeft: '5px', textAlign: 'left' }}>Upward Feedback</span>
-                            <div style={{ display: 'flex', marginLeft: 'auto', alignItems: 'center' }}>
-                                <span style={{ marginRight: '10px' }}>Promedio: {promedio}</span>
+                        <div style={{ display: "flex", alignItems: "center" }}>
+                            <span style={{ marginLeft: "5px", textAlign: "left" }}>Upward Feedback</span>
+                            <div style={{ display: "flex", marginLeft: "auto", alignItems: "center" }}>
+                                <span style={{ marginRight: "10px" }}>Promedio: {promedio}</span>
                                 <AgregarEditarPopupView
-                                    title='Agregar datos de Upward Feedback'
+                                    titulo="Agregar datos de Upward Feedback"
                                     puntaje={puntaje}
                                     comentarios={comentarios}
                                     manejoPuntaje={manejoPuntaje}
                                     manejoComentarios={manejoComentarios}
                                     inputsHabilitados={inputsHabilitados}
-                                    url='upward_fbks'
-                                    user_id={UpwardFeedbackData.user_id}
+                                    url="upward_fbks"
+                                    userID={UpwardFeedbackData.user_id}
                                 />
                             </div>
                         </div>
@@ -53,12 +53,12 @@ function UpwardFeedback({ UpwardFeedbackData }) {
             </thead>
             <thead>
                 <tr>
-                    <th style={{ backgroundColor: '#ffc966', width: '100px' }}>Puntaje</th>
-                    <th style={{ backgroundColor: '#ffc966', width: '450px' }}>Comentarios</th>
+                    <th style={{ backgroundColor: "#ffc966", width: "100px" }}>Puntaje</th>
+                    <th style={{ backgroundColor: "#ffc966", width: "450px" }}>Comentarios</th>
                 </tr>
             </thead>
             <tbody>
-                {UpwardFeedbackData.UpwardFeedbackData.slice(-5).map((data) => (
+                {UpwardFeedbackData.UpwardFeedbackData.slice(-5).reverse().map((data) => (
                     <tr key={data.id}>
                         <td>{data.promedio}</td>
                         <td>{data.comments}</td>

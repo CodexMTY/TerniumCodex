@@ -1,7 +1,7 @@
-import { useState } from 'react';
-import Modal from 'react-bootstrap/Modal';
-import RegisterUser from './RegisterUser';
-import { Nav } from 'react-bootstrap';
+import { useState } from "react";
+import Modal from "react-bootstrap/Modal";
+import RegisterUser from "./RegisterUser";
+import { Nav } from "react-bootstrap";
 
 function BotonSubida() {
     const [mostrar, activarMostrar] = useState(false);
@@ -15,7 +15,7 @@ function BotonSubida() {
                 Registrar empleado
             </Nav.Link>
 
-            <Modal size='lg' show={mostrar} onHide={manejarCerrar}>
+            <Modal size="lg" show={mostrar} onHide={manejarCerrar}>
                 <Modal.Header closeButton>
                     <Modal.Title>Registro individual</Modal.Title>
                 </Modal.Header>
