@@ -45,11 +45,18 @@ function ListaEmpleados() {
 
     const fetchEmpleados = async () => {
         const data = await getRequest("users", Cookies.get("token"));
-        setEmpleados(data);
-        const filteredData = data.filter(function(obj) {
-            return obj.id !== Cookies.get("user_id")
-        });
-        setEmpleados(filteredData);
+        if (Cookies.get("super_admin") === "false"){
+            const filteredData = data.filter(function(obj) {
+                return (obj.id !== Cookies.get("user_id") && obj.idm4 !== null)
+            });
+            setEmpleados(filteredData);
+        } else {
+            const filteredData = data.filter(function(obj) {
+                return obj.id !== Cookies.get("user_id")
+            });
+            setEmpleados(filteredData);
+        }
+        
     };
 
     const distinctColumns = (dataIndex) => {
