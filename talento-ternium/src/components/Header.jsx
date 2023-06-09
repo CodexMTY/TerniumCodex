@@ -13,13 +13,38 @@ function Header() {
     function handleLogOut() {
         Cookies.remove("token", { path: "/" });
         Cookies.remove("user_id", { path: "/" });
-
         navigate("/");
     }
+
+    const isAdmin = Cookies.get("admin");
+    const isSuperAdmin = Cookies.get("super_admin");
 
     function goHome() {
         navigate("/homePage");
     }
+
+    const renderButtons = () => {
+        if (isSuperAdmin === "true") {
+            return (
+                <>
+                    <BotonRegistro  tipoRegistro="rh" />
+                    <Divider type="vertical" style={{ height: "2.9em", background: "#eeeeee" }} />
+                    <BotonRegistro  tipoRegistro="admin" />
+                </>
+            )
+        } else if (isAdmin === "true") {
+          return <BotonRegistro  tipoRegistro="rh" />;
+        } else  {
+          return (
+            <>
+              <BotonSubida/>
+              <Divider type="vertical" style={{ height: "2.9em", background: "#eeeeee" }} />
+              <BotonRegistro  tipoRegistro="empleado" />
+            </>
+          );
+        }
+    };
+      
 
     return (
     <Navbar expand="lg" sticky="top" style={{ background: "white" }}>
@@ -34,14 +59,9 @@ function Header() {
                         Inicio
                     </Nav.Link>
                     <Divider type="vertical" style={{height: "2.9em", background: "#eeeeee"}}/>
-                    <BotonSubida />
-                    <Divider type="vertical"  style={{height: "2.9em", background: "#eeeeee"}} />
-                    <BotonRegistro/>
+                    {renderButtons()}
                 </Nav>
 
-                <Nav className="me-auto">
-                    
-                </Nav>
 
                 <Nav className="ml-auto">
                     <Button onClick={handleLogOut} variant="outline-danger">Cerrar sesión</Button>

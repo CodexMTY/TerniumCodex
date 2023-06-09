@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Form, Input, InputNumber, Radio, DatePicker } from "antd";
 import Cookies from "js-cookie";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Alert } from "react-bootstrap";
 import { postRequest } from "../apiUtils";
 
@@ -16,12 +16,14 @@ const validateMessages = {
 
 const dateFormat = "YYYY-DD-MM";
 
-const RegisterUser = () => {
+const RegisterUser = ({tipoUsuario}) => {
 
     const [mensajeError, declararMensajeError] = useState("");
     const [mensajeExito, declararMensajeExito] = useState("");
     const [mostrarMensajeError, activarMensajeError] = useState(false);
     const [mostrarMensajeExito, activarMensajeExito] = useState(false);
+    const [registroEmpleado, setRegistroEmpleado] = useState(false);
+    const [registroRH, setRegistroRH] = useState(false);
 
     const [confirmLoading, setConfirmLoading] = useState(false);
 
@@ -31,31 +33,72 @@ const RegisterUser = () => {
         window.location.reload;
     }
 
+    useEffect(() => {
+        if (tipoUsuario === "empleado") {
+            setRegistroEmpleado(true);
+        } else if (tipoUsuario === "rh") {
+            setRegistroRH(true);
+        }
+    }, [tipoUsuario]);
+
     const onFinish = async (values) => {
         setConfirmLoading(true);
-        let userData = {
-            "nombre": values["nombre"],
-            "apellidos": values["apellidos"],
-            "email": values["email"],
-            "password": values["password"],
-            "password_confirmation": values["password_confirmation"],
-            "cumpleanos": values["cumpleanos"]["$d"],
-            "fecha_ingreso": values["fecha_ingreso"]["$d"],
-            "idm4": values["idm4"],
-            "cet": values["cet"],
-            "key_talent": values["key_talent"] == "true" ? true : false,
-            "puesto": values["puesto"],
-            "jefe": values["jefe"],
-            "estructura3": values["estructura3"],
-            "estructura4": values["estructura4"],
-            "estructura5": values["estructura5"],
-            "encuadre": values["encuadre"],
-            "pc_cat": values["pccat"],
-            "resumen": "",
-            "universidad": "",
-            "direccion": ""
+
+        let userData = {};
+        console.log(registroEmpleado);
+
+        if (registroEmpleado){
+            userData = {
+                "nombre": values["nombre"],
+                "apellidos": values["apellidos"],
+                "email": values["email"],
+                "password": "1234",
+                "password_confirmation": "1234",
+                "cumpleanos": values["cumpleanos"]["$d"],
+                "fecha_ingreso": values["fecha_ingreso"]["$d"],
+                "idm4": values["idm4"],
+                "cet": values["cet"],
+                "key_talent": values["key_talent"] == "true" ? true : false,
+                "puesto": values["puesto"],
+                "jefe": values["jefe"],
+                "estructura3": values["estructura3"],
+                "estructura4": values["estructura4"],
+                "estructura5": values["estructura5"],
+                "encuadre": values["encuadre"],
+                "pc_cat": values["pccat"],
+                "resumen": "",
+                "universidad": "",
+                "direccion": ""
+            }
+        }
+        else if (registroRH){
+            userData = {
+                "nombre": values["nombre"],
+                "apellidos": values["apellidos"],
+                "email": values["email"],
+                "password": values["password"],
+                "password_confirmation": values["password_confirmation"],
+                "cumpleanos": values["cumpleanos"]["$d"],
+                "fecha_ingreso": values["fecha_ingreso"]["$d"],
+                "idm4": values["idm4"],
+                "cet": values["cet"],
+                "key_talent": values["key_talent"] == "true" ? true : false,
+                "puesto": values["puesto"],
+                "jefe": values["jefe"],
+                "estructura3": values["estructura3"],
+                "estructura4": values["estructura4"],
+                "estructura5": values["estructura5"],
+                "encuadre": values["encuadre"],
+                "pc_cat": values["pccat"],
+                "resumen": "",
+                "universidad": "",
+                "direccion": ""
+            }
+    
         }
 
+        console.log(userData);
+        
         const result = await postRequest("users", userData, Cookies.get("token"));
 
         if (result.email == "has already been taken") {
@@ -131,42 +174,46 @@ const RegisterUser = () => {
                     ]}>
                     <Input />
                 </Form.Item>
-
-                <Form.Item
-                    label="Contraseña"
-                    name="password"
-                    rules={[
-                        {
-                            required: true,
-                        },
-                    ]}
-                    hasFeedback
-                >
-                    <Input.Password />
-                </Form.Item>
-
-                <Form.Item
-                    label="Confirmar contraseña"
-                    name="password_confirmation"
-                    dependencies={["password"]}
-                    hasFeedback
-                    rules={[
-                        {
-                            required: true,
-                            message: "Favor de confirmar contraseña",
-                        },
-                        ({ getFieldValue }) => ({
-                            validator(_, value) {
-                                if (!value || getFieldValue("password") === value) {
-                                    return Promise.resolve();
-                                }
-                                return Promise.reject(new Error("Las contraseñas no coinciden"));
+                
+                {(registroRH && 
+                <>
+                    <Form.Item
+                        label="Contraseña"
+                        name="password"
+                        rules={[
+                            {
+                                required: true,
                             },
-                        }),
-                    ]}
-                >
-                    <Input.Password />
-                </Form.Item>
+                        ]}
+                        hasFeedback
+                    >
+                        <Input.Password />
+                    </Form.Item>
+
+                    <Form.Item
+                        label="Confirmar contraseña"
+                        name="password_confirmation"
+                        dependencies={["password"]}
+                        hasFeedback
+                        rules={[
+                            {
+                                required: true,
+                                message: "Favor de confirmar contraseña",
+                            },
+                            ({ getFieldValue }) => ({
+                                validator(_, value) {
+                                    if (!value || getFieldValue("password") === value) {
+                                        return Promise.resolve();
+                                    }
+                                    return Promise.reject(new Error("Las contraseñas no coinciden"));
+                                },
+                            }),
+                        ]}
+                    >
+                        <Input.Password />
+                    </Form.Item>
+                </>
+                )}
 
                 <Form.Item label="Fecha de nacimiento"
                     name="cumpleanos"
@@ -212,7 +259,7 @@ const RegisterUser = () => {
 
                 <Form.Item label="Key talent"
                     name="key_talent">
-                    <Radio.Group defaultValue="false">
+                    <Radio.Group initialValues="false">
                         <Radio value="true"> Si </Radio>
                         <Radio value="false"> No </Radio>
                     </Radio.Group>
