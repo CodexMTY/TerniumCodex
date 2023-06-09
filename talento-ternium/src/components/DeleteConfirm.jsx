@@ -3,60 +3,74 @@ import { useState } from "react";
 import { DeleteOutlined } from "@ant-design/icons";
 import Cookies from "js-cookie";
 
-function DeleteConfirm({ userId, chooseEmpleados, listaEmpleados }) {
-
-    const [open, setOpen] = useState(false);
+function DeleteConfirm({ userId, escogerEmpleados, listaEmpleados }) {
+    const [abrir, setAbrir] = useState(false);
     const [confirmLoading, setConfirmLoading] = useState(false);
+    const [titulo, setTitulo] = useState("");
+    const [descripcion, setDescripcion] = useState("");
 
     const showPopconfirm = () => {
-        setOpen(true);
+        if (Cookies.get("admin") === "true" && Cookies.get("super_admin") === "false") {
+            setTitulo("Desactivar registro de empleado");
+            setDescripcion("¿Estás seguro/a de que quieres desactivar este registro?");
+        }
+        if (Cookies.get("admin") === "true" && Cookies.get("super_admin") === "true") {
+            setTitulo("Borrar registro de empleado");
+            setDescripcion("¿Estás seguro/a de que quieres borrar este registro?");
+        }
+        setAbrir(true);
     };
 
     const handleOk = () => {
         setConfirmLoading(true);
         fetchDelete();
-        message.success("Registro eliminado");
+        if (Cookies.get("admin") === "true" && Cookies.get("super_admin") === "false") {
+            message.success("Usuario desactivado");
+        }
+        if (Cookies.get("admin") === "true" && Cookies.get("super_admin") === "true") {
+            message.success("Usuario eliminado");
+        }
     };
 
-    const handleCancel = () => {
-        setOpen(false);
+    const handleCancelar = () => {
+        setAbrir(false);
         message.error("Operación cancelada");
     };
 
-    const deleteEmpleado = () => {
+    const borrarEmpleado = () => {
         listaEmpleados = listaEmpleados.filter((empleado) => empleado.id != userId);
-        chooseEmpleados(listaEmpleados);
+        escogerEmpleados(listaEmpleados);
     }
     
     const fetchDelete = async () => {
         try {
             const response = await fetch(`https://codextern-4ny2.onrender.com/users/${userId}`, { method: "DELETE", headers: {"Authorization": Cookies.get("token")} });
             if (response.ok) {
-                deleteEmpleado()
-                setOpen(false);
+                borrarEmpleado()
+                setAbrir(false);
                 setConfirmLoading(false);
             } else {
-                setOpen(false);
+                setAbrir(false);
                 setConfirmLoading(false);
             }
         } catch (error) {
-            setOpen(false);
+            setAbrir(false);
             setConfirmLoading(false);
         }
     };
 
     return (
         <Popconfirm
-            title="Borrar registro de empleado"
-            description="¿Estás seguro/a de que quieres borrar este registro?"
-            open={open}
+            titulo={titulo}
+            description={descripcion}
+            open={abrir}
             onConfirm={handleOk}
             okButtonProps={{
                 loading: confirmLoading,
                 danger: true,
             }}
-            onCancel={handleCancel}
-            okText="Borrar"
+            onCancel={handleCancelar}
+            okText="Realizar operación"
             cancelText="Cancelar"
         >
             <Button type="dashed" icon={<DeleteOutlined
