@@ -1,19 +1,18 @@
 import { Container, Nav, Navbar, Button } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import terniumLogo from "../img/logo-ternium.png";
-import Cookies from "universal-cookie";
+import Cookies from "js-cookie";
 import BotonSubida from "./BotonSubida";
 import BotonRegistro from "./BotonRegistro"
 import {Divider} from "antd";
 
 function Header() {
 
-    const cookies = new Cookies;
     const navigate = useNavigate();
 
     function handleLogOut() {
-        cookies.remove("token", { path: "/" });
-        cookies.remove("user_id", { path: "/" });
+        Cookies.remove("token", { path: "/" });
+        Cookies.remove("user_id", { path: "/" });
 
         navigate("/");
     }

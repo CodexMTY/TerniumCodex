@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 import { Form } from "react-bootstrap";
 import { Link , useNavigate } from "react-router-dom";
-import Cookies from "universal-cookie";
+import Cookies from "js-cookie";
 import AuthCard from "./AuthCard";
 import { postRequest } from "../apiUtils";
-import { parseISO } from "date-fns";
 
 function LoginCard({ switchCard }) {
-  const cookies = new Cookies();
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
@@ -15,8 +13,8 @@ function LoginCard({ switchCard }) {
   const [errorMessage, setErrorMessage] = useState("");
 
   function reformatDate(dateStr) {
-    let parts = dateStr.split(' ');
-    let dateParts = parts[0].split('-');
+    let parts = dateStr.split(" ");
+    let dateParts = parts[0].split("-");
     let reformattedDate = `${dateParts[1]}-${dateParts[0]}-${dateParts[2]} ${parts[1]}`;
 
     return reformattedDate;
@@ -30,11 +28,19 @@ function LoginCard({ switchCard }) {
       setErrorMessage("Credenciales incorrectas");
     }
     else if(result.token){
-      let expDateStr = reformatDate(result.exp);
-      let expiryDate = expDateStr.split(" ")[0].split("-").reverse().join("-") + "T" + expDateStr.split(" ")[1] + "Z";
-      let utcDate = parseISO(expiryDate);
-      cookies.set("token", result.token, { expires: utcDate, path: "/", SameSite: "None", Secure: true });
-      cookies.set("user_id", result.user_id, { expires: utcDate, path: "/", SameSite: "None", Secure: true });
+      let expDateStr = result.exp; // MM-DD-YYYY HH:MM
+      console.log(expDateStr)
+      let [month, day, yearTime] = expDateStr.split("-");
+      let [year, time] = yearTime.split(" ");
+      let expiryDate = `${year}-${month}-${day}T${time}:00Z`; // Convert to ISO string format
+
+      let utcDate = new Date(expiryDate);
+      
+      console.log(utcDate);
+
+      Cookies.set("token", result.token, { expires: utcDate, path: "/", sameSite: "None", secure: true });
+      Cookies.set("user_id", result.user_id, { expires: utcDate, path: "/", sameSite: "None", secure: true });
+      
       navigate("/homePage");
     }
   }

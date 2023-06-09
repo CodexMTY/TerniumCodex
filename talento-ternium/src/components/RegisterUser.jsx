@@ -1,11 +1,10 @@
 import React from "react";
 import { Button, Form, Input, InputNumber, Radio, DatePicker } from "antd";
-import Cookies from "universal-cookie";
+import Cookies from "js-cookie";
 import { useState } from "react";
 import { Alert } from "react-bootstrap";
 import { postRequest } from "../apiUtils";
 
-const cookies = new Cookies;
 
 const validateMessages = {
     required: "${label} es obligatorio",
@@ -57,7 +56,7 @@ const RegisterUser = () => {
             "direccion": ""
         }
 
-        const result = await postRequest("users", userData, cookies.get("token"));
+        const result = await postRequest("users", userData, Cookies.get("token"));
 
         if (result.email == "has already been taken") {
 

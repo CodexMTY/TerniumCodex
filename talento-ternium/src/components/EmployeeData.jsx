@@ -1,9 +1,9 @@
-import React from 'react';
-import { Col, Image, Badge, Row } from 'react-bootstrap';
-import PersonalDataTable from '../components/PersonalDataTable';
-import UpwardFeedback from '../components/UpwardFeedback';
-import ClienteProveedor from '../components/ClienteProveedor';
-import EvaluacionAnual from '../components/EvaluacionAnual';
+import React from "react";
+import { Col, Image, Badge, Row } from "react-bootstrap";
+import PersonalDataTable from "../components/PersonalDataTable";
+import UpwardFeedback from "../components/UpwardFeedback";
+import ClienteProveedor from "../components/ClienteProveedor";
+import EvaluacionAnual from "../components/EvaluacionAnual";
 
 function EmployeeData({ employee, handleImageHover, handleImageLeave, handleImageClick, handleFileChange, fileInputRef, isHovered, picturePlaceholder }) {
   return (
