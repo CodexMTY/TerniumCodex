@@ -59,3 +59,16 @@ export async function putImage(url, file, token) {
 
   return await response.json();
 }
+
+export async function postData(url, file, token) {
+  let response = await (
+    await fetch(`${API}${url}`, {
+      method: "POST",
+      body: file,
+      headers: {
+        "Authorization": token
+      }
+  })).json();
+  
+  return response;
+}

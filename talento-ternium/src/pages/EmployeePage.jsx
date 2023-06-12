@@ -4,7 +4,7 @@ import { Navigate, useParams } from "react-router-dom";
 import Header from "../components/Header";
 import { getRequest, putImage } from "../apiUtils";
 import Cookies from "js-cookie";
-import { Spinner, Button, Row, Col, Image, Badge } from "react-bootstrap";
+import { Spinner, Button } from "react-bootstrap";
 import html2canvas from "html2canvas";
 import JsPDF from "jspdf";
 import picturePlaceholder from "../img/profile_picture.png";

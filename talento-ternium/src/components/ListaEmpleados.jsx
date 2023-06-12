@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { SearchOutlined, FilterFilled } from "@ant-design/icons";
 import { Input, Space, Table, Tag, Slider, Divider, List, Checkbox, Row, Col, Button } from "antd";
+import { Spinner } from "react-bootstrap";
 import { useState, useRef, useEffect } from "react";
 import DeleteConfirm from "../components/DeleteConfirm";
 import Cookies from "js-cookie";
@@ -12,7 +13,6 @@ function ListaEmpleados() {
     const [sortedInfo, setSortedInfo] = useState({});
 
     const handleChange = (pagination, filters, sorter) => {
-        console.log("Various parameters", pagination, filters, sorter);
         setFilteredInfo(filters);
         setSortedInfo(sorter);
     };
@@ -572,7 +572,8 @@ function ListaEmpleados() {
         : []),
     ];
 
-    return <>
+    return (
+        <>
         <Space
             style={{
                 marginTop: 32,
@@ -583,27 +584,37 @@ function ListaEmpleados() {
             <Button onClick={clearFilters}>Eliminar filtros</Button>
             <Button onClick={clearAll}>Eliminar filtros y clasificadores</Button>
         </Space>
-        <Table columns={columns} rowKey={(record) => record.id}
-          onChange={handleChange}
-            expandable={{
-                expandedRowRender: (record) =>
-                    <>
-                        <p>Email: {record.email}</p>
-                        <p style={{ margin: 0 }}>{record.resumen}</p>
-
-                    </>
-                ,
-            }}
-            onRow={(record) => ({ onClick: () => { navigateUser(record.id) } })}
-            dataSource={empleados} scroll={{ x: 2400 }}
-            pagination={{
-                defaultPageSize: 5,
-                showSizeChanger: true,
-                pageSizeOptions: ["5", "10", "15", "20"],
-                showTotal: (total, range) => `${range[0]}-${range[1]} de ${total} empleados`
-            }} />
-
-    </>;
-};
+        {empleados.length > 0 ? (
+            <Table
+                columns={columns}
+                rowKey={(record) => record.id}
+                onChange={handleChange}
+                expandable={{
+                    expandedRowRender: (record) => (
+                        <>
+                            <p>Email: {record.email}</p>
+                            <p style={{ margin: 0 }}>{record.resumen}</p>
+                        </>
+                    )
+                }}
+                onRow={(record) => ({ onClick: () => { navigateUser(record.id) } })}
+                dataSource={empleados}
+                scroll={{ x: 2400 }}
+                pagination={{
+                    defaultPageSize: 5,
+                    showSizeChanger: true,
+                    pageSizeOptions: ["5", "10", "15", "20"],
+                    showTotal: (total, range) => `${range[0]}-${range[1]} de ${total} empleados`
+                }}
+            />
+        ) : (
+          <div>
+              <Spinner animation="border" variant="warning" />
+              <p>Cargando...</p>
+          </div>
+        )}
+      </>
+    );
+}
 
 export default ListaEmpleados;

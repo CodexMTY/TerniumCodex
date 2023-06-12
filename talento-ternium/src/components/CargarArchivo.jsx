@@ -3,11 +3,11 @@ import { InboxOutlined } from "@ant-design/icons";
 import { Upload } from "antd";
 import { Button, Alert } from "react-bootstrap";
 import Cookies from "js-cookie";
+import { postData } from "../apiUtils";
 
 const { Dragger } = Upload;
-const API = "https://codextern-4ny2.onrender.com/";
 
-const CargarArchivo = () => {
+function CargarArchivo ({ url }) {
   const [listaArchivos, declararListaArchivos] = useState([]);
   const [hayArchivo, activarBoton] = useState(false);
   const [cursorEnCaja, cambiarBorde] = useState(false);
@@ -77,40 +77,27 @@ const CargarArchivo = () => {
   const subirArchivo = async () => {
     const form = new FormData();
     const token = Cookies.get("token");
+    let result = null;
 
     form.append("file", listaArchivos[0], listaArchivos[0].name);
   
-    for (const [key, value] of form.entries()) {
-        console.log(`${key}:`, value);
-    }
-  
     activarBoton(false);
-  
-    fetch(`${API}users/batch_upload`, {
-      method: "POST",
-      body: form,
-      headers: {
-        "Authorization": token,
-      },
-    })
-    .then((response) => response.json())
-    .then((result) => {
-        console.log(result)
-        if (result.error){
-            activarBoton(true);
-            activarMensajeError(true);
-            declararMensajeError("Hubo un error al subir el archivo. Por favor intente de nuevo.");
-        }
-        else {
-            console.log(result)
-            activarMensajeExito(true);
-            declararMensajeExito("El archivo se ha subido con éxito. La página se reiniciará en breve.");
 
-            setTimeout(() => {
-                window.location.href = window.location.href;
-            }, 3000);
-        }
-    })
+    result = await postData(url, form, token)
+
+    if (result.error){
+        activarBoton(true);
+        activarMensajeError(true);
+        declararMensajeError("Hubo un error al subir el archivo. Por favor intente de nuevo.");
+    }
+    else {
+        activarMensajeExito(true);
+        declararMensajeExito("El archivo se ha subido con éxito. La página se reiniciará en breve.");
+
+        setTimeout(() => {
+            window.location.reload();
+        }, 3000);
+    }
   };
 
   return (

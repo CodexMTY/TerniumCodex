@@ -4,7 +4,7 @@ import RegisterUser from "./RegisterUser";
 import RegisterAdmin from "./RegisterAdmin";
 import { Nav } from "react-bootstrap";
 
-function BotonSubida({ tipoRegistro }) {
+function BotonSubidaEmpleados({ tipoRegistro }) {
     const [mostrar, activarMostrar] = useState(false);
     const [registroEmpleado, setRegistroEmpleado] = useState(false);
     const [registroRH, setRegistroRH] = useState(false);
@@ -75,4 +75,4 @@ function BotonSubida({ tipoRegistro }) {
     );
 }
 
-export default BotonSubida;
+export default BotonSubidaEmpleados;
