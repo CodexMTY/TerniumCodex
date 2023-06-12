@@ -37,7 +37,7 @@ const RegisterUser = () => {
             "password": values["password"],
             "password_confirmation": values["password_confirmation"],
             "admin": true,
-            "super_admin": values["super_admin"] || false // set it to false if it's undefined
+            "super_admin": values["super_admin"] || false
         }
 
         const result = await postRequest("users", userData, Cookies.get("token"));

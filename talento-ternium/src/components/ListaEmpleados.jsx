@@ -28,7 +28,7 @@ function ListaEmpleados() {
 
     const navigate = useNavigate();
 
-    const [empleados, setEmpleados] = useState([]);
+    const [empleados, setEmpleados] = useState(null);
 
     const chooseEmpleados = (empleados) => {
         setEmpleados(empleados);
@@ -584,36 +584,36 @@ function ListaEmpleados() {
             <Button onClick={clearFilters}>Eliminar filtros</Button>
             <Button onClick={clearAll}>Eliminar filtros y clasificadores</Button>
         </Space>
-        {empleados.length > 0 ? (
+        {empleados ? (
             <Table
-                columns={columns}
-                rowKey={(record) => record.id}
-                onChange={handleChange}
-                expandable={{
-                    expandedRowRender: (record) => (
-                        <>
-                            <p>Email: {record.email}</p>
-                            <p style={{ margin: 0 }}>{record.resumen}</p>
-                        </>
-                    )
-                }}
-                onRow={(record) => ({ onClick: () => { navigateUser(record.id) } })}
-                dataSource={empleados}
-                scroll={{ x: 2400 }}
-                pagination={{
-                    defaultPageSize: 5,
-                    showSizeChanger: true,
-                    pageSizeOptions: ["5", "10", "15", "20"],
-                    showTotal: (total, range) => `${range[0]}-${range[1]} de ${total} empleados`
-                }}
-            />
+            columns={columns}
+            rowKey={(record) => record.id}
+            onChange={handleChange}
+            expandable={{
+                expandedRowRender: (record) => (
+                <>
+                    <p>Email: {record.email}</p>
+                    <p style={{ margin: 0 }}>{record.resumen}</p>
+                </>
+                ),
+            }}
+            onRow={(record) => ({ onClick: () => { navigateUser(record.id) } })}
+            dataSource={empleados}
+            scroll={{ x: 2400 }}
+            pagination={{
+                defaultPageSize: 5,
+                showSizeChanger: true,
+                pageSizeOptions: ["5", "10", "15", "20"],
+                showTotal: (total, range) => `${range[0]}-${range[1]} de ${total} empleados`,
+            }}
+        />
         ) : (
-          <div>
-              <Spinner animation="border" variant="warning" />
-              <p>Cargando...</p>
-          </div>
+            <div>
+                <Spinner animation="border" variant="warning" />
+                <p>Cargando...</p>
+            </div>
         )}
-      </>
+        </>
     );
 }
 
