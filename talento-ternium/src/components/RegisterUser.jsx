@@ -45,7 +45,6 @@ const RegisterUser = ({tipoUsuario}) => {
         setConfirmLoading(true);
 
         let userData = {};
-        console.log(registroEmpleado);
 
         if (registroEmpleado){
             userData = {
@@ -96,8 +95,6 @@ const RegisterUser = ({tipoUsuario}) => {
             }
     
         }
-
-        console.log(userData);
         
         const result = await postRequest("users", userData, Cookies.get("token"));
 

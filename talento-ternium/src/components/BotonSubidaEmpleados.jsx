@@ -3,7 +3,7 @@ import Modal from "react-bootstrap/Modal";
 import CargarArchivo from "./CargarArchivo";
 import { Nav } from "react-bootstrap";
 
-function BotonSubida() {
+function BotonSubidaEmpleados() {
   const [mostrar, activarMostrar] = useState(false);
 
   const manejarCerrar = () => activarMostrar(false);
@@ -12,17 +12,17 @@ function BotonSubida() {
   return (
     <>
       <Nav.Link onClick={manejarAbrir}>
-        Subir datos
+        Subir datos de empleados
       </Nav.Link>
 
       <Modal show={mostrar} onHide={manejarCerrar}>
         <Modal.Header closeButton>
-          <Modal.Title>Carga de archivos</Modal.Title>
+          <Modal.Title>Carga de datos de empleados</Modal.Title>
         </Modal.Header>
-        <Modal.Body> <CargarArchivo /> </Modal.Body>
+        <Modal.Body> <CargarArchivo url="users/batch_upload"/> </Modal.Body>
       </Modal>
     </>
   );
 }
 
-export default BotonSubida;
+export default BotonSubidaEmpleados;
