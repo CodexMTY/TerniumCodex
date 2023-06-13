@@ -545,7 +545,7 @@ function ListaEmpleados() {
                     render: (record) => (
                         <DeleteConfirm
                             userId={record.id}
-                            escogerEmpleadosEmpleados={chooseEmpleados}
+                            escogerEmpleados={chooseEmpleados}
                             refetchEmpleados={fetchEmpleados}
                         />
                     ),
