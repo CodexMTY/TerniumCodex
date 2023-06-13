@@ -3,7 +3,7 @@ import { useState } from "react";
 import { DeleteOutlined } from "@ant-design/icons";
 import Cookies from "js-cookie";
 
-function DeleteConfirm({ userId, escogerEmpleados, listaEmpleados }) {
+function DeleteConfirm({ userId, escogerEmpleados, refetchEmpleados }) {
     const [abrir, setAbrir] = useState(false);
     const [confirmLoading, setConfirmLoading] = useState(false);
     const [titulo, setTitulo] = useState("");
@@ -25,21 +25,21 @@ function DeleteConfirm({ userId, escogerEmpleados, listaEmpleados }) {
         setConfirmLoading(true);
         fetchDelete();
         if (Cookies.get("admin") === "true" && Cookies.get("super_admin") === "false") {
-            message.success("Usuario desactivado");
+            message.success("Usuario desactivado", 3);
         }
         if (Cookies.get("admin") === "true" && Cookies.get("super_admin") === "true") {
-            message.success("Usuario eliminado");
+            message.success("Usuario eliminado", 3);
         }
     };
 
     const handleCancelar = () => {
         setAbrir(false);
-        message.error("Operación cancelada");
+        message.error("Operación cancelada", 3);
     };
 
     const borrarEmpleado = () => {
-        listaEmpleados = listaEmpleados.filter((empleado) => empleado.id != userId);
-        escogerEmpleados(listaEmpleados);
+        escogerEmpleados();
+        refetchEmpleados();
     }
     
     const fetchDelete = async () => {

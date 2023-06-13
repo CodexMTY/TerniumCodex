@@ -119,6 +119,9 @@ const RegisterUser = () => {
                     rules={[
                         {
                             required: true,
+                            min: 8,
+                            pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/,
+                            message: "La contraseña debe tener al menos 8 caracteres, una letra mayúscula, una letra minúscula y un número.",
                         },
                     ]}
                     hasFeedback

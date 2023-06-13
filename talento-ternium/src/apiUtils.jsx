@@ -70,5 +70,11 @@ export async function postData(url, file, token) {
       }
   })).json();
   
+  if (response.status === 500) {
+    const error = new Error("Error 500: Hubo un error interno en el servidor. Revise que los datos ingresados sean correctos o intente de nuevo más tarde.");
+    error.isServerError = true;
+    throw error;
+  }
+
   return response;
 }
