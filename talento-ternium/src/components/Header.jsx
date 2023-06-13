@@ -5,6 +5,7 @@ import Cookies from "js-cookie";
 import BotonSubidaEmpleados from "./BotonSubidaEmpleados";
 import BotonSubidaEvaluacionesAnuales from "./BotonSubidaEvaluacionesAnuales";
 import BotonRegistro from "./BotonRegistro"
+import BotonDescargarFormatosCSV from "./BotonDescargarFormatoCSV"
 import {Divider} from "antd";
 
 function Header() {
@@ -43,6 +44,8 @@ function Header() {
               <BotonSubidaEvaluacionesAnuales/>
               <Divider type="vertical" style={{ height: "2.9em", background: "#eeeeee" }} />
               <BotonRegistro  tipoRegistro="empleado" />
+              <Divider type="vertical" style={{ height: "2.9em", background: "#eeeeee" }} />
+              <BotonDescargarFormatosCSV />
             </>
           );
         }
@@ -50,7 +53,7 @@ function Header() {
       
 
     return (
-    <Navbar expand="lg" sticky="top" style={{ background: "white" }}>
+    <Navbar expand="lg" position="sticky" top="0" style={{ background: "white" }}>
         <Container>
             <div className="d-inline-block align-top" style={{ paddingRight: "10px" }}>
                 <Link to="/homePage"><img src={terniumLogo} height="50" alt="Logo Ternium" /></Link>

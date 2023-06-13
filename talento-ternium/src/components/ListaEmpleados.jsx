@@ -30,8 +30,8 @@ function ListaEmpleados() {
 
     const [empleados, setEmpleados] = useState(null);
 
-    const chooseEmpleados = (empleados) => {
-        setEmpleados(empleados);
+    const chooseEmpleados = () => {
+        setEmpleados(null);
     }
 
     const navigateUser = (id) => {
@@ -58,7 +58,6 @@ function ListaEmpleados() {
             });
             setEmpleados(filteredData);
         }
-        
     };
 
     const distinctColumns = (dataIndex) => {
@@ -545,15 +544,15 @@ function ListaEmpleados() {
                     onCell: () => ({ onClick: (e) => e.stopPropagation() }),
                     render: (record) => (
                         <DeleteConfirm
-                        userId={record.id}
-                        chooseEmpleados={chooseEmpleados}
-                        listaEmpleados={empleados}
+                            userId={record.id}
+                            escogerEmpleadosEmpleados={chooseEmpleados}
+                            refetchEmpleados={fetchEmpleados}
                         />
                     ),
                 },
             ]
             : []),
-        ...(Cookies.get("super_admin") === "true" && Cookies.get("super_admin") === "true"
+        ...(Cookies.get("admin") === "true" && Cookies.get("super_admin") === "true"
             ? [
                 {
                     title: "Borrar",
@@ -562,9 +561,9 @@ function ListaEmpleados() {
                     onCell: () => ({ onClick: (e) => e.stopPropagation() }),
                     render: (record) => (
                         <DeleteConfirm
-                        userId={record.id}
-                        chooseEmpleados={chooseEmpleados}
-                        listaEmpleados={empleados}
+                            userId={record.id}
+                            escogerEmpleados={chooseEmpleados}
+                            refetchEmpleados={fetchEmpleados}
                         />
                     ),
                 },
