@@ -59,10 +59,18 @@ function AgregarEditarPopupView(
             activarMensajeInputAnio(false);
             activarMensajeInputPerformance(false);
             
-            if (puntaje !== undefined && puntaje !== "" && !numericRegex.test(puntaje)) {
-                setMensajeInputPuntaje("Solo se aceptan valores numéricos para el puntaje");
-                activarMensajeInputPuntaje(true);
-                inputInvalido = true;
+            if (puntaje !== undefined && puntaje !== "") {
+                if (numericRegex.test(puntaje) && parseInt(puntaje, 10) < 0 || parseInt(puntaje, 10) > 5) {
+                    setMensajeInputPuntaje("El puntaje debe ser un número entre 0 y 5");
+                    activarMensajeInputPuntaje(true);
+                    inputInvalido = true;
+                }
+
+                if (!numericRegex.test(puntaje)) {
+                    setMensajeInputPuntaje("Solo se aceptan valores numéricos para el puntaje");
+                    activarMensajeInputPuntaje(true);
+                    inputInvalido = true;
+                }
             }
             
             if (anio !== undefined && anio !== "" && !numericRegex.test(anio)) {
@@ -71,12 +79,20 @@ function AgregarEditarPopupView(
                 inputInvalido = true;
             }
             
-            if (performance !== undefined && performance !== "" && !numericRegex.test(performance)) {
-                setMensajeInputPerformance("Solo se aceptan valores numéricos para el performance");
-                activarMensajeInputPerformance(true);
-                inputInvalido = true;
+            if (performance !== undefined && performance !== "") {
+                if (numericRegex.test(performance) && parseInt(performance, 10) < 0 || parseInt(performance, 10) > 5) {
+                    setMensajeInputPerformance("El performance debe ser un número entre 0 y 5");
+                    activarMensajeInputPerformance(true);
+                    inputInvalido = true;
+                }
+
+                if (!numericRegex.test(performance)) {
+                    setMensajeInputPerformance("Solo se aceptan valores numéricos para el performance");
+                    activarMensajeInputPerformance(true);
+                    inputInvalido = true;
+                }
             }
-            
+
             return inputInvalido;
         }
 

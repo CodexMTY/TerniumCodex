@@ -77,6 +77,7 @@ function CargarArchivo ({ url }) {
     const subirArchivo = async () => {
         const form = new FormData();
         const token = Cookies.get("token");
+        const emailRegex = /[^@\s]+@[^@\s]+\.[^@\s]+/;
 
         form.append("file", listaArchivos[0], listaArchivos[0].name);
     
@@ -84,18 +85,27 @@ function CargarArchivo ({ url }) {
 
         try {
             const result = await postData(url, form, token);
-
             if (result.error) {
                 activarBoton(true);
                 declararMensajeError("Hubo un error al subir el archivo. Por favor intente de nuevo.");
                 activarMensajeError(true);
             } else {
-                declararMensajeExito("El archivo se ha subido con éxito. La página se reiniciará en breve.");
-                activarMensajeExito(true);
-        
-                setTimeout(() => {
-                    window.location.reload();
-                }, 3000);
+                const mensaje = result.message;
+                const igualarEmail = mensaje.match(emailRegex);
+                const email = igualarEmail ? igualarEmail[0] : "";
+
+                if (email) {
+                    activarBoton(true);
+                    declararMensajeError(`Ya existe un usuario con el correo "${email}". Cambie los datos e intente de nuevo.`);
+                    activarMensajeError(true);
+                } else {
+                    declararMensajeExito("El archivo se ha subido con éxito. La página se reiniciará en breve.");
+                    activarMensajeExito(true);
+
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 3000);
+                }
             }
         } catch (error) {
             if (error.isServerError) {
