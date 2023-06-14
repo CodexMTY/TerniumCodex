@@ -11,15 +11,9 @@ function LogIn() {
     return <Navigate replace to="/homePage"></Navigate>;
   }
 
-  const [activeCard, setActiveCard] = useState("login");
-
-  function switchCard() {
-    setActiveCard(activeCard === "login" ? "register" : "login");
-  }
-
   return (
     <div style={{ position: "fixed", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}>
-        <LoginCard switchCard={switchCard} />
+        <LoginCard />
     </div>
   );
 }

@@ -5,33 +5,31 @@ import Cookies from "js-cookie";
 import AuthCard from "./AuthCard";
 import { postRequest } from "../apiUtils";
 
-function LoginCard({ switchCard }) {
+function LoginCard() {
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
-  function reformatDate(dateStr) {
-    let parts = dateStr.split(" ");
-    let dateParts = parts[0].split("-");
-    let reformattedDate = `${dateParts[1]}-${dateParts[0]}-${dateParts[2]} ${parts[1]}`;
-
-    return reformattedDate;
-  }
-
   const userLogin = async (e) => {
     e.preventDefault();
+
+    if (email === "" || password === "" || password === " "){
+      setErrorMessage("Favor de ingresar una credenciales válidas");
+      return;
+    }
+
     const result = await postRequest("auth/login", { email, password });
     
     if (result.error){
       setErrorMessage("Credenciales incorrectas");
     }
     else if(result.token){
-      let expDateStr = result.exp; // MM-DD-YYYY HH:MM
+      let expDateStr = result.exp;
       let [month, day, yearTime] = expDateStr.split("-");
       let [year, time] = yearTime.split(" ");
-      let expiryDate = `${year}-${month}-${day}T${time}:00Z`; // Convert to ISO string format
+      let expiryDate = `${year}-${month}-${day}T${time}:00Z`;
 
       let utcDate = new Date(expiryDate);
 
@@ -44,7 +42,7 @@ function LoginCard({ switchCard }) {
   }
 
   return (
-    <AuthCard onSubmit={userLogin} switchCard={switchCard} primaryButtonText="Iniciar sesión">
+    <AuthCard onSubmit={userLogin} primaryButtonText="Iniciar sesión">
       <Form.Group controlId="formBasicEmail">
         <Form.Control type="email" placeholder="Correo electrónico" value={email} onChange={(e) => setEmail(e.target.value)} />
       </Form.Group>
