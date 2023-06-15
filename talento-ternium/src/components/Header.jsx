@@ -2,10 +2,9 @@ import { Container, Nav, Navbar, Button } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import terniumLogo from "../img/logo-ternium.png";
 import Cookies from "js-cookie";
-import BotonSubidaEmpleados from "./BotonSubidaEmpleados";
-import BotonSubidaEvaluacionesAnuales from "./BotonSubidaEvaluacionesAnuales";
 import BotonRegistro from "./BotonRegistro"
 import BotonDescargarFormatosCSV from "./BotonDescargarFormatoCSV"
+import BatchUpload from "./BatchUpload"
 import {Divider} from "antd";
 
 function Header() {
@@ -38,9 +37,7 @@ function Header() {
         } else  {
           return (
             <>
-              <BotonSubidaEmpleados/>
-              <Divider type="vertical" style={{ height: "2.9em", background: "#eeeeee" }} />
-              <BotonSubidaEvaluacionesAnuales/>
+              <BatchUpload />
               <Divider type="vertical" style={{ height: "2.9em", background: "#eeeeee" }} />
               <BotonRegistro  tipoRegistro="empleado" />
               <Divider type="vertical" style={{ height: "2.9em", background: "#eeeeee" }} />
